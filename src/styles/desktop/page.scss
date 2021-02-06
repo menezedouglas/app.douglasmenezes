@@ -1,0 +1,23 @@
+@media (min-width: 768px) {
+    .page {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flex-item {
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .page-subtitle {
+        display: block;
+        color: #DB6400;
+        font-size: 52px;
+        text-align: center;
+        padding: 50px 20px;
+        margin: 150px 0 0 0;
+    }
+
+}

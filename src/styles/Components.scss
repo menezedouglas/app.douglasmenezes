@@ -1,0 +1,25 @@
+.input-component {
+    width: 100%;
+    height: 50px;
+    font-size: 12pt;
+    padding: 15px 20px 2px 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+.label-input-component {
+    position: absolute;
+    color: #000000;
+    margin: 12px 20px;
+    font-size: 12pt;
+    /*left: 30px;*/
+    /*top: 22px;*/
+}
+
+.input-component:focus {
+    outline: none;
+    box-shadow: 0 0 10px 5px #007bff;
+    border: none;
+}
+
+

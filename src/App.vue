@@ -1,28 +1,36 @@
+<style>
+  @import "styles/master.scss";
+  @import "styles/desktop.scss";
+  @import "styles/mobile.scss";
+</style>
+
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <section class="app-header">
+      <h2 class="title">
+        Douglas Menezes
+      </h2>
+      <span class="subtitle">
+          Desenvolvedor Web
+      </span>
+    </section>
+    <main-menu />
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { main_menu as MainMenu } from '@/modules/main_menu'
 export default {
-  name: 'App',
+  name: 'app',
+  data () {
+    return {}
+  },
   components: {
-    HelloWorld
+    MainMenu
+  },
+  created () {
+
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
