@@ -15,7 +15,9 @@
       </span>
     </section>
     <main-menu />
-    <router-view/>
+    <div @click="closeSideBar">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,13 @@ export default {
   },
   components: {
     MainMenu
+  },
+  methods: {
+    closeSideBar: () => {
+      const ctrl_sidebar = document.querySelector('#menu_control')
+      if(ctrl_sidebar.checked)
+        ctrl_sidebar.checked = !ctrl_sidebar.checked
+    },
   },
   created () {
 
