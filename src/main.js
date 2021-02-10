@@ -8,7 +8,7 @@ import store from './store'
 import AOS from 'aos'
 import "aos/dist/aos.css"
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 new Vue({
   bootstrap,
