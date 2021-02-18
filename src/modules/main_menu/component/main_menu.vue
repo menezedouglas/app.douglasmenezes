@@ -1,6 +1,6 @@
 <template>
   <div style="position: absolute;">
-    <input type="checkbox" id="menu_control">
+    <input type="checkbox" id="menu_control" checked>
 
     <label for="menu_control">
       <div id="btn_menu">
@@ -40,16 +40,6 @@
           </li>
 
         </a>
-
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Projetos-->
-
-<!--          </li>-->
-
-<!--        </a>-->
 
 <!--        <a href="#" class="menu-link">-->
 
@@ -103,6 +93,18 @@
       </ul>
 
       <section class="menu-footer">
+        <div class="social-networks">
+          <nav>
+            <ul>
+              <li>
+
+              </li>
+              <li>
+
+              </li>
+            </ul>
+          </nav>
+        </div>
         <small>
           Douglas Menezes Evangelista da Silva<br>
           Desenvolvimento de Software M.E<br>
@@ -122,5 +124,19 @@ name: "main_menu"
 </script>
 
 <style scoped>
+  .social-networks {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
+  .social-networks nav ul {
+    list-style: none;
+  }
+
+  .social-networks nav ul li {
+    display: inline-block;
+    color: #fff;
+  }
 </style>
