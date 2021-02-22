@@ -1,6 +1,6 @@
 <template>
   <div style="position: absolute;">
-    <input type="checkbox" id="menu_control">
+    <input type="checkbox" id="menu_control" checked>
 
     <label for="menu_control">
       <div id="btn_menu">
@@ -40,16 +40,6 @@
           </li>
 
         </a>
-
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Projetos-->
-
-<!--          </li>-->
-
-<!--        </a>-->
 
 <!--        <a href="#" class="menu-link">-->
 
@@ -103,6 +93,27 @@
       </ul>
 
       <section class="menu-footer">
+        <div class="social-networks">
+          <nav>
+            <ul>
+              <li>
+                <redirect class="social-networks-item" to="https://github.com/menezedouglas">
+                  <i class="fab fa-github"></i>
+                </redirect>
+              </li>
+              <li>
+                <redirect class="social-networks-item" to="https://www.linkedin.com/in/douglas-menezes-526a45148/">
+                  <i class="fab fa-linkedin-in"></i>
+                </redirect>
+              </li>
+              <li>
+                <redirect class="social-networks-item" to="https://www.instagram.com/menezedouglas/">
+                  <i class="fab fa-instagram"></i>
+                </redirect>
+              </li>
+            </ul>
+          </nav>
+        </div>
         <small>
           Douglas Menezes Evangelista da Silva<br>
           Desenvolvimento de Software M.E<br>
@@ -116,11 +127,41 @@
 </template>
 
 <script>
+import { component as redirect } from "@/modules/redirect";
+
 export default {
-name: "main_menu"
+  name: "main_menu",
+  components: {
+    redirect,
+  }
 }
 </script>
 
 <style scoped>
+  .social-networks {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
+  .social-networks nav ul {
+    list-style: none;
+  }
+
+  .social-networks nav ul li {
+    display: inline-block;
+  }
+
+  .social-networks-item {
+    color: rgba(255,255,255,.5);
+    padding: 0 10px;
+    font-size: 18pt;
+    cursor: pointer;
+    transition: all .05s linear !important;
+  }
+
+  .social-networks-item:hover {
+    color: rgba(255,255,255,.9);
+  }
 </style>
