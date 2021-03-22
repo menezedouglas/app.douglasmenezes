@@ -11,7 +11,7 @@ import '@fortawesome/fontawesome-free/js/all'
 import AOS from 'aos'
 import "aos/dist/aos.css"
 
-Vue.config.productionTip = true
+Vue.config.productionTip = process.env.VUE_APP_PRODUCTION
 
 new Vue({
   bootstrap,

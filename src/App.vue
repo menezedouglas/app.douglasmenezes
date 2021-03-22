@@ -22,24 +22,66 @@
 </template>
 
 <script>
-import { main_menu as MainMenu } from '@/modules/main_menu'
+import { component as MainMenu } from '@/modules/components/main_menu'
+import { mapActions } from 'vuex'
 export default {
   name: 'app',
   data () {
-    return {}
+    return {
+      mainMenu: {
+        items: [
+          {
+            name: 'Início',
+            url: '/',
+            active: true
+          }
+          // {
+          //   name: 'Início',
+          //   url: '/',
+          //   active: true
+          // },
+          // {
+          //   name: 'Início',
+          //   url: '/',
+          //   active: true
+          // },
+          // {
+          //   name: 'Início',
+          //   url: '/',
+          //   active: true
+          // }
+        ],
+        socialsNetworks: [
+          {
+            icon: 'fab fa-github',
+            url: 'https://github.com/menezedouglas'
+          },
+          {
+            icon: 'fab fa-linkedin-in',
+            url: 'https://www.linkedin.com/in/douglas-menezes-526a45148/'
+          },
+          {
+            icon: 'fab fa-instagram',
+            url: 'https://www.instagram.com/menezedouglas/'
+          }
+        ]
+      }
+    }
   },
   components: {
     MainMenu
   },
   methods: {
+    ...mapActions('mainMenu', ['ActionSetItems', 'ActionSetSocialsNetworks']),
     closeSideBar: () => {
       const ctrl_sidebar = document.querySelector('#menu_control')
       if(ctrl_sidebar.checked)
         ctrl_sidebar.checked = !ctrl_sidebar.checked
-    },
+    }
   },
   created () {
-
+    this.ActionSetItems(this.mainMenu.items)
+    this.ActionSetSocialsNetworks(this.mainMenu.socialsNetworks)
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div style="position: absolute;">
-    <input type="checkbox" id="menu_control" checked>
+    <input type="checkbox" id="menu_control" />
 
     <label for="menu_control">
       <div id="btn_menu">
@@ -31,84 +31,33 @@
 
       <ul class="master-list">
 
-        <a href="#" class="menu-link">
+        <a
+            v-for="(item, index) in getItems()"
+            v-bind:key="index"
+            :href="item.url"
+            class="menu-link"
+        >
 
-          <li class="menu-item menu-item-active">
+          <li :class="(item.active) ? `menu-item menu-item-active` : `menu-item`">
 
-            Início
+            {{ item.name }}
 
           </li>
 
         </a>
 
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Participações-->
-
-<!--          </li>-->
-
-<!--        </a>-->
-
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Meu Currículo-->
-
-<!--          </li>-->
-
-<!--        </a>-->
-
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Tecnologias-->
-
-<!--          </li>-->
-
-<!--        </a>-->
-
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Contato-->
-
-<!--          </li>-->
-
-<!--        </a>-->
-
-<!--        <a href="#" class="menu-link">-->
-
-<!--          <li class="menu-item">-->
-
-<!--            Entrar-->
-
-<!--          </li>-->
-
-<!--        </a>-->
       </ul>
 
       <section class="menu-footer">
         <div class="social-networks">
           <nav>
             <ul>
-              <li>
-                <redirect class="social-networks-item" to="https://github.com/menezedouglas">
-                  <i class="fab fa-github"></i>
-                </redirect>
-              </li>
-              <li>
-                <redirect class="social-networks-item" to="https://www.linkedin.com/in/douglas-menezes-526a45148/">
-                  <i class="fab fa-linkedin-in"></i>
-                </redirect>
-              </li>
-              <li>
-                <redirect class="social-networks-item" to="https://www.instagram.com/menezedouglas/">
-                  <i class="fab fa-instagram"></i>
+              <li
+                v-for="(item, index) in getSocialsNetworks()"
+                v-bind:key="index"
+              >
+                <redirect class="social-networks-item" :to="item.url">
+                  <i :class="item.icon"></i>
                 </redirect>
               </li>
             </ul>
@@ -128,11 +77,15 @@
 
 <script>
 import { component as redirect } from "@/modules/redirect";
+import { mapGetters } from 'vuex'
 
 export default {
   name: "main_menu",
   components: {
     redirect,
+  },
+  methods: {
+    ...mapGetters('mainMenu', ['getItems', 'getSocialsNetworks'])
   }
 }
 </script>

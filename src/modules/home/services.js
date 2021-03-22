@@ -1,10 +1,10 @@
 export default {
     getServices: {
         method: 'get',
-        url: 'services'
+        url: 'service'
     },
     showService: {
         method: 'get',
-        url: 'services/show'
+        url: 'service/show'
     }
 }
