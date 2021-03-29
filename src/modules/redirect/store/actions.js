@@ -34,6 +34,11 @@ export const ActionSetLink = ({ commit, getters }, payload) => {
 }
 
 export const ActionRedirectToLink = ({ getters }, id) => {
-    let url = getters.getLinks[id]
-    window.open(url)
+    const url = getters.getLinks[id].toString()
+
+    if(url.indexOf('http') >= 0) {
+        window.open(url)
+    } else {
+        location.href = `/#${url}`
+    }
 }

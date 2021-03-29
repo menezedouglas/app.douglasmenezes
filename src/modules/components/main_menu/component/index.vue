@@ -30,21 +30,18 @@
       </section>
 
       <ul class="master-list">
-
-        <a
+        <li
             v-for="(item, index) in getItems()"
             v-bind:key="index"
-            :href="item.url"
             class="menu-link"
         >
-
-          <li :class="(item.active) ? `menu-item menu-item-active` : `menu-item`">
-
+          <redirect
+              :class="(item.active) ? `menu-item menu-item-active` : `menu-item`"
+              :to="item.url"
+          >
             {{ item.name }}
-
-          </li>
-
-        </a>
+          </redirect>
+        </li>
 
       </ul>
 

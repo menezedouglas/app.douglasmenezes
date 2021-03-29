@@ -34,12 +34,12 @@ export default {
             name: 'Início',
             url: '/',
             active: true
-          }
-          // {
-          //   name: 'Início',
-          //   url: '/',
-          //   active: true
-          // },
+          },
+          {
+            name: 'Projetos',
+            url: '/projects',
+            active: false
+          },
           // {
           //   name: 'Início',
           //   url: '/',

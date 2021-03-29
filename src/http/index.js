@@ -8,10 +8,6 @@ const http = Vue.http
 
 http.options.root = 'http://192.168.0.11:8000/system/v1'
 
-http.interceptors.push(function(request) {
-    request.headers.set('X-CSRF-TOKEN', process.env.VUE_APP_API_KEY)
-})
-
 Object.keys(services).map(service => {
     services[service] = Vue.resource('', {}, services[service])
 })
