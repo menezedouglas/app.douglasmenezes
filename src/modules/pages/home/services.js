@@ -1,7 +1,7 @@
 export default {
     getServices: {
         method: 'get',
-        url: 'service'
+        url: 'service/all'
     },
     showService: {
         method: 'get',

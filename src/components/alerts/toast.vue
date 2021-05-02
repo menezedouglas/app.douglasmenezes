@@ -2,64 +2,12 @@
   <div :class="`toast-aria toast-show-scroll ${position}`">
     <section class="toast-scroll-aria">
       <message-toast
-          bg="primary"
-          message="teste"
+          v-for="(message, index) in messages"
+          v-bind:key="index"
+          :bg="message.bg"
+          :message="message.message"
           :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
-      />
-      <message-toast
-          bg="primary"
-          message="teste"
-          :show="true"
+          @close="$emit('close', message)"
       />
     </section>
   </div>
@@ -70,7 +18,8 @@ import messageToast from '@/components/generics/message-toast'
 export default {
   name: "toast",
   props: {
-    position: { required: true }
+    position: { required: true },
+    messages: { required: true },
   },
   components: {
     messageToast

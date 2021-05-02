@@ -1,0 +1,1 @@
+export const SET_MESSAGES = 'MESSAGES/SET_MESSAGES'

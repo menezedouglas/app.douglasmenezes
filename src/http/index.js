@@ -6,7 +6,7 @@ Vue.use(VueResource)
 
 const http = Vue.http
 
-http.options.root = 'http://192.168.0.11:8000/system/v1'
+http.options.root = 'http://localhost:8000/system/v1'
 
 Object.keys(services).map(service => {
     services[service] = Vue.resource('', {}, services[service])

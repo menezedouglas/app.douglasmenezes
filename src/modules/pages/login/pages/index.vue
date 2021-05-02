@@ -1,10 +1,10 @@
 <style scoped>
-  .absolute-center {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-items: center;
-  }
+.absolute-center {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
 </style>
 
 <template>
@@ -55,46 +55,58 @@
         </form>
       </div>
     </div>
-    <toast
-      position="bottom-left"
+    <messages
+        position="bottom-center"
     />
   </div>
 </template>
 
 <script>
-import defaultInput from '@/components/forms/default-input'
-import defaultButton from '@/components/generics/default-button'
-import toast from '@/components/alerts/toast'
-import { mapActions, mapGetters } from 'vuex'
+import defaultInput from '../../../../components/forms/default-input'
+import defaultButton from '../../../../components/generics/default-button'
+import { component as messages } from '../../../messages'
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: "index",
   components: {
     defaultInput,
     defaultButton,
-    toast
+    messages
   },
-  data () {
+  data() {
     return {
-      loading: false,
       credentials: {
         email: '',
         password: ''
+      },
+    }
+  },
+  computed: {
+    loading: {
+      set(val) {
+        this.ActionSetLoading(val)
+      },
+      get() {
+        return this.getLoading()
       }
     }
   },
   methods: {
-    ...mapActions('login', ['ActionDoLogin']),
-    ...mapGetters('login', ['getLoading']),
-    async submit () {
+    ...mapActions('login', [
+      'ActionDoLogin',
+      'ActionSetLoading'
+    ]),
+    ...mapGetters('login', [
+      'getLoading'
+    ]),
+    async submit() {
       try {
-        this.loading = true
         await this.ActionDoLogin(this.credentials)
-        this.loading = false
       } catch (error) {
-        this.loading = false
         console.log(error)
       }
     }
-  }
+  },
 }
 </script>
