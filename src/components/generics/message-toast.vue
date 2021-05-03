@@ -1,5 +1,6 @@
 <style>
   .toast {
+    width: auto;
     margin-bottom: 15px;
   }
 </style>
@@ -17,7 +18,7 @@
       <div
           class="toast-body"
       >
-        {{ message }}
+        {{ message }} {{ percent }}
       </div>
       <button
           type="button"
@@ -34,9 +35,35 @@
 export default {
   name: "message-toast",
   props: {
+    index: { required: true },
     bg: { required: true },
     message: { required: true },
-    show: { required: true }
+    show: { required: true },
+    timer: { required: true }
+  },
+  data () {
+    return {
+      percent: 0
+    }
+  },
+  methods: {
+    startTimer () {
+      // eslint-disable-next-line no-unused-vars
+      let count = 0
+      let updateTime = setInterval(() => {
+        count += 1
+        this.percent = (100 * count) / this.timer
+        if(this.percent == 100) {
+          clearInterval(updateTime)
+          setTimeout(() => {
+            this.$emit('close')
+          }, (this.index + 1) * 1000)
+        }
+      }, 1000)
+    }
+  },
+  created() {
+    this.startTimer()
   }
 }
 </script>

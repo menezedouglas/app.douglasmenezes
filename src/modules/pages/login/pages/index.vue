@@ -90,6 +90,14 @@ export default {
       get() {
         return this.getLoading()
       }
+    },
+    messages: {
+      set (val) {
+        this.ActionAddMessage(val)
+      },
+      get () {
+        return this.getMessages()
+      }
     }
   },
   methods: {
@@ -100,11 +108,37 @@ export default {
     ...mapGetters('login', [
       'getLoading'
     ]),
+    ...mapActions('messages', [
+        'ActionAddMessage',
+        'ActionAddMessages',
+        'ActionUnsetMessage'
+    ]),
+    ...mapGetters('messages', [
+       'getMessages'
+    ]),
     async submit() {
       try {
         await this.ActionDoLogin(this.credentials)
-      } catch (error) {
-        console.log(error)
+        this.messages = {
+          bg: 'success',
+          message: 'Login Efetuado'
+        }
+      } catch (response) {
+
+        // eslint-disable-next-line no-undef
+        const error = await helpers.httpResponses.errors(response)
+
+        switch (response.status) {
+          case 422: {
+            this.ActionAddMessages(error)
+            break
+          }
+          default: {
+            this.ActionAddMessage(error)
+            break
+          }
+        }
+
       }
     }
   },

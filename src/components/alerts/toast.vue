@@ -4,8 +4,10 @@
       <message-toast
           v-for="(message, index) in messages"
           v-bind:key="index"
+          :index="index"
           :bg="message.bg"
           :message="message.message"
+          :timer="5"
           :show="true"
           @close="$emit('close', message)"
       />
@@ -14,7 +16,7 @@
 </template>
 
 <script>
-import messageToast from '@/components/generics/message-toast'
+import messageToast from '../generics/message-toast'
 export default {
   name: "toast",
   props: {
