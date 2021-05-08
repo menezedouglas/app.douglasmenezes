@@ -64,7 +64,7 @@
 <script>
 import defaultInput from '../../../../components/forms/default-input'
 import defaultButton from '../../../../components/generics/default-button'
-import { component as messages } from '../../../messages'
+import {component as messages} from '../../../components/messages'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
@@ -92,10 +92,10 @@ export default {
       }
     },
     messages: {
-      set (val) {
+      set(val) {
         this.ActionAddMessage(val)
       },
-      get () {
+      get() {
         return this.getMessages()
       }
     }
@@ -109,12 +109,12 @@ export default {
       'getLoading'
     ]),
     ...mapActions('messages', [
-        'ActionAddMessage',
-        'ActionAddMessages',
-        'ActionUnsetMessage'
+      'ActionAddMessage',
+      'ActionAddMessages',
+      'ActionUnsetMessage'
     ]),
     ...mapGetters('messages', [
-       'getMessages'
+      'getMessages'
     ]),
     async submit() {
       try {
