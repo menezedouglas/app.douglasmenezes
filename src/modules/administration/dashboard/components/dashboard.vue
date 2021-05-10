@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 my-3">
-        <h1 class="text-muted">Usuários</h1>
+        <h1 class="text-muted">Dashboard</h1>
         <hr class="my-2">
       </div>
       <div class="col-auto">
@@ -22,11 +22,15 @@ export default {
   },
   computed: {
     user: {
-      set (val) {
+      async set (val) {
         try {
-          this.ActionSetUser(val)
+          await this.ActionSetUser(val)
         } catch (error) {
           this.ActionSetErrors(error)
+          if(error.request.status) {
+            await this.$store.dispatch('login/ActionLogOut')
+            location.reload()
+          }
         }
       },
       get () {

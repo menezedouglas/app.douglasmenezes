@@ -111,9 +111,9 @@ export default {
       'getEmail',
       'getLoading'
     ]),
-    logout () {
+    async logout () {
       this.ActionLogOut()
-      location.reload()
+      await this.$router.push('/login')
     }
   }
 }

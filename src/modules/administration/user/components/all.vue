@@ -23,9 +23,9 @@
             >
               <thead class="thead-dark">
               <tr>
-                <th scope="col">Id</th>
+                <th scope="col" class="hide-mb">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">E-mail</th>
+                <th scope="col" class="hide-mb">E-mail</th>
                 <th scope="col">
                   <button
                       class="btn btn-sm btn-success"
@@ -42,9 +42,9 @@
                   v-for="user in users"
                   v-bind:key="user.id"
               >
-                <td>{{ user.id }}</td>
+                <td class="hide-mb">{{ user.id }}</td>
                 <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
+                <td class="hide-mb">{{ user.email }}</td>
                 <td></td>
               </tr>
               </tbody>

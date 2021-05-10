@@ -8,7 +8,7 @@
 <template>
   <div>
     <div
-        :class="`toast align-items-center text-white bg-${bg} border-0 ${(show) ? `show` : ``}`"
+        :class="`toast align-items-center ${(bg === 'warning') ? `text-dark` : `text-white`} bg-${bg} border-0 ${(show) ? `show` : ``}`"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"

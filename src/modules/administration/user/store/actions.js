@@ -23,7 +23,6 @@ export const ActionSetUsers = ({dispatch, commit}) => {
         try {
             dispatch('ActionSetLoading', true)
             const { request } = await requests.user.all()
-            console.log(request.response)
             commit(types.SET_USERS, request.response)
             dispatch('ActionSetLoading', false)
             resolve()

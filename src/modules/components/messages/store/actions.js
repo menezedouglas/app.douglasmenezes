@@ -53,7 +53,6 @@ export const ActionSetErrors = async ({ dispatch }, payload) => {
         }
         case 401: {
             dispatch('ActionAddMessage', error)
-            await this.$store.dispatch('login/ActionLogOut')
             break
         }
         default: {

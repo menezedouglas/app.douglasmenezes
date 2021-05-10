@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col position-relative">
             <h3 class="menu-title">
-              Menu
+              Administração
             </h3>
           </div>
           <div class="col-auto position-relative">
@@ -34,6 +34,7 @@
             v-for="(item, index) in items"
             v-bind:key="index"
             class="menu-link"
+            @click="closeSideBar"
         >
           <redirect
               :class="(item.active) ? `menu-item menu-item-active` : `menu-item`"
@@ -78,6 +79,51 @@ import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "main_menu",
+  props: ['mode'],
+  data () {
+    return {
+      mainMenu: {
+        itemsUnauthenticated: [
+          {
+            name: 'Início',
+            url: '/',
+            active: true
+          },
+          {
+            name: 'Projetos',
+            url: '/projects',
+            active: false
+          }
+        ],
+        itemsAuthenticated: [
+          {
+            name: 'Dashboard',
+            url: '/dashboard',
+            active: false
+          },
+          {
+            name: 'Usuários',
+            url: '/users',
+            active: false
+          }
+        ],
+        socialsNetworks: [
+          {
+            icon: 'fab fa-github',
+            url: 'https://github.com/menezedouglas'
+          },
+          {
+            icon: 'fab fa-linkedin-in',
+            url: 'https://www.linkedin.com/in/douglas-menezes-526a45148/'
+          },
+          {
+            icon: 'fab fa-instagram',
+            url: 'https://www.instagram.com/menezedouglas/'
+          }
+        ]
+      }
+    }
+  },
   components: {
     redirect,
   },
@@ -100,8 +146,30 @@ export default {
     }
   },
   methods: {
+    ...mapGetters('login', ['hasAuthorization']),
     ...mapActions('mainMenu', ['ActionSetItems', 'ActionSetSocialsNetworks']),
-    ...mapGetters('mainMenu', ['getItems', 'getSocialsNetworks'])
+    ...mapGetters('mainMenu', ['getItems', 'getSocialsNetworks']),
+    closeSideBar: () => {
+      const ctrl_sidebar = document.querySelector('#menu_control')
+      if (ctrl_sidebar.checked)
+        ctrl_sidebar.checked = !ctrl_sidebar.checked
+    }
+  },
+  created () {
+    switch (this.mode) {
+      case 'restricted': {
+        this.ActionSetItems([
+          ...this.mainMenu.itemsAuthenticated
+        ])
+        break
+      }
+      case 'public': {
+        this.ActionSetItems([
+          ...this.mainMenu.itemsUnauthenticated
+        ])
+        break
+      }
+    }
   }
 }
 </script>
