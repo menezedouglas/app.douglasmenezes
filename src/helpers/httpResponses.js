@@ -1,12 +1,13 @@
 export default {
     errors: response => {
-        switch (response.status) {
+        const request = response.request
+        switch (request.status) {
             case 422: {
                 let messages = []
-                Object.keys(response.body).map(input => {
+                Object.keys(request.response).map(input => {
                     messages.push({
                         bg: 'warning',
-                        message: `${response.body[input][0]}`
+                        message: `${request.response[input][0]}`
                     })
                 })
                 return messages
@@ -14,9 +15,21 @@ export default {
             default: {
                 return {
                     bg: 'danger',
-                    message: `${response.body.msg} ${response.body.error}`
+                    message: `${request.response.msg} ${request.response.error}`
                 }
             }
         }
+    },
+    toGet: data => {
+        let response = `?`
+
+        Object.keys(data).map((key, index) => {
+            response += `${key}=${data[key]}`
+            if(index + 1 < Object.keys(data).length) {
+                response += `&`
+            }
+        })
+
+        return response
     }
 }

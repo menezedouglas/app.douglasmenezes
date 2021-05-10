@@ -90,14 +90,6 @@ export default {
       get() {
         return this.getLoading()
       }
-    },
-    messages: {
-      set(val) {
-        this.ActionAddMessage(val)
-      },
-      get() {
-        return this.getMessages()
-      }
     }
   },
   methods: {
@@ -109,38 +101,16 @@ export default {
       'getLoading'
     ]),
     ...mapActions('messages', [
-      'ActionAddMessage',
-      'ActionAddMessages',
-      'ActionUnsetMessage'
-    ]),
-    ...mapGetters('messages', [
-      'getMessages'
+        'ActionSetErrors'
     ]),
     async submit() {
       try {
         await this.ActionDoLogin(this.credentials)
-        this.messages = {
-          bg: 'success',
-          message: 'Login Efetuado'
-        }
+        await this.$router.push('/dashboard')
       } catch (response) {
-
-        // eslint-disable-next-line no-undef
-        const error = await helpers.httpResponses.errors(response)
-
-        switch (response.status) {
-          case 422: {
-            this.ActionAddMessages(error)
-            break
-          }
-          default: {
-            this.ActionAddMessage(error)
-            break
-          }
-        }
-
+        this.ActionSetErrors(response)
       }
     }
-  },
+  }
 }
 </script>
