@@ -1,0 +1,6 @@
+export const SET_ID = 'USER/SET_ID'
+export const SET_NAME = 'USER/SET_NAME'
+export const SET_EMAIL = 'USER/SET_EMAIL'
+export const SET_LOADING = 'USER/SET_LOADING'
+export const SET_USERS = 'USER/SET_USERS'
+export const SET_EDIT = 'USER/SET_EDIT'

@@ -5,7 +5,7 @@
     }
 
     .flex-item {
-        min-height: 100vh;
+        height: calc(100vh - 140px);
         overflow-x: hidden;
         overflow-y: auto;
         position: relative;

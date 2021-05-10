@@ -1,4 +1,44 @@
-export default async (to, from, next) => {
+import store from '../store'
+
+const publicRoutes = [
+    '/',
+    '/login',
+    '/projects'
+]
+
+const authenticatedRoutes = [
+    '/dashboard',
+    '/users'
+]
+
+export default async (to) => {
     document.title = `${to.name} - Douglas Menezes`
-    next()
+    if (
+        publicRoutes.indexOf(to.path) < 0 &&
+        authenticatedRoutes.indexOf(to.path) >= 0 &&
+        await store.getters['login/hasAuthorization']
+    ) {
+        try {
+            await store.dispatch('login/ActionCheckToken')
+            return true
+        } catch (e) {
+            return '/login'
+        }
+    } else {
+        if (publicRoutes.indexOf(to.path) < 0 && authenticatedRoutes.indexOf(to.path) < 0) {
+            return '/'
+        } else {
+            if (await store.getters['login/hasAuthorization']) {
+                if (to.path === '/login') {
+                    return '/dashboard'
+                }
+            } else {
+                if (publicRoutes.indexOf(to.path) >= 0) {
+                    return true
+                } else {
+                    return '/'
+                }
+            }
+        }
+    }
 }

@@ -31,7 +31,7 @@
 
       <ul class="master-list">
         <li
-            v-for="(item, index) in getItems()"
+            v-for="(item, index) in items"
             v-bind:key="index"
             class="menu-link"
         >
@@ -50,7 +50,7 @@
           <nav>
             <ul>
               <li
-                v-for="(item, index) in getSocialsNetworks()"
+                v-for="(item, index) in socialsNetworks"
                 v-bind:key="index"
               >
                 <redirect class="social-networks-item" :to="item.url">
@@ -73,15 +73,34 @@
 </template>
 
 <script>
-import { component as redirect } from "@/modules/redirect";
-import { mapGetters } from 'vuex'
+import { component as redirect } from "../../../redirect";
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "main_menu",
   components: {
     redirect,
   },
+  computed: {
+    items : {
+      set (val) {
+        this.ActionSetItems(val)
+      },
+      get () {
+        return this.getItems()
+      }
+    },
+    socialsNetworks: {
+      set (val) {
+        this.ActionSetSocialsNetworks(val)
+      },
+      get () {
+        return this.getSocialsNetworks()
+      }
+    }
+  },
   methods: {
+    ...mapActions('mainMenu', ['ActionSetItems', 'ActionSetSocialsNetworks']),
     ...mapGetters('mainMenu', ['getItems', 'getSocialsNetworks'])
   }
 }

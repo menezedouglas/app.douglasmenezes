@@ -1,1 +1,0 @@
-export const SET_LOADING = 'LOGIN/SET_LOADING'

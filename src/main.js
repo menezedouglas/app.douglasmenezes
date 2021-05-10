@@ -1,6 +1,6 @@
-import Vue from 'vue'
-import bootstrap from '@/modules/bootstrap'
-import http from '@/http'
+import { createApp, h } from 'vue';
+import bootstrap from './modules/bootstrap'
+import { axios } from './http'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -12,17 +12,13 @@ import '@fortawesome/fontawesome-free/js/all'
 import AOS from 'aos'
 import "aos/dist/aos.css"
 
-Vue.config.productionTip = process.env.VUE_APP_PRODUCTION
-
 window.helpers = helpers
 
-new Vue({
+export const app = createApp({
   bootstrap,
-  router,
-  store,
-  http,
-  render: h => h(App),
+  axios,
+  render: () => h(App),
   created () {
     AOS.init()
   }
-}).$mount('#app')
+}).use(router).use(store).mount('#app')
