@@ -1,5 +1,6 @@
-export const getId = ({ id }) => { return id }
-export const getName = ({ name }) => { return name }
-export const getEmail = ({ email }) => { return email }
-export const getLoading = ({ loading }) => { return loading }
-export const getUsers = ({ users }) => { return users }
+export const getId = ({ id }) => id
+export const getName = ({ name }) => name
+export const getEmail = ({ email }) => email
+export const getLoading = ({ loading }) => loading
+export const getUsers = ({ users }) => users
+export const getFormEditMode = ({ formEditMode }) => formEditMode

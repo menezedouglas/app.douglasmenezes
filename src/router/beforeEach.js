@@ -18,10 +18,9 @@ export default async (to) => {
         authenticatedRoutes.indexOf(to.path) >= 0 &&
         await store.getters['login/hasAuthorization']
     ) {
-        try {
-            await store.dispatch('login/ActionCheckToken')
+        if (await store.getters['login/hasAuthorization']) {
             return true
-        } catch (e) {
+        } else {
             return '/login'
         }
     } else {
@@ -36,7 +35,11 @@ export default async (to) => {
                 if (publicRoutes.indexOf(to.path) >= 0) {
                     return true
                 } else {
-                    return '/'
+                    if(authenticatedRoutes.indexOf(to.path) >= 0) {
+                        return '/login'
+                    } else {
+                        return '/'
+                    }
                 }
             }
         }

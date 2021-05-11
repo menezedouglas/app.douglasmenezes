@@ -1,5 +1,4 @@
 import { createApp, h } from 'vue';
-import bootstrap from './modules/bootstrap'
 import { axios } from './http'
 import App from './App.vue'
 import router from './router'
@@ -15,7 +14,6 @@ import "aos/dist/aos.css"
 window.helpers = helpers
 
 export const app = createApp({
-  bootstrap,
   axios,
   render: () => h(App),
   created () {

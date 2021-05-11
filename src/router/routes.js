@@ -4,8 +4,8 @@ import { routes as login } from '../modules/auth/login'
 import { routes as dashboard } from '../modules/administration/dashboard'
 import { routes as users } from '../modules/administration/user'
 
-import publicLayout from "../layouts/public"
-import restrictedLayout from "../layouts/restricted";
+import publicLayout from '../layouts/public.vue'
+import restrictedLayout from '../layouts/restricted.vue'
 
 export default [
     {

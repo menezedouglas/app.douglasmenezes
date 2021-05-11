@@ -66,6 +66,7 @@ export default {
   created () {
     this.loadServices()
     this.ActionUpdateActiveItem()
+    console.log('here')
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <modals></modals>
     <section class="app-header">
       <h2 class="title">
         Douglas Menezes
@@ -19,11 +20,13 @@
 
 <script>
 import { component as MainMenu } from '../modules/components/main_menu'
+import modals from './modals'
 import {mapActions} from 'vuex'
 export default {
   name: 'app',
   components: {
-    MainMenu
+    MainMenu,
+    modals
   },
   methods: {
     ...mapActions('login', ['ActionCheckToken']),

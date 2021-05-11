@@ -18,5 +18,8 @@ export default {
     },
     [types.SET_EDIT] (state, payload) {
         state.edit = payload
+    },
+    [types.SET_FORM_EDIT_MODE] (state, payload) {
+        state.formEditMode = payload
     }
 }

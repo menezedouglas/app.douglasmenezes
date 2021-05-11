@@ -4,5 +4,6 @@ export default {
     email: '',
     loading: '',
     users: [],
+    formEditMode: false,
     edit: {}
 }

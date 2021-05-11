@@ -17,6 +17,10 @@ export const ActionSetLoading = ({commit}, payload) => {
     commit(types.SET_LOADING, payload)
 }
 
+export const ActionSetFormEditMode = ({ commit }, payload) => {
+    commit(types.SET_FORM_EDIT_MODE, payload)
+}
+
 export const ActionSetUsers = ({dispatch, commit}) => {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {

@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col position-relative">
             <h3 class="menu-title">
-              Administração
+              {{ (mode === 'restrict') ? `Administração` : `Menu` }}
             </h3>
           </div>
           <div class="col-auto position-relative">

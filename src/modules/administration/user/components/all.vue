@@ -31,6 +31,7 @@
                       class="btn btn-sm btn-success"
                       data-bs-toggle="tooltip"
                       title="teste"
+                      @click="showFormUser()"
                   >
                     <i class="fas fa-plus"></i>
                   </button>
@@ -86,11 +87,13 @@ export default {
     ...mapGetters('user', [
         'getUsers',
         'getLoading'
-    ])
+    ]),
+    showFormUser(/*editMode = false*/) {
+
+    }
   },
   created() {
     this.users = ''
-
   }
 }
 </script>

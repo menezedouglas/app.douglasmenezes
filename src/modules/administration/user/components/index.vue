@@ -1,52 +1,55 @@
 <template>
-  <div class="card border-0 shadow">
-    <div class="card-body">
-      <div
-          v-if="loading"
-          class="spinner-border text-secondary"
-          role="status"
-      />
-      <div
-          v-if="!loading"
-          class="row"
-      >
-        <div class="col">
-          <h5 class="m-0 p-0"><strong>{{ name }}</strong></h5>
-          <small>{{ email }}</small>
-        </div>
-        <div class="col-auto">
-          <div class="dropdown">
-            <div
-                style="cursor: pointer;"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-            >
-              <i class="fas fa-ellipsis-v"></i>
+  <div>
+    <!-- Card -->
+    <div class="card border-0 shadow">
+      <div class="card-body">
+        <div
+            v-if="loading"
+            class="spinner-border text-secondary"
+            role="status"
+        />
+        <div
+            v-if="!loading"
+            class="row"
+        >
+          <div class="col">
+            <h5 class="m-0 p-0"><strong>{{ name }}</strong></h5>
+            <small>{{ email }}</small>
+          </div>
+          <div class="col-auto">
+            <div class="dropdown">
+              <div
+                  style="cursor: pointer;"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+              >
+                <i class="fas fa-ellipsis-v"></i>
+              </div>
+              <ul
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+              >
+                <li
+                    class="dropdown-item"
+                    style="cursor: pointer;"
+                >
+                  <i class="fas fa-user-edit"></i>
+                  Editar
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li
+                    class="dropdown-item text-danger"
+                    style="cursor: pointer;"
+                    @click="logout()"
+                >
+                  <i class="fas fa-sign-out-alt"></i>
+                  Sair
+                </li>
+              </ul>
             </div>
-            <ul
-                class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-            >
-              <li
-                  class="dropdown-item"
-                  style="cursor: pointer;"
-              >
-                <i class="fas fa-user-edit"></i>
-                Editar
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li
-                  class="dropdown-item text-danger"
-                  style="cursor: pointer;"
-                  @click="logout()"
-              >
-                <i class="fas fa-sign-out-alt"></i>
-                Sair
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -114,11 +117,19 @@ export default {
     async logout () {
       this.ActionLogOut()
       await this.$router.push('/login')
+    },
+    showFormUser(editMode = false) {
+      const modal = document.querySelector('#formUserModal')
+      switch (editMode) {
+        case true: {
+          break
+        }
+        case false: {
+          modal.show()
+          break
+        }
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
