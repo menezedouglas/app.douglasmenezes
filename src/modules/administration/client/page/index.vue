@@ -13,13 +13,16 @@
             row-key="name"
         />
       </div>
+      <div class="col-12">
+        <form-client></form-client>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
+import formClient from '../components/form'
 export default {
   name: "index",
   data () {
@@ -91,6 +94,9 @@ export default {
         return this.getClients()
       }
     }
+  },
+  components: {
+    formClient
   },
   methods: {
     ...mapActions('client', ['ActionSetClients', 'ActionSetLoading']),
