@@ -3,7 +3,7 @@
     <div class="flex-item">
       <section class="main">
         <h2 class="title">
-          Douglas Menezes
+          Douglas <span>Menezes</span>
         </h2>
         <span class="subtitle">
             Desenvolvedor Web
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import PageFooter from '@/components/PageFooter.vue'
-import { component as Accordion } from '@/modules/components/accordion'
+import PageFooter from '../../../../components/PageFooter.vue'
+import { component as Accordion } from '../../../components/accordion'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Home',

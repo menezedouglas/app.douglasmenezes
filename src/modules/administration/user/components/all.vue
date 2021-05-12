@@ -1,57 +1,33 @@
 <template>
-  <div class="container-fluid">
+  <div class="q-pa-md">
     <div class="row">
-      <div class="col-12 my-3">
-        <h1 class="text-muted">Usuários</h1>
-        <hr class="my-2">
+      <div class="col-12 q-my-sm">
+        <h2 class="text-grey-8">Usuários</h2>
+        <hr class="q-my-sm">
       </div>
       <div class="col-12">
-        <div class="card border-0 shadow">
-          <div class="card-body">
-            <div
-                v-if="loading"
-                class="d-flex align-content-center justify-content-center"
+        <q-card>
+          <q-card-section>
+            <q-table
+                grid
+                title="Usuários cadastrados"
+                :rows="users"
+                :columns="columns"
+                row-key="id"
+                :filter="filter"
+                :loading="loading"
+                hide-header
             >
-              <div
-                  class="spinner-border text-secondary"
-                  role="status"
-              />
-            </div>
-            <table
-                v-if="!loading"
-                class="table"
-            >
-              <thead class="thead-dark">
-              <tr>
-                <th scope="col" class="hide-mb">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col" class="hide-mb">E-mail</th>
-                <th scope="col">
-                  <button
-                      class="btn btn-sm btn-success"
-                      data-bs-toggle="tooltip"
-                      title="teste"
-                      @click="showFormUser()"
-                  >
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr
-                  v-for="user in users"
-                  v-bind:key="user.id"
-              >
-                <td class="hide-mb">{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td class="hide-mb">{{ user.email }}</td>
-                <td></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+              <template v-slot:top-right>
+                <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
+                  <template v-slot:append>
+                    <q-icon name="fas fa-search" />
+                  </template>
+                </q-input>
+              </template>
+            </q-table>
+          </q-card-section>
+        </q-card>
       </div>
     </div>
   </div>
@@ -59,39 +35,64 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: "all",
+  data() {
+    return {
+      filter: '',
+      columns: [
+        {
+          name: 'id',
+          required: true,
+          label: 'Id',
+          align: 'left',
+          field: 'id',
+          sortable: true
+        },
+        {name: 'name', align: 'center', label: 'Nome', field: 'name', sortable: true},
+        {name: 'email', label: 'E-mail', field: 'email', sortable: true},
+      ]
+    }
+  },
   computed: {
     users: {
-      set (/* val */) {
+      set(/* val */) {
         this.ActionSetUsers()
-      },
-      get () {
+      }
+      ,
+      get() {
         return this.getUsers()
       }
-    },
+    }
+    ,
     loading: {
-      set (val) {
+      set(val) {
         this.ActionSetLoading(val)
-      },
-      get () {
+      }
+      ,
+      get() {
         return this.getLoading()
       }
     }
-  },
+  }
+  ,
   methods: {
-    ...mapActions('user', [
-        'ActionSetUsers',
-        'ActionSetLoading'
-    ]),
-    ...mapGetters('user', [
-        'getUsers',
-        'getLoading'
-    ]),
+    ...
+        mapActions('user', [
+          'ActionSetUsers',
+          'ActionSetLoading'
+        ]),
+    ...
+        mapGetters('user', [
+          'getUsers',
+          'getLoading'
+        ]),
     showFormUser(/*editMode = false*/) {
 
     }
-  },
+  }
+  ,
   created() {
     this.users = ''
   }
@@ -99,5 +100,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .q-table__bottom>svg {
+    display: none !important;
+  }
 </style>

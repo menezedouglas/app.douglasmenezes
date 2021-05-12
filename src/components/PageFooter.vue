@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
       <section class="title">
-        Douglas Menezes
+        Douglas <span>Menezes</span>
       </section>
       <section class="subtitle">
         Desenvolvedor Web

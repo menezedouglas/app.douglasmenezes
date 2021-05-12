@@ -14,7 +14,7 @@ export default {
             }
             default: {
                 return {
-                    bg: 'danger',
+                    bg: 'negative',
                     message: `${request.response.msg} ${request.response.error}`
                 }
             }

@@ -1,24 +1,15 @@
 <template>
   <div
-      class="form-floating mb-3"
+      class="form-floating q-mb-md"
   >
-    <input
-        v-model="value"
+    <q-input
+        filled
         :type="type"
-        :name="name"
-        class="form-control"
-        :id="`${type}_${name}`"
-        :placeholder="placeholder"
-        @change="$emit('change')"
-        @keydown="$emit('keydown')"
-        @keypress="$emit('keypress')"
-        @keyup="$emit('keyup')"
-    >
-    <label
-        :for="`${type}_${name}`"
-    >
-      {{ label }}
-    </label>
+        v-model="value"
+        :label="label"
+        :dense="false"
+        :disable="(!! disabled)"
+    />
   </div>
 </template>
 
@@ -28,12 +19,14 @@ export default {
   props: {
     type: { required: true },
     name: { required: true },
-    placeholder: { required: true },
-    label: { required: true }
+    label: { required: true },
+    hint: { required: false },
+    disabled: { required: false }
   },
   data () {
     return {
-      value: ''
+      value: '',
+      isPwd: false
     }
   },
   watch: {

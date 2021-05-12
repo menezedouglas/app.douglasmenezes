@@ -8,17 +8,17 @@
 </style>
 
 <template>
-  <div class="row h-100">
+  <div class="row q-s">
     <div class="col">
       <div class="absolute-center p-3">
         <div class="card border-0 shadow">
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h2 class="text-dark mb-0">
+                <h2 class="text-dark q-mb-none">
                   Entrar
                 </h2>
-                <hr class="my-2 mb-3">
+                <hr class="q-my-sm q-mb-md">
               </div>
             </div>
             <form
@@ -32,6 +32,7 @@
                       name="email"
                       placeholder="user@mail.com"
                       @value="credentials.email = $event"
+                      :disabled="loading"
                   />
                 </div>
                 <div class="col-12">
@@ -41,15 +42,18 @@
                       name="password"
                       placeholder="senha1234"
                       @value="credentials.password = $event"
+                      :disabled="loading"
                   />
                 </div>
                 <div class="col-12 mt-3">
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <defaultButton
+                    <q-btn
+                        class="q-px-lg float-right"
                         type="submit"
-                        bg="primary"
+                        label="Entrar"
+                        color="green"
                         :loading="loading"
-                        name="Entrar"
+                        :disable="loading"
                     />
                   </div>
                 </div>
@@ -57,9 +61,6 @@
             </form>
           </div>
         </div>
-        <messages
-            position="bottom-center"
-        />
       </div>
     </div>
   </div>
@@ -67,16 +68,16 @@
 
 <script>
 import defaultInput from '../../../../components/forms/default-input'
-import defaultButton from '../../../../components/generics/default-button'
-import {component as messages} from '../../../components/messages'
+// import defaultButton from '../../../../components/generics/default-button'
+// import {component as messages} from '../../../components/messages'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "index",
   components: {
     defaultInput,
-    defaultButton,
-    messages
+    // defaultButton,
+    // messages
   },
   data() {
     return {
@@ -105,7 +106,7 @@ export default {
       'getLoading'
     ]),
     ...mapActions('messages', [
-        'ActionSetErrors'
+      'ActionSetErrors'
     ]),
     async submit() {
       try {

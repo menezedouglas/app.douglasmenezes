@@ -1,5 +1,5 @@
-import * as types from './mutation-types';
-
+import * as types from './mutation-types'
+import { Notify } from 'quasar'
 
 export const ActionUnsetMessage = ({ dispatch, getters }, payload) => {
     const currentMessages = getters.getMessages
@@ -40,7 +40,15 @@ export const ActionAddMessages = ({ dispatch, getters }, payload) => {
 }
 
 export const ActionSetMessages = ({ commit }, payload) => {
-    commit(types.SET_MESSAGES, payload)
+    payload.map(msg => {
+        Notify.create({
+            type: msg.bg,
+            message: msg.message,
+            multiLine: false,
+            position: "bottom"
+        })
+    })
+    commit(types.SET_MESSAGES, [])
 }
 
 export const ActionSetErrors = async ({ dispatch }, payload) => {

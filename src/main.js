@@ -10,6 +10,8 @@ import '@fortawesome/fontawesome-free/js/all'
 
 import AOS from 'aos'
 import "aos/dist/aos.css"
+import { Quasar } from 'quasar'
+import quasarUserOptions from './quasar-user-options'
 
 window.helpers = helpers
 
@@ -19,4 +21,4 @@ export const app = createApp({
   created () {
     AOS.init()
   }
-}).use(router).use(store).mount('#app')
+}).use(router).use(Quasar, quasarUserOptions).use(store).mount('#app')

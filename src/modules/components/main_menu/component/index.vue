@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col position-relative">
             <h3 class="menu-title">
-              {{ (mode === 'restrict') ? `Administração` : `Menu` }}
+              Menu
             </h3>
           </div>
           <div class="col-auto position-relative">
@@ -79,7 +79,6 @@ import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "main_menu",
-  props: ['mode'],
   data () {
     return {
       mainMenu: {
@@ -156,14 +155,15 @@ export default {
     }
   },
   created () {
-    switch (this.mode) {
-      case 'restricted': {
+    switch (this.hasAuthorization()) {
+      case true: {
         this.ActionSetItems([
+          ...this.mainMenu.itemsUnauthenticated,
           ...this.mainMenu.itemsAuthenticated
         ])
         break
       }
-      case 'public': {
+      case false: {
         this.ActionSetItems([
           ...this.mainMenu.itemsUnauthenticated
         ])

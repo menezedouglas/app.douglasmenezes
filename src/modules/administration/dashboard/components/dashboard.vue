@@ -1,9 +1,9 @@
 <template>
-  <div class="container-fluid">
+  <div class="q-pa-md">
     <div class="row">
-      <div class="col-12 my-3">
-        <h1 class="text-muted">Dashboard</h1>
-        <hr class="my-2">
+      <div class="col-12 q-my-sm">
+        <h2 class="text-grey-8">Dashboard</h2>
+        <hr class="q-my-sm">
       </div>
       <div class="col-auto">
         <user></user>
@@ -29,7 +29,7 @@ export default {
           this.ActionSetErrors(error)
           if(error.request.status) {
             await this.$store.dispatch('login/ActionLogOut')
-            location.reload()
+            await this.$router.push('/login')
           }
         }
       },

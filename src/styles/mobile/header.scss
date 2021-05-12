@@ -6,7 +6,7 @@
     top: 0;
     left: 0;
     background: #1B1B1B;
-    padding: 15px 0 0 15px;
+    padding: 20px 0 0 25px;
     text-align: left;
     box-shadow: 0 1px 10px 0 #1B1B1B;
     z-index: 10;
@@ -20,6 +20,11 @@
   .app-header .subtitle {
     color: #F5F5F5;
     font-size: 14pt;
+  }
+
+  .app-header .logo {
+    width: 60px;
+    height: 60px;
   }
 
 }

@@ -2,16 +2,11 @@
   <div id="app">
     <modals></modals>
     <section class="app-header">
-      <h2 class="title">
-        Douglas Menezes
-      </h2>
-      <span class="subtitle">
-          Desenvolvedor Web
-      </span>
+      <q-avatar square class="logo">
+        <img src="logo.png">
+      </q-avatar>
     </section>
-    <main-menu
-      mode="restricted"
-    />
+    <main-menu />
     <div @click="closeSideBar" id="content">
       <router-view />
     </div>

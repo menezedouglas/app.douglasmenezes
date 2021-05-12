@@ -13,6 +13,7 @@ const authenticatedRoutes = [
 
 export default async (to) => {
     document.title = `${to.name} - Douglas Menezes`
+    store.dispatch('mainMenu/ActionUpdateActiveItem')
     if (
         publicRoutes.indexOf(to.path) < 0 &&
         authenticatedRoutes.indexOf(to.path) >= 0 &&

@@ -1,59 +1,66 @@
 <template>
   <div>
     <!-- Card -->
-    <div class="card border-0 shadow">
-      <div class="card-body">
-        <div
-            v-if="loading"
-            class="spinner-border text-secondary"
-            role="status"
-        />
-        <div
-            v-if="!loading"
-            class="row"
+    <q-card
+      style="min-width: 255px; min-height: 85px;"
+    >
+      <q-card-section>
+        <transition
+            appear
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
         >
-          <div class="col">
-            <h5 class="m-0 p-0"><strong>{{ name }}</strong></h5>
-            <small>{{ email }}</small>
-          </div>
-          <div class="col-auto">
-            <div class="dropdown">
-              <div
-                  style="cursor: pointer;"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-              >
-                <i class="fas fa-ellipsis-v"></i>
+          <div v-show="!loading">
+            <div class="row items-center no-wrap">
+              <div class="col">
+                <h5 class="m-0 p-0"><strong>{{ name }}</strong></h5>
+                <small>{{ email }}</small>
               </div>
-              <ul
-                  class="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-              >
-                <li
-                    class="dropdown-item"
-                    style="cursor: pointer;"
-                >
-                  <i class="fas fa-user-edit"></i>
-                  Editar
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li
-                    class="dropdown-item text-danger"
-                    style="cursor: pointer;"
-                    @click="logout()"
-                >
-                  <i class="fas fa-sign-out-alt"></i>
-                  Sair
-                </li>
-              </ul>
+              <div class="col-auto">
+                <q-btn color="grey-7" size="sm" round flat icon="fas fa-ellipsis-v">
+                  <q-menu auto-close style="width: 100px" anchor="center right" self="center left" :offset="[30, 10]">
+                    <q-list>
+                      <q-item clickable>
+                        <q-item-section>
+                          <div class="row items-center no-wrap">
+                            <div class="col-auto">
+                              <i class="fas fa-user-edit"></i>
+                            </div>
+                            <div class="col text-right">
+                              Editar
+                            </div>
+                          </div>
+                        </q-item-section>
+                      </q-item>
+                      <q-item clickable>
+                        <q-item-section
+                            class="text-red"
+                            @click="logout()"
+                        >
+
+                          <div class="row items-center no-wrap">
+                            <div class="col-auto">
+                              <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <div class="col text-right">
+                              Sair
+                            </div>
+                          </div>
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-menu>
+                </q-btn>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </transition>
+      </q-card-section>
+
+      <q-inner-loading :showing="loading">
+        <q-spinner-gears size="50px" color="primary" />
+      </q-inner-loading>
+    </q-card>
   </div>
 </template>
 
