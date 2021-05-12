@@ -7,6 +7,7 @@ import { store as messages } from '../modules/components/messages'
 import { store as login } from '../modules/auth/login'
 import { store as user } from '../modules/administration/user'
 import { store as dashboard } from '../modules/administration/dashboard'
+import { store as client } from '../modules/administration/client'
 
 export default {
     home,
@@ -17,5 +18,6 @@ export default {
     accordion,
     messages,
     user,
-    dashboard
+    dashboard,
+    client
 }

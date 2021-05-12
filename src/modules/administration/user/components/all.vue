@@ -10,7 +10,6 @@
           <q-card-section>
             <q-table
                 grid
-                title="Usuários cadastrados"
                 :rows="users"
                 :columns="columns"
                 row-key="id"

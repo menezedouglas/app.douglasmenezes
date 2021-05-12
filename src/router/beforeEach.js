@@ -8,7 +8,8 @@ const publicRoutes = [
 
 const authenticatedRoutes = [
     '/dashboard',
-    '/users'
+    '/users',
+    '/client'
 ]
 
 export default async (to) => {

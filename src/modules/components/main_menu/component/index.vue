@@ -104,6 +104,11 @@ export default {
             name: 'Usuários',
             url: '/users',
             active: false
+          },
+          {
+            name: 'Cliente',
+            url: '/client',
+            active: false
           }
         ],
         socialsNetworks: [
