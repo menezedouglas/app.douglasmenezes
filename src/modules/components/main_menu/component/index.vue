@@ -88,11 +88,11 @@ export default {
             url: '/',
             active: true
           },
-          {
-            name: 'Projetos',
-            url: '/projects',
-            active: false
-          }
+          // {
+          //   name: 'Projetos',
+          //   url: '/projects',
+          //   active: false
+          // }
         ],
         itemsAuthenticated: [
           {
