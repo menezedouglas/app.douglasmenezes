@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md">
+    <formClient></formClient>
     <div class="row">
       <div class="col-12 q-my-sm">
         <h2 class="text-grey-8">Clientes</h2>
@@ -13,56 +14,45 @@
             row-key="name"
         />
       </div>
-      <div class="col-12">
-        <form-client></form-client>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import formClient from '../components/form'
+import formClient from '../components/formClient'
 export default {
   name: "index",
-  data () {
+  setup () {
     return {
       columns: [
         {
-          name: 'id',
-          required: true,
-          label: 'Id',
+          name: 'fantasy_name',
           align: 'center',
-          field: 'id',
+          label: 'Nome Fantasia',
+          field: 'fantasy_name',
           sortable: true
         },
         {
-          name: 'user_id',
+          name: 'document_type',
+          label: 'Tipo do Documento',
           align: 'center',
-          label: 'Id da Empresa',
-          field: 'user_id',
-          sortable: true
-        },
-        {
-          name: 'user_is_representative',
-          label: 'Representante',
-          align: 'center',
-          field: 'user_is_representative',
+          field: 'document_type',
           sortable: true,
-          format: val => val === 0 ? `Não` : 'Sim'
+          format: val => val.toUpperCase()
         },
         {
-          name: 'representative_name',
-          label: 'Nome',
+          name: 'document',
+          label: 'Documento',
           align: 'center',
-          field: 'representative_name',
+          field: 'document',
           sortable: true
         },
         {
-          name: 'representative_occupation',
-          label: 'Cargo',
+          name: 'email',
+          label: 'E-mail',
           align: 'center',
-          field: 'representative_occupation',
+          field: 'email',
           sortable: true
         }
       ]

@@ -8,6 +8,7 @@ import { store as login } from '../modules/auth/login'
 import { store as user } from '../modules/administration/user'
 import { store as dashboard } from '../modules/administration/dashboard'
 import { store as client } from '../modules/administration/client'
+import { store as refCodes } from '../modules/administration/refCodes'
 
 export default {
     home,
@@ -19,5 +20,6 @@ export default {
     messages,
     user,
     dashboard,
-    client
+    client,
+    refCodes
 }

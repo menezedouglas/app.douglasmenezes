@@ -13,13 +13,25 @@ export default {
     [types.SET_FORM_USER_ID] ({ form }, payload) {
         form.user_id = payload
     },
-    [types.SET_FORM_USER_IS_REPRESENTATIVE] ({ form }, payload) {
-        form.user_is_representative = payload
+    [types.SET_FORM_FULL_NAME] ({ form }, payload) {
+        form.full_name = payload
     },
-    [types.SET_FORM_REPRESENTATIVE_NAME] ({ form }, payload) {
-        form.representative_name = payload
+    [types.SET_FORM_FANSTASY_NAME] ({ form }, payload) {
+        form.fantasy_name = payload
     },
-    [types.SET_FORM_REPRESENTATIVE_OCCUPATION] ({ form }, payload) {
-        form.representative_occupation = payload
+    [types.SET_FORM_DOCUMENT_TYPE] ({ form }, payload) {
+        form.document_type = payload
+    },
+    [types.SET_FORM_EMAIL] ({ form }, payload) {
+        form.email = payload
+    },
+    [types.SET_FORM_PHONE] ({ form }, payload) {
+        form.phone = payload
+    },
+    [types.SET_FORM_DIALOG] (state, payload) {
+        state.formDialog = payload
+    },
+    [types.SET_OPTIONS] (state, payload) {
+        state.options = payload
     }
 }

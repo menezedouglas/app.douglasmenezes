@@ -106,8 +106,8 @@ export default {
             active: false
           },
           {
-            name: 'Cliente',
-            url: '/client',
+            name: 'Clientes',
+            url: '/clients',
             active: false
           }
         ],
