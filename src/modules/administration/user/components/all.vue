@@ -77,13 +77,11 @@ export default {
   }
   ,
   methods: {
-    ...
-        mapActions('user', [
+    ...mapActions('user', [
           'ActionSetUsers',
           'ActionSetLoading'
         ]),
-    ...
-        mapGetters('user', [
+    ...mapGetters('user', [
           'getUsers',
           'getLoading'
         ]),

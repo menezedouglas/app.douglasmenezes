@@ -9,7 +9,7 @@ export default {
         full_name: ref(''),
         fantasy_name: ref(''),
         document_type: ref(''),
-        document: ref(0),
+        document: ref(''),
         email: ref(''),
         phone: ref('')
     },

@@ -1,5 +1,6 @@
 import * as types from './mutation-types'
 import requests  from '../../../../http'
+import helpers from '../../../../helpers'
 
 export const ActionSetLoading = ({ commit }, payload) => {
     commit(types.SET_LOADING, payload)
@@ -26,7 +27,7 @@ export const ActionSetFormDocumentType = ({ commit }, payload) => {
 }
 
 export const ActionSetFormDocument = ({ commit }, payload) => {
-    commit(types.SET_FORM_DOCUMENT, payload)
+    commit(types.SET_FORM_DOCUMENT, helpers.string.onlyNumbers(payload))
 }
 
 export const ActionSetFormEmail = ({ commit }, payload) => {
@@ -34,7 +35,7 @@ export const ActionSetFormEmail = ({ commit }, payload) => {
 }
 
 export const ActionSetFormPhone = ({ commit }, payload) => {
-    commit(types.SET_FORM_PHONE, payload)
+    commit(types.SET_FORM_PHONE, helpers.string.onlyNumbers(payload))
 }
 
 export const ActionSetFormDialog = ({ commit }, payload) => {
@@ -51,6 +52,23 @@ export const ActionSetClients = async ({ commit, dispatch }) => {
         const { request } = await requests.client.all()
         commit(types.SET_CLIENTS, request.response)
         dispatch('ActionSetLoading', false)
+        return Promise.resolve()
+    } catch (error) {
+        dispatch('ActionSetLoading', false)
+        return Promise.reject(error)
+    }
+}
+
+export const ActionCreateClients = async ({ dispatch }, payload) => {
+    try {
+        dispatch('ActionSetLoading', true)
+        Object.keys(payload).map(key => {
+            if(key === 'document' || key === 'phone') {
+                payload[key] = parseInt(payload[key])
+            }
+        })
+        await requests.client.create(payload)
+        dispatch('ActionSetClients')
         return Promise.resolve()
     } catch (error) {
         dispatch('ActionSetLoading', false)

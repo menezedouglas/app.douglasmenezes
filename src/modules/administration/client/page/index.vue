@@ -11,8 +11,30 @@
             :rows="clients"
             :loading="loading"
             :columns="columns"
-            row-key="name"
-        />
+            row-key="fantasy_name"
+            :filter="filter"
+        >
+          <template v-slot:top-left>
+            <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
+              <template v-slot:append>
+                <q-icon name="fas fa-search" />
+              </template>
+            </q-input>
+          </template>
+          <template v-slot:top-right>
+            <q-btn
+              dense
+              size="sm"
+              color="positive"
+              icon="fas fa-plus"
+              @click="formClientDialog = !formClientDialog"
+            >
+              <q-tooltip anchor="center left" self="center right">
+                Novo cliente
+              </q-tooltip>
+            </q-btn>
+          </template>
+        </q-table>
       </div>
     </div>
   </div>
@@ -28,6 +50,7 @@ export default {
       columns: [
         {
           name: 'fantasy_name',
+          required: true,
           align: 'center',
           label: 'Nome Fantasia',
           field: 'fantasy_name',
@@ -55,7 +78,8 @@ export default {
           field: 'email',
           sortable: true
         }
-      ]
+      ],
+      filter: ''
     }
   },
   computed: {
@@ -82,6 +106,14 @@ export default {
       },
       get () {
         return this.getClients()
+      }
+    },
+    formClientDialog: {
+      set (val) {
+        this.$store.dispatch('client/ActionSetFormDialog', val)
+      },
+      get () {
+        return this.$store.getters['client/getFormDialog']
       }
     }
   },

@@ -1,7 +1,7 @@
 <style scoped>
   @media (min-width: 768px) {
     .form-client-card {
-      min-width: 450px;
+      min-width: 500px;
     }
   }
   @media (max-width: 767px) {
@@ -19,49 +19,159 @@
     >
       <q-card class="form-client-card">
         <q-card-section>
-          <h5 class="text-grey-7">Novo Cliente</h5>
+          <div class="row">
+            <div class="col">
+              <h5 class="text-grey-7">Novo Cliente</h5>
+            </div>
+            <div class="col-auto">
+              <q-btn
+                dense
+                round
+                flat
+                icon="fas fa-times"
+                color="grey"
+                @click="dialog = !dialog"
+              >
+                <q-tooltip anchor="center left" self="center right" class="bg-red text-white">
+                  Fechar o formulário
+                </q-tooltip>
+              </q-btn>
+            </div>
+          </div>
         </q-card-section>
         <q-separator />
         <q-card-section>
           <q-form
               class="q-gutter-md"
+              @submit.prevent="submit"
           >
+
+            <q-table
+                title="Usuários"
+                :rows="users"
+                :loading="usersLoading"
+                :columns="[
+                        {
+                          name: 'name',
+                          required: true,
+                          label: 'Nome',
+                          align: 'left',
+                          field: 'name',
+                          sortable: true
+                        },
+                        {
+                          name: 'email',
+                          label: 'E-mail',
+                          align: 'left',
+                          field: 'email',
+                          sortable: true
+                        }
+                    ]"
+                row-key="name"
+                selection="single"
+                v-model:selected="userSelected"
+                :filter="userFilter"
+            >
+              <template v-slot:top-right>
+                <q-input borderless dense debounce="300" v-model="userFilter" placeholder="Pesquisar">
+                  <template v-slot:append>
+                    <q-icon name="fas fa-search" />
+                  </template>
+                </q-input>
+              </template>
+            </q-table>
+
             <q-input
                 filled
-                v-model="fullName"
-                label="Nome Completo"
-                hint="Nome completo da empresa"
-                lazy-rules
+                v-model="full_name"
+                label="Nome Completo *"
+                hint="Nome completo do cliente (Obrigatório)"
+                lazy-rules=""
                 :rules="[ val => val && val.length > 0 || 'Por favor, este campo não pode ficar em branco']"
             />
 
             <q-input
                 filled
-                v-model="fantasyName"
+                v-model=fantasy_name
                 label="Nome Fantasia"
-                hint="Nome fantasia da empresa"
-                lazy-rules
+                hint="Nome fantasia (p/ empresas)"
+                lazy-rules=""
             />
 
-            <q-select
+            <!-- Init - Document Inputs -->
+            <q-card>
+              <q-card-section>
+                <h6 class="text-grey-5">Documento</h6>
+              </q-card-section>
+              <q-card-section>
+                <div class="row q-gutter-sm">
+                  <div class="col-5">
+                    <q-select
+                        filled
+                        v-model="document_type"
+                        use-input
+                        input-debounce="0"
+                        label="Tipo *"
+                        :options="options"
+                        @filter="filterFn"
+                        behavior="dialog"
+                        :loading="loading"
+                        :disable="loading"
+                    >
+                      <template v-slot:no-option>
+                        <q-item>
+                          <q-item-section class="text-grey">
+                            Sem resultados
+                          </q-item-section>
+                        </q-item>
+                      </template>
+                    </q-select>
+                  </div>
+                  <div class="col-6">
+                    <q-input
+                        filled
+                        v-model="document"
+                        :label="`Número do ${document_type || 'Documento'}`"
+                        :disable="(! document_type)"
+                        :mask="maskDocument"
+                        lazy-rules=""
+                        :rules="[
+                          val => val && val.length > 0 || 'Por favor, este campo não pode ficar em branco',
+                          val => !isNaN(val) || 'Somente números'
+                        ]"
+                    />
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
+            <!-- End - Document Input -->
+
+            <q-input
                 filled
-                v-model="documentType"
-                use-input
-                input-debounce="0"
-                label="Simple filter"
-                :options="options"
-                @filter="filterFn"
-                style="width: 250px"
-                behavior="dialog"
-            >
-              <template v-slot:no-option>
-                <q-item>
-                  <q-item-section class="text-grey">
-                    No results
-                  </q-item-section>
-                </q-item>
-              </template>
-            </q-select>
+                v-model="email"
+                label="E-mail *"
+                hint="E-mail para contato (obrigatório)"
+                lazy-rules=""
+                :rules="[ val => val && val.length > 0 || 'Por favor, este campo não pode ficar em branco']"
+            />
+
+            <q-input
+                filled
+                v-model="phone"
+                label="Telefone"
+                hint="Telefone para contato"
+                :mask="maskPhone"
+                lazy-rules=""
+            />
+
+            <q-btn
+                type="submit"
+                ripple=""
+                class="float-right q-mb-md"
+                color="positive"
+                icon="far fa-save"
+                label="Salvar"
+            />
           </q-form>
         </q-card-section>
       </q-card>
@@ -72,7 +182,24 @@
 <script>
 export default {
   name: 'formClient',
+  data () {
+    return {
+      maskPhone: '',
+      maskDocument: '',
+      users: [],
+      userFilter: '',
+      userSelected: []
+    }
+  },
   computed: {
+    usersLoading: {
+      set (val) {
+        this.$store.dispatch('user/ActionSetLoading', val)
+      },
+      get () {
+        return this.$store.getters['user/getLoading']
+      }
+    },
     loading: {
       set (val) {
         this.$store.dispatch('client/ActionSetLoading', val)
@@ -97,7 +224,7 @@ export default {
         return this.$store.getters['client/getFormUserId']
       }
     },
-    fullName: {
+    full_name: {
       set (val) {
         this.$store.dispatch('client/ActionSetFormFullName', val)
       },
@@ -105,7 +232,7 @@ export default {
         return this.$store.getters['client/getFormFullName']
       }
     },
-    fantasyName: {
+    fantasy_name: {
       set (val) {
         this.$store.dispatch('client/ActionSetFormFantasyName', val)
       },
@@ -113,7 +240,7 @@ export default {
         return this.$store.getters['client/getFormFantasyName']
       }
     },
-    documentType: {
+    document_type: {
       set (val) {
         this.$store.dispatch('client/ActionSetFormDocumentType', val)
       },
@@ -155,7 +282,14 @@ export default {
     },
     options: {
       set (val) {
-        this.$store.dispatch('client/ActionSetOptions', val)
+
+        let opt = []
+
+        val.map(item => {
+          opt.push(item.value.toUpperCase())
+        })
+
+        this.$store.dispatch('client/ActionSetOptions', opt)
       },
       get () {
         return this.$store.getters['client/getOptions']
@@ -165,6 +299,7 @@ export default {
       async set (val) {
         try {
           await this.$store.dispatch('refCodes/ActionSetCodes', val)
+          this.options = this.refCodes
         } catch (error) {
           await this.$store.dispatch('messages/ActionSetErrors', error)
           if(error.request.status === 401) {
@@ -176,6 +311,35 @@ export default {
       get () {
         return this.$store.getters['refCodes/getCodes']
       }
+    },
+    refCodes_loading: {
+      set (val) {
+        this.$store.dispatch('refCodes/ActionSetLoading', val)
+      },
+      get () {
+        return this.$store.getters['refCodes/getLoading']
+      }
+    }
+  },
+  watch: {
+    async dialog (val) {
+      if(val) {
+        this.refCodes = 'document_type'
+        this.users = await this.getUsers()
+      } else {
+        Object.keys(this.form).map(key => {
+          this[key] = ''
+        })
+      }
+    },
+    document_type (val) {
+      this.maskDocument = (val === 'CPF') ? '###.###.###-##' : "##.###.###/####-##"
+    },
+    phone (val) {
+      this.maskPhone = (val.length <= 10) ? `(##) #### - #####` : `(##) # #### - ####`
+    },
+    userSelected (val) {
+      this.userId = val[0].id
     }
   },
   methods: {
@@ -190,12 +354,36 @@ export default {
 
       update(() => {
         const needle = val.toLowerCase()
-        this.options = this.refCodes.filter(v => v.toLowerCase().indexOf(needle) > -1)
+        this.options = this.refCodes.filter(v => v.value.toLowerCase().indexOf(needle) > -1)
       })
+    },
+    async getUsers () {
+      try {
+        return await this.$store.dispatch('user/ActionGetUsers')
+      } catch (error) {
+        this.$store.dispatch('messages/ActionSetErrors', error)
+        if(error.request.status === 401) {
+          this.$store.dispatch('login/ActionLogOut')
+          await this.$router.push('/login')
+        }
+        return []
+      }
+    },
+    async submit () {
+      try {
+        this.$q.loading.show()
+        await this.$store.dispatch('client/ActionCreateClients', this.form)
+        this.$q.loading.hide()
+        this.dialog = false
+        this.$store.dispatch('messages/ActionAddMessage', {
+          bg: 'positive',
+          message: 'Cliente criado com sucesso'
+        })
+      } catch (error) {
+        this.$q.loading.hide()
+        this.$store.dispatch('messages/ActionSetErrors', error)
+      }
     }
-  },
-  created() {
-    this.dialog = true
   }
 }
 </script>

@@ -22,6 +22,9 @@ export default {
     [types.SET_FORM_DOCUMENT_TYPE] ({ form }, payload) {
         form.document_type = payload
     },
+    [types.SET_FORM_DOCUMENT] ({ form }, payload) {
+        form.document = payload
+    },
     [types.SET_FORM_EMAIL] ({ form }, payload) {
         form.email = payload
     },

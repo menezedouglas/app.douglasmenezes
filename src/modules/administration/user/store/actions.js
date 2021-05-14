@@ -36,6 +36,34 @@ export const ActionSetUsers = ({dispatch, commit}) => {
     })
 }
 
+export const ActionGetUsers = ({dispatch}) => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
+        try {
+            dispatch('ActionSetLoading', true)
+            const { request } = await requests.user.all()
+            dispatch('ActionSetLoading', false)
+            resolve(request.response)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+export const ActionGetUser = ({dispatch}, payload) => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
+        try {
+            dispatch('ActionSetLoading', true)
+            const { request } = await requests.user.show({ user_id: payload })
+            dispatch('ActionSetLoading', false)
+            resolve(request.response)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 export const ActionSetUser = ({dispatch}, payload) => {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {

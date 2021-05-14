@@ -1,3 +1,4 @@
 export default {
-    codes: []
+    codes: [],
+    loading: false
 }
