@@ -1,6 +1,7 @@
 export const getClients = ({ clients }) => clients
 export const getLoading = ({ loading }) => loading
 export const getForm = ({ form }) => form
+export const getFormClientId = ({ form }) => form.client_id
 export const getFormUserId = ({ form }) => form.user_id
 export const getFormFullName = ({ form }) => form.full_name
 export const getFormFantasyName = ({ form }) => form.fantasy_name
@@ -10,3 +11,5 @@ export const getFormEmail = ({ form }) => form.email
 export const getFormPhone = ({ form }) => form.phone
 export const getFormDialog = ({ formDialog }) => formDialog
 export const getOptions = ({ options }) => options
+export const getFormDialogEditMode = ({ formDialogEditMode }) => formDialogEditMode
+export const getClientShow = ({ clientShow }) => clientShow

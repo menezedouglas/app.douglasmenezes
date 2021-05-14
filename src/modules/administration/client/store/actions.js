@@ -10,6 +10,10 @@ export const ActionSetForm = ({ commit }, payload) => {
     commit(types.SET_FORM, payload)
 }
 
+export const ActionSetFormClientId = ({ commit }, payload) => {
+    commit(types.SET_FROM_CLIENT_ID, payload)
+}
+
 export const ActionSetFormUserId = ({ commit }, payload) => {
     commit(types.SET_FORM_USER_ID, payload)
 }
@@ -44,6 +48,22 @@ export const ActionSetFormDialog = ({ commit }, payload) => {
 
 export const ActionSetOptions = ({ commit }, payload) => {
     commit(types.SET_OPTIONS, payload)
+}
+
+export const ActionSetFormDialogEditMode = ({ commit }, payload) => {
+    commit(types.SET_FORM_DIALOG_EDIT_MODE, payload)
+}
+
+export const ActionSetClientShow = async ({ commit, dispatch }, payload) => {
+    try {
+        dispatch('ActionSetLoading', true)
+        const { request } = await requests.client.show({ client_id: payload })
+        commit(types.SET_CLIENT_SHOW, request.response)
+        dispatch('ActionSetLoading', false)
+    } catch (error) {
+        dispatch('ActionSetLoading', false)
+        return Promise.reject(error)
+    }
 }
 
 export const ActionSetClients = async ({ commit, dispatch }) => {

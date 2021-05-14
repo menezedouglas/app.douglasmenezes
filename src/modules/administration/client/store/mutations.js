@@ -10,6 +10,9 @@ export default {
     [types.SET_FORM] (state, payload) {
         state.form = payload
     },
+    [types.SET_FROM_CLIENT_ID] (state, payload) {
+        state.client_id = payload
+    },
     [types.SET_FORM_USER_ID] ({ form }, payload) {
         form.user_id = payload
     },
@@ -36,5 +39,11 @@ export default {
     },
     [types.SET_OPTIONS] (state, payload) {
         state.options = payload
+    },
+    [types.SET_FORM_DIALOG_EDIT_MODE] (state, payload) {
+        state.formDialogEditMode = payload
+    },
+    [types.SET_CLIENT_SHOW] (state, payload) {
+        state.clientShow = payload
     }
 }

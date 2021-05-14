@@ -34,6 +34,48 @@
               </q-tooltip>
             </q-btn>
           </template>
+
+          <template v-slot:body="props">
+            <q-tr :props="props">
+              <q-td key="fantasy_name" :props="props">
+                {{ props.row.fantasy_name }}
+              </q-td>
+              <q-td key="document_type" :props="props">
+                {{ props.row.document_type.toUpperCase() }}
+              </q-td>
+              <q-td key="document" :props="props">
+                {{ props.row.document }}
+              </q-td>
+              <q-td key="email" :props="props">
+                {{ props.row.email }}
+              </q-td>
+              <q-td key="actions" :props="props" class="q-gutter-sm">
+                <q-btn
+                  round
+                  ripple=""
+                  size="sm"
+                  color="dark"
+                  icon="fas fa-user-edit"
+                  @click="showEdit(props.row.id)"
+                >
+                  <q-tooltip anchor="center left" self="center right">
+                    Editar
+                  </q-tooltip>
+                </q-btn>
+                <q-btn
+                    round
+                    ripple=""
+                    size="sm"
+                    color="red"
+                    icon="fas fa-user-minus"
+                >
+                  <q-tooltip class="bg-red text-white" anchor="center right" self="center left">
+                    Deletar
+                  </q-tooltip>
+                </q-btn>
+              </q-td>
+            </q-tr>
+          </template>
         </q-table>
       </div>
     </div>
@@ -61,8 +103,7 @@ export default {
           label: 'Tipo do Documento',
           align: 'center',
           field: 'document_type',
-          sortable: true,
-          format: val => val.toUpperCase()
+          sortable: true
         },
         {
           name: 'document',
@@ -77,6 +118,13 @@ export default {
           align: 'center',
           field: 'email',
           sortable: true
+        },
+        {
+          name: 'actions',
+          label: '',
+          align: 'center',
+          field: 'actions',
+          sortable: false
         }
       ],
       filter: ''
@@ -115,7 +163,23 @@ export default {
       get () {
         return this.$store.getters['client/getFormDialog']
       }
-    }
+    },
+    editMode: {
+      set(val) {
+        this.$store.dispatch('client/ActionSetFormDialogEditMode', val)
+      },
+      get() {
+        return this.$store.getters['client/getFormDialogEditMode']
+      }
+    },
+    clientShow: {
+      set (val) {
+        this.$store.dispatch('client/ActionSetClientShow', val)
+      },
+      get () {
+        return this.$store.getters['client/getClientShow']
+      }
+    },
   },
   components: {
     formClient
@@ -123,7 +187,21 @@ export default {
   methods: {
     ...mapActions('client', ['ActionSetClients', 'ActionSetLoading']),
     ...mapGetters('client', ['getClients', 'getLoading']),
-    ...mapActions('messages', ['ActionSetErrors'])
+    ...mapActions('messages', ['ActionSetErrors']),
+    async showEdit(id) {
+      try {
+        await this.$store.dispatch('client/ActionSetClientShow', id)
+        this.$store.dispatch('client/ActionSetForm', this.clientShow)
+        this.editMode = true
+        this.formClientDialog = true
+      } catch (error) {
+        this.$store.dispatch('messages/ActionSetErrors', error)
+        if(error.request.status === 401) {
+          this.$store.dispatch('login/ActionLogOut')
+          await this.$router.push('/login')
+        }
+      }
+    }
   },
   created() {
     this.clients = ''

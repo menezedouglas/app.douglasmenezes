@@ -1,21 +1,22 @@
 <style scoped>
-  @media (min-width: 768px) {
-    .form-client-card {
-      min-width: 500px;
-    }
+@media (min-width: 768px) {
+  .form-client-card {
+    min-width: 500px;
   }
-  @media (max-width: 767px) {
-    .form-client-card {
-      min-width: 300px;
-    }
+}
+
+@media (max-width: 767px) {
+  .form-client-card {
+    min-width: 300px;
   }
+}
 </style>
 
 <template>
   <div>
     <q-dialog
-      v-model="dialog"
-      persistent
+        v-model="dialog"
+        persistent
     >
       <q-card class="form-client-card">
         <q-card-section>
@@ -25,12 +26,12 @@
             </div>
             <div class="col-auto">
               <q-btn
-                dense
-                round
-                flat
-                icon="fas fa-times"
-                color="grey"
-                @click="dialog = !dialog"
+                  dense
+                  round
+                  flat
+                  icon="fas fa-times"
+                  color="grey"
+                  @click="dialog = !dialog"
               >
                 <q-tooltip anchor="center left" self="center right" class="bg-red text-white">
                   Fechar o formulário
@@ -39,7 +40,7 @@
             </div>
           </div>
         </q-card-section>
-        <q-separator />
+        <q-separator/>
         <q-card-section>
           <q-form
               class="q-gutter-md"
@@ -75,7 +76,7 @@
               <template v-slot:top-right>
                 <q-input borderless dense debounce="300" v-model="userFilter" placeholder="Pesquisar">
                   <template v-slot:append>
-                    <q-icon name="fas fa-search" />
+                    <q-icon name="fas fa-search"/>
                   </template>
                 </q-input>
               </template>
@@ -164,14 +165,15 @@
                 lazy-rules=""
             />
 
-            <q-btn
-                type="submit"
-                ripple=""
-                class="float-right q-mb-md"
-                color="positive"
-                icon="far fa-save"
-                label="Salvar"
-            />
+            <div class="flex items-end justify-end">
+              <q-btn
+                  type="submit"
+                  ripple=""
+                  color="positive"
+                  icon="far fa-save"
+                  label="Salvar"
+              />
+            </div>
           </q-form>
         </q-card-section>
       </q-card>
@@ -182,7 +184,7 @@
 <script>
 export default {
   name: 'formClient',
-  data () {
+  data() {
     return {
       maskPhone: '',
       maskDocument: '',
@@ -193,95 +195,113 @@ export default {
   },
   computed: {
     usersLoading: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('user/ActionSetLoading', val)
       },
-      get () {
+      get() {
         return this.$store.getters['user/getLoading']
       }
     },
     loading: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetLoading', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getLoading']
       }
     },
     form: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetForm', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getForm']
       }
     },
-    userId: {
+    editMode: {
+      set(val) {
+        this.$store.dispatch('client/ActionSetFormDialogEditMode', val)
+      },
+      get() {
+        return this.$store.getters['client/getFormDialogEditMode']
+      }
+    },
+    clientShow: {
       set (val) {
-        this.$store.dispatch('client/ActionSetFormUserId', val)
+        this.$store.dispatch('client/ActionSetClientShow', val)
       },
       get () {
+        return this.$store.getters['client/getClientShow']
+      }
+    },
+    userId: {
+      set(val) {
+        this.$store.dispatch('client/ActionSetFormUserId', val)
+      },
+      get() {
         return this.$store.getters['client/getFormUserId']
       }
     },
     full_name: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormFullName', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormFullName']
       }
     },
     fantasy_name: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormFantasyName', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormFantasyName']
       }
     },
     document_type: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormDocumentType', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormDocumentType']
       }
     },
     document: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormDocument', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormDocument']
       }
     },
     email: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormEmail', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormEmail']
       }
     },
     phone: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormPhone', val)
       },
-      get () {
-        return this.$store.getters['client/getFormPhone']
+      get() {
+        const val = this.$store.getters['client/getFormPhone']
+
+        return (val) ? val : ''
       }
     },
     dialog: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormDialog', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormDialog']
       }
     },
     options: {
-      set (val) {
+      set(val) {
 
         let opt = []
 
@@ -291,39 +311,39 @@ export default {
 
         this.$store.dispatch('client/ActionSetOptions', opt)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getOptions']
       }
     },
     refCodes: {
-      async set (val) {
+      async set(val) {
         try {
           await this.$store.dispatch('refCodes/ActionSetCodes', val)
           this.options = this.refCodes
         } catch (error) {
           await this.$store.dispatch('messages/ActionSetErrors', error)
-          if(error.request.status === 401) {
+          if (error.request.status === 401) {
             await this.$store.dispatch('login/ActionLogOut')
             await this.$router.push('/login')
           }
         }
       },
-      get () {
+      get() {
         return this.$store.getters['refCodes/getCodes']
       }
     },
     refCodes_loading: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('refCodes/ActionSetLoading', val)
       },
-      get () {
+      get() {
         return this.$store.getters['refCodes/getLoading']
       }
     }
   },
   watch: {
-    async dialog (val) {
-      if(val) {
+    async dialog(val) {
+      if (val) {
         this.refCodes = 'document_type'
         this.users = await this.getUsers()
       } else {
@@ -332,18 +352,18 @@ export default {
         })
       }
     },
-    document_type (val) {
+    document_type(val) {
       this.maskDocument = (val === 'CPF') ? '###.###.###-##' : "##.###.###/####-##"
     },
-    phone (val) {
+    phone(val) {
       this.maskPhone = (val.length <= 10) ? `(##) #### - #####` : `(##) # #### - ####`
     },
-    userSelected (val) {
+    userSelected(val) {
       this.userId = val[0].id
     }
   },
   methods: {
-    filterFn (val, update) {
+    filterFn(val, update) {
       if (val === '') {
         update(() => {
           this.refCodes = 'document_type'
@@ -357,28 +377,47 @@ export default {
         this.options = this.refCodes.filter(v => v.value.toLowerCase().indexOf(needle) > -1)
       })
     },
-    async getUsers () {
+    async getUsers() {
       try {
-        return await this.$store.dispatch('user/ActionGetUsers')
+        const users = await this.$store.dispatch('user/ActionGetUsers')
+        if(this.editMode) {
+          users.map(user => {
+            if(user.id === this.userId) {
+              this.userSelected.push(user)
+            }
+          })
+        }
+        return users
       } catch (error) {
         this.$store.dispatch('messages/ActionSetErrors', error)
-        if(error.request.status === 401) {
+        if (error.request.status === 401) {
           this.$store.dispatch('login/ActionLogOut')
           await this.$router.push('/login')
         }
         return []
       }
     },
-    async submit () {
+    async submit() {
       try {
         this.$q.loading.show()
-        await this.$store.dispatch('client/ActionCreateClients', this.form)
+        if(this.editMode) {
+          // await this.$store.dispatch('client/ActionCreateClients', this.form)
+        } else {
+          await this.$store.dispatch('client/ActionCreateClients', this.form)
+        }
         this.$q.loading.hide()
         this.dialog = false
-        this.$store.dispatch('messages/ActionAddMessage', {
-          bg: 'positive',
-          message: 'Cliente criado com sucesso'
-        })
+        if(this.editMode) {
+          // this.$store.dispatch('messages/ActionAddMessage', {
+          //   bg: 'positive',
+          //   message: 'Cliente criado com sucesso'
+          // })
+        } else {
+          this.$store.dispatch('messages/ActionAddMessage', {
+            bg: 'positive',
+            message: 'Cliente criado com sucesso'
+          })
+        }
       } catch (error) {
         this.$q.loading.hide()
         this.$store.dispatch('messages/ActionSetErrors', error)
