@@ -1,6 +1,6 @@
 import * as types from './mutation-types'
 import requests  from '../../../../http'
-import helpers from '../../../../helpers'
+// import helpers from '../../../../helpers'
 
 export const ActionSetLoading = ({ commit }, payload) => {
     commit(types.SET_LOADING, payload)
@@ -28,18 +28,6 @@ export const ActionSetFormFantasyName = ({ commit }, payload) => {
 
 export const ActionSetFormDocumentType = ({ commit }, payload) => {
     commit(types.SET_FORM_DOCUMENT_TYPE, payload)
-}
-
-export const ActionSetFormDocument = ({ commit }, payload) => {
-    commit(types.SET_FORM_DOCUMENT, helpers.string.onlyNumbers(payload))
-}
-
-export const ActionSetFormEmail = ({ commit }, payload) => {
-    commit(types.SET_FORM_EMAIL, payload)
-}
-
-export const ActionSetFormPhone = ({ commit }, payload) => {
-    commit(types.SET_FORM_PHONE, helpers.string.onlyNumbers(payload))
 }
 
 export const ActionSetFormDialog = ({ commit }, payload) => {

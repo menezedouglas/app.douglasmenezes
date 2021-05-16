@@ -9,7 +9,8 @@ import {
   QTable,
   QTh,
   QTr,
-  QTd
+  QTd,
+  Dialog
 } from 'quasar'
 
 // To be used on app.use(Quasar, { ... })
@@ -18,6 +19,7 @@ export default {
   plugins: {
     Loading,
     Notify,
+    Dialog
   },
   components:{
     QTable,

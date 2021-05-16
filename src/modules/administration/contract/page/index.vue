@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <formClient></formClient>
+    <formContract></formContract>
     <div class="row">
       <div class="col-12 q-my-sm">
         <h2 class="text-grey-8">Clientes</h2>
@@ -23,11 +23,11 @@
           </template>
           <template v-slot:top-right>
             <q-btn
-              dense
-              size="sm"
-              color="positive"
-              icon="fas fa-plus"
-              @click="openFormClient()"
+                dense
+                size="sm"
+                color="positive"
+                icon="fas fa-plus"
+                @click="openFormClient()"
             >
               <q-tooltip anchor="center left" self="center right">
                 Novo cliente
@@ -51,12 +51,12 @@
               </q-td>
               <q-td key="actions" :props="props" class="q-gutter-sm">
                 <q-btn
-                  round
-                  ripple=""
-                  size="sm"
-                  color="dark"
-                  icon="fas fa-user-edit"
-                  @click="openFormClient(props.row.id, true)"
+                    round
+                    ripple=""
+                    size="sm"
+                    color="dark"
+                    icon="fas fa-user-edit"
+                    @click="openFormClient(props.row.id, true)"
                 >
                   <q-tooltip anchor="center left" self="center right">
                     Editar
@@ -85,7 +85,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import formClient from '../components/formClient'
+import formContract from '../component/formContract'
 export default {
   name: "index",
   setup () {
@@ -183,7 +183,7 @@ export default {
     },
   },
   components: {
-    formClient
+    formContract
   },
   methods: {
     ...mapActions('client', ['ActionSetClients', 'ActionSetLoading']),
@@ -236,7 +236,7 @@ export default {
       })
     }
 
-},
+  },
   created() {
     this.clients = ''
   }

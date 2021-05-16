@@ -4,6 +4,7 @@ import { services as projects } from '../modules/public/projetos'
 import { services as user } from '../modules/administration/user'
 import { services as client } from '../modules/administration/client'
 import { services as refCodes } from '../modules/administration/refCodes'
+import { services as contract } from '../modules/administration/contract'
 
 export default {
     home,
@@ -11,5 +12,6 @@ export default {
     projects,
     user,
     client,
-    refCodes
+    refCodes,
+    contract
 }

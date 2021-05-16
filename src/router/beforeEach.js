@@ -9,7 +9,8 @@ const publicRoutes = [
 const authenticatedRoutes = [
     '/dashboard',
     '/users',
-    '/clients'
+    '/clients',
+    '/contracts'
 ]
 
 export default async (to) => {
