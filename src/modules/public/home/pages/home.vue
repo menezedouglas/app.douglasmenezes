@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <q-page class="page">
     <div class="flex-item">
       <section class="main">
         <h2 class="title">
@@ -25,11 +25,11 @@
     <div class="flex-item">
       <page-footer></page-footer>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
-import PageFooter from '../../../../components/PageFooter.vue'
+import PageFooter from 'components/PageFooter.vue'
 import { component as Accordion } from '../../../components/accordion'
 import { mapActions, mapGetters } from 'vuex'
 export default {

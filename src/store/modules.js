@@ -12,16 +12,16 @@ import { store as refCodes } from '../modules/administration/refCodes'
 import { store as contracts } from '../modules/administration/contract'
 
 export default {
-    home,
-    login,
-    projects,
-    redirect,
-    mainMenu,
-    accordion,
-    messages,
-    user,
-    dashboard,
-    client,
-    refCodes,
-    contracts
+  home,
+  login,
+  projects,
+  redirect,
+  mainMenu,
+  accordion,
+  messages,
+  user,
+  dashboard,
+  client,
+  refCodes,
+  contracts
 }

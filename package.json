@@ -1,11 +1,13 @@
 {
   "name": "app.douglasmenezes",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "description": "Douglas Menezes - Professional Web Site",
+  "productName": "Douglas Menezes",
+  "author": "Douglas Menezes <contato@douglasmenezes.dev.br>",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --ext .js,.vue ./",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -13,47 +15,41 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@quasar/extras": "^1.0.0",
-    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "dotenv": "^8.2.0",
-    "quasar": "^2.0.0-beta.1",
-    "vue": "^3.0.0-beta.1",
-    "vue-router": "^4.0.0-alpha.6",
-    "vuex": "^4.0.0-alpha.1"
+    "global": "^4.4.0",
+    "quasar": "^1.0.0",
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.1",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-alpha.0",
-    "sass": "^1.29.0",
-    "sass-loader": "^10.1.0",
-    "vue-cli-plugin-quasar": "^4.0.0-beta.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+    "@quasar/app": "^2.0.0",
+    "babel-eslint": "^10.0.1",
+    "dotenv": "^9.0.2",
+    "eslint": "^7.26.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-vue": "^7.7.0",
+    "eslint-webpack-plugin": "^2.4.0",
+    "vue-router": "^3.5.1"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "ie >= 11",
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
 }

@@ -16,9 +16,9 @@
 <script>
 import { component as MainMenu } from '../modules/components/main_menu'
 import modals from './modals'
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 export default {
-  name: 'app',
+  name: 'restricted',
   components: {
     MainMenu,
     modals
@@ -26,9 +26,9 @@ export default {
   methods: {
     ...mapActions('login', ['ActionCheckToken']),
     closeSideBar: () => {
+      // eslint-disable-next-line camelcase
       const ctrl_sidebar = document.querySelector('#menu_control')
-      if(ctrl_sidebar.checked)
-        ctrl_sidebar.checked = !ctrl_sidebar.checked
+      if (ctrl_sidebar.checked) { ctrl_sidebar.checked = !ctrl_sidebar.checked }
     }
   },
   created () {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import toast from '../../../../components/alerts/toast'
+import toast from 'components/alerts/toast'
 import {mapActions, mapGetters} from 'vuex'
 export default {
   name: "index",

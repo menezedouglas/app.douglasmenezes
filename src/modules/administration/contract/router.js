@@ -2,6 +2,6 @@ export default [
     {
         name: 'Contratos',
         path: '/contracts',
-        component: () => import('./page/index')
+        component: () => import('./page')
     }
 ]

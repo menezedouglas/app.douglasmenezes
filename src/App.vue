@@ -1,30 +1,10 @@
-<style>
-@import "styles/master.scss";
-@import "styles/desktop.scss";
-@import "styles/mobile.scss";
-</style>
-
 <template>
-  <router-view />
+  <div id="q-app">
+    <router-view />
+  </div>
 </template>
-
 <script>
-import { mapActions } from 'vuex'
 export default {
-  name: "app",
-  methods: {
-    ...mapActions('login', [
-        'ActionCheckToken',
-        'ActionLogOut'
-    ])
-  },
-  async mounted() {
-    try {
-      await this.ActionCheckToken()
-    } catch (e) {
-      await this.ActionLogOut()
-      await this.$router.push('/login')
-    }
-  }
+  name: 'App'
 }
 </script>

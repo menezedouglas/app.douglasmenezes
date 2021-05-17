@@ -1,9 +1,9 @@
-import httpResponses from "./httpResponses";
-import string from "./string";
-import json from "./json";
+import httpResponses from './httpResponses'
+import string from './string'
+import json from './json'
 
 export default {
-    httpResponses,
-    string,
-    json
+  httpResponses,
+  string,
+  json
 }

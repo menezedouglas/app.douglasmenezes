@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "default-button",
+  name: 'default-button',
   props: {
     type: { required: true },
     bg: { required: false },

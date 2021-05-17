@@ -106,14 +106,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { mapGetters } from 'vuex'
 export default {
   name: "index",
   setup () {
     return {
-      tab: ref('sistema'),
-      splitterModel: ref(20)
+      tab: 'sistema',
+      splitterModel: 20
     }
   },
   props: {

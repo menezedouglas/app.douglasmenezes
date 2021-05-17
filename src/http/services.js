@@ -7,11 +7,11 @@ import { services as refCodes } from '../modules/administration/refCodes'
 import { services as contract } from '../modules/administration/contract'
 
 export default {
-    home,
-    login,
-    projects,
-    user,
-    client,
-    refCodes,
-    contract
+  home,
+  login,
+  projects,
+  user,
+  client,
+  refCodes,
+  contract
 }

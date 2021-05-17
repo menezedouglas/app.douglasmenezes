@@ -184,7 +184,7 @@
 <script>
 export default {
   name: 'formClient',
-  data() {
+  data () {
     return {
       maskPhone: '',
       maskDocument: '',
@@ -195,34 +195,34 @@ export default {
   },
   computed: {
     usersLoading: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('user/ActionSetLoading', val)
       },
-      get() {
+      get () {
         return this.$store.getters['user/getLoading']
       }
     },
     loading: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetLoading', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getLoading']
       }
     },
     form: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetForm', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getForm']
       }
     },
     editMode: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormDialogEditMode', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormDialogEditMode']
       }
     },
@@ -235,83 +235,82 @@ export default {
       }
     },
     clientId: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormClientId', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormClientId']
       }
     },
     userId: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormUserId', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormUserId']
       }
     },
     full_name: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormFullName', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormFullName']
       }
     },
     fantasy_name: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormFantasyName', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormFantasyName']
       }
     },
     document_type: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormDocumentType', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormDocumentType']
       }
     },
     document: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormDocument', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormDocument']
       }
     },
     email: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormEmail', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormEmail']
       }
     },
     phone: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormPhone', val)
       },
-      get() {
+      get () {
         const val = this.$store.getters['client/getFormPhone']
 
-        return (val) ? val : ''
+        return (val) || ''
       }
     },
     dialog: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('client/ActionSetFormDialog', val)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getFormDialog']
       }
     },
     options: {
-      set(val) {
-
-        let opt = []
+      set (val) {
+        const opt = []
 
         val.map(item => {
           opt.push(item.value.toUpperCase())
@@ -319,12 +318,12 @@ export default {
 
         this.$store.dispatch('client/ActionSetOptions', opt)
       },
-      get() {
+      get () {
         return this.$store.getters['client/getOptions']
       }
     },
     refCodes: {
-      async set(val) {
+      async set (val) {
         try {
           await this.$store.dispatch('refCodes/ActionSetCodes', val)
           this.options = this.refCodes
@@ -336,21 +335,21 @@ export default {
           }
         }
       },
-      get() {
+      get () {
         return this.$store.getters['refCodes/getCodes']
       }
     },
     refCodes_loading: {
-      set(val) {
+      set (val) {
         this.$store.dispatch('refCodes/ActionSetLoading', val)
       },
-      get() {
+      get () {
         return this.$store.getters['refCodes/getLoading']
       }
     }
   },
   watch: {
-    async dialog(val) {
+    async dialog (val) {
       if (val) {
         this.refCodes = 'document_type'
         this.users = []
@@ -361,20 +360,20 @@ export default {
         })
       }
     },
-    document_type(val) {
-      this.maskDocument = (val === 'CPF') ? '###.###.###-##' : "##.###.###/####-##"
+    document_type (val) {
+      this.maskDocument = (val === 'CPF') ? '###.###.###-##' : '##.###.###/####-##'
     },
-    phone(val) {
-      this.maskPhone = (val.length <= 10) ? `(##) #### - #####` : `(##) # #### - ####`
+    phone (val) {
+      this.maskPhone = (val.length <= 10) ? '(##) #### - #####' : '(##) # #### - ####'
     },
-    userSelected(val) {
-      if(val && val.length > 0) {
+    userSelected (val) {
+      if (val && val.length > 0) {
         this.userId = val[0].id
       }
     }
   },
   methods: {
-    filterFn(val, update) {
+    filterFn (val, update) {
       if (val === '') {
         update(() => {
           this.refCodes = 'document_type'
@@ -388,13 +387,13 @@ export default {
         this.options = this.refCodes.filter(v => v.value.toLowerCase().indexOf(needle) > -1)
       })
     },
-    async getUsers() {
+    async getUsers () {
       try {
         const users = await this.$store.dispatch('user/ActionGetUsers')
         this.userSelected = []
-        if(this.editMode) {
+        if (this.editMode) {
           users.map(user => {
-            if(user.id === this.userId) {
+            if (user.id === this.userId) {
               this.userSelected.push(user)
             }
           })
@@ -409,17 +408,17 @@ export default {
         return []
       }
     },
-    async submit() {
+    async submit () {
       try {
         this.$q.loading.show()
-        if(this.editMode) {
+        if (this.editMode) {
           await this.$store.dispatch('client/ActionUpdateClient', this.form)
         } else {
           await this.$store.dispatch('client/ActionCreateClients', this.form)
         }
         this.$q.loading.hide()
         this.dialog = false
-        if(this.editMode) {
+        if (this.editMode) {
           this.$store.dispatch('messages/ActionAddMessage', {
             bg: 'positive',
             message: 'Cliente atualizado'

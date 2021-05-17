@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: "modal",
+  name: 'modal',
   props: ['id', 'title', 'showFooter', 'centralized']
 }
 </script>

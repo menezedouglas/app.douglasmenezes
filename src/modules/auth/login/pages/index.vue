@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import defaultInput from '../../../../components/forms/default-input'
+import defaultInput from 'components/forms/default-input'
 // import defaultButton from '../../../../components/generics/default-button'
 // import {component as messages} from '../../../components/messages'
 import {mapActions, mapGetters} from 'vuex'

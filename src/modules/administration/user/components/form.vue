@@ -53,9 +53,9 @@
 </template>
 
 <script>
-import defaultInput from '../../../../components/forms/default-input'
-import defaultButton from '../../../../components/generics/default-button'
-import modal from '../../../../components/generics/modal'
+import defaultInput from 'components/forms/default-input'
+import defaultButton from 'components/generics/default-button'
+import modal from 'components/generics/modal'
 export default {
   name: "edit",
   props: ['mode'],
