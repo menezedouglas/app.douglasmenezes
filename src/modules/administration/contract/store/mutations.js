@@ -1,8 +1,8 @@
 import * as types from './mutation-types'
 
 export default {
-    [types.SET_CLIENTS] (state, payload) {
-        state.clients = payload
+    [types.SET_CONTRACTS] (state, payload) {
+      state.contracts = payload
     },
     [types.SET_LOADING] (state, payload) {
         state.loading = payload
@@ -10,29 +10,29 @@ export default {
     [types.SET_FORM] (state, payload) {
         state.form = payload
     },
-    [types.SET_FROM_CLIENT_ID] (state, payload) {
-        state.client_id = payload
+    [types.SET_FORM_CONTRACT_ID] ({ form }, payload) {
+        form.contract_id = payload
     },
-    [types.SET_FORM_USER_ID] ({ form }, payload) {
-        form.user_id = payload
+    [types.SET_FORM_CLIENT_ID] ({ form }, payload) {
+        form.client_id = payload
     },
-    [types.SET_FORM_FULL_NAME] ({ form }, payload) {
-        form.full_name = payload
+    [types.SET_FORM_SEVICE_ID] ({ form }, payload) {
+        form.service_id = payload
     },
-    [types.SET_FORM_FANSTASY_NAME] ({ form }, payload) {
-        form.fantasy_name = payload
+    [types.SET_FORM_VALUE] ({ form }, payload) {
+        form.value = payload
     },
-    [types.SET_FORM_DOCUMENT_TYPE] ({ form }, payload) {
-        form.document_type = payload
+    [types.SET_FORM_CONTRACT_ID] ({ form }, payload) {
+        form.contract_id = payload
     },
-    [types.SET_FORM_DOCUMENT] ({ form }, payload) {
-        form.document = payload
+    [types.SET_FORM_START_VALIDITY] ({ form }, payload) {
+      form.start_validity = payload
     },
-    [types.SET_FORM_EMAIL] ({ form }, payload) {
-        form.email = payload
+    [types.SET_FORM_END_VALIDITY] ({ form }, payload) {
+      form.end_validity = payload
     },
-    [types.SET_FORM_PHONE] ({ form }, payload) {
-        form.phone = payload
+    [types.SET_FORM_TYPE_VALUE] ({ form }, payload) {
+      form.type_value = payload
     },
     [types.SET_FORM_DIALOG] (state, payload) {
         state.formDialog = payload
@@ -43,7 +43,10 @@ export default {
     [types.SET_FORM_DIALOG_EDIT_MODE] (state, payload) {
         state.formDialogEditMode = payload
     },
-    [types.SET_CLIENT_SHOW] (state, payload) {
-        state.clientShow = payload
+    [types.SET_CONTRACT_SHOW] (state, payload) {
+        state.contractShow = payload
+    },
+    [types.SET_TABLE_FILTER] (state, payload) {
+        state.tableFilter = payload
     }
 }

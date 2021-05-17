@@ -9,6 +9,7 @@ import { store as user } from '../modules/administration/user'
 import { store as dashboard } from '../modules/administration/dashboard'
 import { store as client } from '../modules/administration/client'
 import { store as refCodes } from '../modules/administration/refCodes'
+import { store as contracts } from '../modules/administration/contract'
 
 export default {
     home,
@@ -21,5 +22,6 @@ export default {
     user,
     dashboard,
     client,
-    refCodes
+    refCodes,
+    contracts
 }

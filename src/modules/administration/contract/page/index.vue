@@ -3,12 +3,12 @@
     <formContract></formContract>
     <div class="row">
       <div class="col-12 q-my-sm">
-        <h2 class="text-grey-8">Clientes</h2>
+        <h2 class="text-grey-8">Contratos</h2>
         <hr class="q-my-sm">
       </div>
       <div class="col-12">
         <q-table
-            :rows="clients"
+            :rows="rows"
             :loading="loading"
             :columns="columns"
             row-key="fantasy_name"
@@ -27,10 +27,10 @@
                 size="sm"
                 color="positive"
                 icon="fas fa-plus"
-                @click="openFormClient()"
+                @click="formDialog = !formDialog"
             >
               <q-tooltip anchor="center left" self="center right">
-                Novo cliente
+                Novo contrato
               </q-tooltip>
             </q-btn>
           </template>
@@ -56,7 +56,6 @@
                     size="sm"
                     color="dark"
                     icon="fas fa-user-edit"
-                    @click="openFormClient(props.row.id, true)"
                 >
                   <q-tooltip anchor="center left" self="center right">
                     Editar
@@ -68,7 +67,6 @@
                     size="sm"
                     color="red"
                     icon="fas fa-user-minus"
-                    @click="dropClient(props.row.id)"
                 >
                   <q-tooltip class="bg-red text-white" anchor="center right" self="center left">
                     Deletar
@@ -84,41 +82,48 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 import formContract from '../component/formContract'
 export default {
   name: "index",
   setup () {
     return {
+      rows: [],
       columns: [
         {
-          name: 'fantasy_name',
+          name: 'id',
           required: true,
           align: 'center',
-          label: 'Nome Fantasia',
-          field: 'fantasy_name',
+          label: '#',
+          field: 'id',
           sortable: true
         },
         {
-          name: 'document_type',
-          label: 'Tipo do Documento',
+          name: 'start_validity',
+          label: 'Início',
           align: 'center',
-          field: 'document_type',
+          field: 'start_validity',
           sortable: true
         },
         {
-          name: 'document',
-          label: 'Documento',
+          name: 'end_validity',
+          label: 'Término',
           align: 'center',
-          field: 'document',
+          field: 'end_validity',
           sortable: true
         },
         {
-          name: 'email',
-          label: 'E-mail',
+          name: 'value',
+          label: 'R$',
           align: 'center',
-          field: 'email',
+          field: 'value',
           sortable: true
+        },
+        {
+          name: 'type_value',
+          label: 'Pagamento',
+          align: 'center',
+          field: 'type_value',
+          sortable: false
         },
         {
           name: 'actions',
@@ -134,111 +139,35 @@ export default {
   computed: {
     loading: {
       set (val) {
-        this.ActionSetLoading(val)
+        this.$store.dispatch('contracts/ActionSetLoading', val)
       },
       get () {
-        return this.getLoading()
+        return this.$store.getters['contracts/getLoading']
       }
     },
-    clients: {
-      async set () {
-        try {
-          await this.ActionSetClients()
-        } catch (error) {
-          if(error.request.status === 401) {
-            this.$store.dispatch('login/ActionLogOut')
-            await this.$router.push('/login')
-          } else {
-            this.$store.dispatch('messages/ActionSetErrors', error)
-          }
-        }
-      },
-      get () {
-        return this.getClients()
-      }
-    },
-    formClientDialog: {
+    formDialog: {
       set (val) {
-        this.$store.dispatch('client/ActionSetFormDialog', val)
+        this.$store.dispatch('contracts/ActionSetFormDialog', val)
       },
       get () {
-        return this.$store.getters['client/getFormDialog']
+        return this.$store.getters['contracts/getFormDialog']
       }
-    },
-    editMode: {
-      set(val) {
-        this.$store.dispatch('client/ActionSetFormDialogEditMode', val)
-      },
-      get() {
-        return this.$store.getters['client/getFormDialogEditMode']
-      }
-    },
-    clientShow: {
-      set (val) {
-        this.$store.dispatch('client/ActionSetClientShow', val)
-      },
-      get () {
-        return this.$store.getters['client/getClientShow']
-      }
-    },
+    }
   },
   components: {
     formContract
   },
   methods: {
-    ...mapActions('client', ['ActionSetClients', 'ActionSetLoading']),
-    ...mapGetters('client', ['getClients', 'getLoading']),
-    ...mapActions('messages', ['ActionSetErrors']),
-    async openFormClient(id = 0, editMode = false) {
-      this.editMode = editMode
-      if (editMode) {
-        try {
-          await this.$store.dispatch('client/ActionSetClientShow', id)
-          this.$store.dispatch('client/ActionSetForm', this.clientShow)
-          this.editMode = true
-          this.formClientDialog = true
-        } catch (error) {
-          this.$store.dispatch('messages/ActionSetErrors', error)
-          if(error.request.status === 401) {
-            this.$store.dispatch('login/ActionLogOut')
-            await this.$router.push('/login')
-          }
-        }
-      } else {
-        this.formClientDialog = true
+    async getContracts () {
+      try {
+        this.rows = await this.$store.dispatch('contracts/ActionGetContracts')
+      } catch (error) {
+        this.$store.dispatch('messages/ActionSetErrors', error)
       }
-    },
-
-    dropClient(id) {
-      this.$q.dialog({
-        title: 'Deletar Cliente',
-        message: 'Deseja realmente realizar esta ação?',
-        cancel: {
-          push: true,
-          color: 'positive',
-          label: 'Não'
-        },
-        persistent: true,
-        ok: {
-          label: 'Sim',
-          color: 'negative'
-        },
-      }).onOk(async () => {
-        try {
-          await this.$store.dispatch('client/ActionDropClient', id)
-          this.$store.dispatch('messages/ActionAddMessage', {
-            bg: 'positive',
-            message: 'Cliente deletado'
-          })
-        } catch (error) {
-          this.$store.dispatch('messages/ActionSetErrors', error)
-        }
-      })
     }
-
   },
   created() {
-    this.clients = ''
+    this.getContracts()
   }
 }
 </script>

@@ -109,6 +109,11 @@ export default {
             name: 'Clientes',
             url: '/clients',
             active: false
+          },
+          {
+            name: 'Contratos',
+            url: '/contracts',
+            active: false
           }
         ],
         socialsNetworks: [

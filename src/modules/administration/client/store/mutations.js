@@ -10,7 +10,7 @@ export default {
     [types.SET_FORM] (state, payload) {
         state.form = payload
     },
-    [types.SET_FROM_CLIENT_ID] (state, payload) {
+    [types.SET_FORM_CLIENT_ID] (state, payload) {
         state.client_id = payload
     },
     [types.SET_FORM_USER_ID] ({ form }, payload) {

@@ -11,7 +11,7 @@ export const ActionSetForm = ({ commit }, payload) => {
 }
 
 export const ActionSetFormClientId = ({ commit }, payload) => {
-    commit(types.SET_FROM_CLIENT_ID, payload)
+    commit(types.SET_FORM_CLIENT_ID, payload)
 }
 
 export const ActionSetFormUserId = ({ commit }, payload) => {
