@@ -1,42 +1,29 @@
 {
   "name": "app.douglasmenezes",
   "version": "0.0.1",
-  "description": "Douglas Menezes - Professional Web Site",
+  "description": "Douglas Menezes - Profession Web Site",
   "productName": "Douglas Menezes",
-  "author": "Douglas Menezes <contato@douglasmenezes.dev.br>",
+  "author": "Douglas Menezes <menezedouglas@outlook.com.br>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-brands-svg-icons": "^5.15.1",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@fortawesome/vue-fontawesome": "^2.0.2",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "global": "^4.4.0",
-    "quasar": "^1.0.0",
-    "vue": "^2.6.12"
+    "quasar": "^2.0.0-beta.1"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "@quasar/app": "^2.0.0",
-    "babel-eslint": "^10.0.1",
-    "dotenv": "^9.0.2",
-    "eslint": "^7.26.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-vue": "^7.7.0",
-    "eslint-webpack-plugin": "^2.4.0",
-    "vue-router": "^3.5.1"
+    "@babel/eslint-parser": "^7.13.14",
+    "@quasar/app": "^3.0.0-beta.1",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "eslint-webpack-plugin": "^2.4.0"
   },
   "browserslist": [
-    "ie >= 11",
     "last 10 Chrome versions",
     "last 10 Firefox versions",
     "last 4 Edge versions",
@@ -48,7 +35,7 @@
     "last 5 Opera versions"
   ],
   "engines": {
-    "node": ">= 10.18.1",
+    "node": ">= 12.22.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   }

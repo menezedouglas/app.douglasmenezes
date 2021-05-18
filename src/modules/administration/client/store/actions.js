@@ -1,6 +1,6 @@
 import * as types from './mutation-types'
 import requests  from '../../../../http'
-import helpers from '../../../../helpers'
+import helpers from '../../../../../bkp/src/helpers'
 
 export const ActionSetLoading = ({ commit }, payload) => {
     commit(types.SET_LOADING, payload)

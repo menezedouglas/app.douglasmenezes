@@ -1,6 +1,6 @@
 # Douglas Menezes (app.douglasmenezes)
 
-Douglas Menezes - Professional Web Site
+Douglas Menezes - Profession Web Site
 
 ## Install the dependencies
 ```bash
@@ -23,4 +23,4 @@ quasar build
 ```
 
 ### Customize the configuration
-See [Configuring quasar.conf.js](https://v1.quasar.dev/quasar-cli/quasar-conf-js).
+See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).

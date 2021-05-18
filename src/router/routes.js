@@ -6,13 +6,10 @@ import { routes as users } from '../modules/administration/user'
 import { routes as client } from '../modules/administration/client'
 import { routes as contract } from '../modules/administration/contract'
 
-import publicLayout from 'layouts/public.vue'
-import restrictedLayout from 'layouts/restricted.vue'
-
 export default [
   {
     path: '/',
-    component: publicLayout,
+    component: () => import('layouts/public.vue'),
     children: [
       ...home,
       ...projects,
@@ -21,7 +18,7 @@ export default [
   },
   {
     path: '/dashboard',
-    component: restrictedLayout,
+    component: () => import('layouts/restricted.vue'),
     children: [
       ...dashboard,
       ...users,
