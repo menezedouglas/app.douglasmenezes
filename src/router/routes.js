@@ -5,6 +5,7 @@ import { routes as dashboard } from '../modules/administration/dashboard'
 import { routes as users } from '../modules/administration/user'
 import { routes as client } from '../modules/administration/client'
 import { routes as contract } from '../modules/administration/contract'
+import { routes as service } from '../modules/administration/services'
 
 export default [
   {
@@ -23,7 +24,8 @@ export default [
       ...dashboard,
       ...users,
       ...client,
-      ...contract
+      ...contract,
+      ...service
     ]
   }
 ]

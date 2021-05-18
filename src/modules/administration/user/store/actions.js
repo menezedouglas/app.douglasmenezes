@@ -21,6 +21,30 @@ export const ActionSetFormEditMode = ({ commit }, payload) => {
     commit(types.SET_FORM_EDIT_MODE, payload)
 }
 
+export const ActionSetForm = ({ commit }, payload) => {
+  commit(types.SET_FORM, payload)
+}
+
+export const ActionSetFormUserId = ({ commit }, payload) => {
+  commit(types.SET_FORM_USER_ID, payload)
+}
+
+export const ActionSetFormName = ({ commit }, payload) => {
+  commit(types.SET_FORM_NAME, payload)
+}
+
+export const ActionSetFormEmail = ({ commit }, payload) => {
+  commit(types.SET_FORM_EMAIL, payload)
+}
+
+export const ActionSetFormPassword = ({ commit }, payload) => {
+  commit(types.SET_FORM_PASSWORD, payload)
+}
+
+export const ActionSetFormDialog = ({ commit }, payload) => {
+  commit(types.SET_FORM_DIALOG, payload)
+}
+
 export const ActionSetUsers = ({dispatch, commit}) => {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
@@ -79,4 +103,40 @@ export const ActionSetUser = ({dispatch}, payload) => {
             reject(error)
         }
     })
+}
+
+export const ActionCreateUser = async ({ dispatch }, payload) => {
+  try {
+    dispatch('ActionSetLoading', true)
+    await requests.user.create(payload)
+    dispatch('ActionSetUsers')
+    return Promise.resolve()
+  } catch (error) {
+    dispatch('ActionSetLoading', false)
+    return Promise.reject(error)
+  }
+}
+
+export const ActionUpdateUser = async ({ dispatch }, payload) => {
+  try {
+    dispatch('ActionSetLoading', true)
+    await requests.user.update(payload)
+    dispatch('ActionSetUsers')
+    return Promise.resolve()
+  } catch (error) {
+    dispatch('ActionSetLoading', false)
+    return Promise.reject(error)
+  }
+}
+
+export const ActionDropUser = async ({ dispatch }, payload) => {
+  try {
+    dispatch('ActionSetLoading', true)
+    await requests.user.delete({ user_id: payload })
+    dispatch('ActionSetUsers')
+    return Promise.resolve()
+  } catch (error) {
+    dispatch('ActionSetLoading', false)
+    return Promise.reject(error)
+  }
 }

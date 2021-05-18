@@ -1,8 +1,8 @@
 import axios from 'axios'
 import services from './services'
-import helpers from '../../bkp/src/helpers'
+import helpers from '../helpers'
 
-axios.defaults.baseURL = 'http://192.168.0.11:8000/system/v1'
+axios.defaults.baseURL = 'http://localhost:8000/system/v1'
 
 const setToken = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`

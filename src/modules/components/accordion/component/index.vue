@@ -22,7 +22,7 @@
               style="color: #16697A;"
           >
             <q-tab
-                v-for="item in getItems()"
+                v-for="item in items"
                 v-bind:key="item.id"
                 :name="item.name.toLowerCase()"
                 :label="item.name"
@@ -40,7 +40,7 @@
               transition-next="jump-up"
           >
             <q-tab-panel
-                v-for="item in getItems()"
+                v-for="item in items"
                 v-bind:key="item.id"
                 :name="item.name.toLowerCase()"
             >
@@ -106,13 +106,31 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { ref } from 'vue'
 export default {
   name: "index",
   setup () {
     return {
-      tab: 'sistema',
-      splitterModel: 20
+      tab: ref('sistema'),
+      splitterModel: ref(20)
+    }
+  },
+  computed: {
+    items: {
+      set (val) {
+        this.$store.dispatch('accordion/ActionSetItems', val)
+      },
+      get () {
+        return this.$store.getters['accordion/getItems']
+      }
+    },
+    id: {
+      set (val) {
+        this.$store.dispatch('accordion/ActionSetId', val)
+      },
+      get () {
+        return this.$store.getters['accordion/getId']
+      }
     }
   },
   props: {
@@ -121,19 +139,6 @@ export default {
     },
     showError: {
       required: true
-    }
-  },
-  watch: {
-    showData (val) {
-      if(val) {
-        this.loadData()
-      }
-    }
-  },
-  methods: {
-    ...mapGetters('accordion', ['getItems', 'getId']),
-    loadData () {
-
     }
   }
 }

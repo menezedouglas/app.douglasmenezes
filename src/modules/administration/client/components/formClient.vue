@@ -44,7 +44,7 @@
         <q-card-section>
           <q-form
               class="q-gutter-md"
-              @submit.prevent="submit"
+              @submit.prevent="submit()"
           >
 
             <q-table
@@ -400,9 +400,9 @@ export default {
         }
         return users
       } catch (error) {
-        this.$store.dispatch('messages/ActionSetErrors', error)
+        await this.$store.dispatch('messages/ActionSetErrors', error)
         if (error.request.status === 401) {
-          this.$store.dispatch('login/ActionLogOut')
+          await this.$store.dispatch('login/ActionLogOut')
           await this.$router.push('/login')
         }
         return []
@@ -413,25 +413,26 @@ export default {
         this.$q.loading.show()
         if (this.editMode) {
           await this.$store.dispatch('client/ActionUpdateClient', this.form)
-        } else {
-          await this.$store.dispatch('client/ActionCreateClients', this.form)
-        }
-        this.$q.loading.hide()
-        this.dialog = false
-        if (this.editMode) {
-          this.$store.dispatch('messages/ActionAddMessage', {
+          await this.$store.dispatch('messages/ActionAddMessage', {
             bg: 'positive',
             message: 'Cliente atualizado'
           })
         } else {
-          this.$store.dispatch('messages/ActionAddMessage', {
+          await this.$store.dispatch('client/ActionCreateClients', this.form)
+          await this.$store.dispatch('messages/ActionAddMessage', {
             bg: 'positive',
-            message: 'Cliente criado'
+            message: `${this.fantasy_name} criado(a)`
           })
         }
+        this.$q.loading.hide()
+        this.dialog = false
       } catch (error) {
         this.$q.loading.hide()
-        this.$store.dispatch('messages/ActionSetErrors', error)
+        await this.$store.dispatch('messages/ActionSetErrors', error)
+        if (error.request.status === 401) {
+          await this.$store.dispatch('login/ActionLogOut')
+          await this.$router.push('/login')
+        }
       }
     }
   }

@@ -42,26 +42,14 @@
         </q-card-section>
         <q-separator/>
         <q-card-section>
-
-
-          <q-table
-              title="Clientes"
-              :rows="clients"
-              :loading="clientLoading"
-              :columns="clientColumns"
-              row-key="name"
-              selection="single"
-              v-model:selected="clientSelected"
-              :filter="clientFilter"
-          >
-            <template v-slot:top-right>
-              <q-input borderless dense debounce="300" v-model="clientFilter" placeholder="Pesquisar">
-                <template v-slot:append>
-                  <q-icon name="fas fa-search"/>
-                </template>
-              </q-input>
-            </template>
-          </q-table>
+          <q-select
+            v-model="clientId"
+            label="Clients"
+            :options="optionsClients"
+            :loading="clientLoading"
+            :disable="clientLoading"
+            filled
+          />
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -69,49 +57,43 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'formClient',
-  setup () {
-    const clientColumns = [
-      {
-        name: 'fantasy_name',
-        required: true,
-        align: 'center',
-        label: 'Nome Fantasia',
-        field: 'fantasy_name',
-        sortable: true
-      },
-      {
-        name: 'document_type',
-        align: 'center',
-        label: 'Tipo de Documento',
-        field: 'document_type',
-        sortable: true,
-        render: val => val.toUpperCase()
-      },
-      {
-        name: 'document',
-        align: 'center',
-        label: 'Documento',
-        field: 'document',
-        sortable: true
-      }
-    ]
-
-    let clientFilter = ''
-    let clientSelected = []
-
+  data () {
     return {
-      clientColumns,
-      clientFilter,
-      clientSelected
+      teste: ref(null)
     }
   },
   computed: {
+    options: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetOptions', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getOptions']
+      }
+    },
+    optionsClients: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetOptionsClients', val)
+      },
+      get () {
+        return JSON.parse(JSON.stringify(this.$store.getters['contracts/getOptionsClients']))
+      }
+    },
+    optionsServices: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetOptionsServices', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getOptionsServices']
+      }
+    },
     clients: {
       async set (/* val */) {
         try {
-          await this.$store.dispatch('client/ActionSetClients')
+          await this.$store.dispatch('client/ActionGetClients')
         } catch (error) {
           await this.setErrors(error)
         }
@@ -214,13 +196,26 @@ export default {
       if(val) {
         this.clients = ''
       }
+    },
+    clients (val) {
+      const options = []
+      val.map(client => {
+        options.push({
+          label: client.fantasy_name,
+          value: client.id
+        })
+      })
+      this.optionsClients = options
+    },
+    teste (val) {
+      console.log(val)
     }
   },
   methods: {
     async setErrors (error) {
-      this.$store.dispatch('messages/ActionSetErrors', error)
+      await this.$store.dispatch('messages/ActionSetErrors', error)
       if(error.request.status === 401) {
-        this.$store.dispatch('login/ActionLogOut')
+        await this.$store.dispatch('login/ActionLogOut')
         await this.$router.push('/login')
       }
     }

@@ -26,24 +26,38 @@
             >
               <div class="row">
                 <div class="col-12">
-                  <defaultInput
-                      type="email"
-                      label="E-mail"
-                      name="email"
-                      placeholder="user@mail.com"
-                      @value="credentials.email = $event"
-                      :disabled="loading"
+                  <q-input
+                    v-model="credentials.email"
+                    filled
+                    type="email"
+                    label="E-mail"
+                    :disable="loading"
+                    lazy-rules
+                    :rules="[
+                      val => val && val !== '' || 'Por favor, este campo não pode ficar vazio!'
+                    ]"
                   />
                 </div>
                 <div class="col-12">
-                  <defaultInput
-                      type="password"
-                      label="Senha"
-                      name="password"
-                      placeholder="senha1234"
-                      @value="credentials.password = $event"
-                      :disabled="loading"
-                  />
+                  <q-input
+                    v-model="credentials.password"
+                    filled
+                    :type="isPwd ? 'password' : 'text'"
+                    label="Senha"
+                    :disabled="loading"
+                    lazy-rules
+                    :rules="[
+                      val => val && val !== '' || 'Por favor, este campo não pode ficar vazio!'
+                    ]"
+                  >
+                    <template v-slot:append>
+                      <q-icon
+                        :name="isPwd ? 'visibility_off' : 'visibility'"
+                        class="cursor-pointer"
+                        @click="isPwd = !isPwd"
+                      />
+                    </template>
+                  </q-input>
                 </div>
                 <div class="col-12 mt-3">
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -67,15 +81,11 @@
 </template>
 
 <script>
-import defaultInput from 'components/forms/default-input'
-// import defaultButton from '../../../../components/generics/default-button'
-// import {component as messages} from '../../../components/messages'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "index",
   components: {
-    defaultInput,
     // defaultButton,
     // messages
   },
@@ -85,6 +95,7 @@ export default {
         email: '',
         password: ''
       },
+      isPwd: true
     }
   },
   computed: {

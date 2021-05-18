@@ -8,26 +8,26 @@
       </div>
       <div class="col-12">
         <q-table
-            :rows="rows"
-            :loading="loading"
-            :columns="columns"
-            row-key="fantasy_name"
-            :filter="filter"
+          :rows="tableRows"
+          :loading="loading"
+          :columns="tableColumns"
+          row-key="fantasy_name"
+          :filter="tableFilter"
         >
           <template v-slot:top-left>
-            <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
+            <q-input borderless dense debounce="300" v-model="tableFilter" placeholder="Pesquisar">
               <template v-slot:append>
-                <q-icon name="fas fa-search" />
+                <q-icon name="fas fa-search"/>
               </template>
             </q-input>
           </template>
           <template v-slot:top-right>
             <q-btn
-                dense
-                size="sm"
-                color="positive"
-                icon="fas fa-plus"
-                @click="formDialog = !formDialog"
+              round
+              size="sm"
+              color="positive"
+              icon="fas fa-plus"
+              @click="formDialog = !formDialog"
             >
               <q-tooltip anchor="center left" self="center right">
                 Novo contrato
@@ -51,22 +51,22 @@
               </q-td>
               <q-td key="actions" :props="props" class="q-gutter-sm">
                 <q-btn
-                    round
-                    ripple=""
-                    size="sm"
-                    color="dark"
-                    icon="fas fa-user-edit"
+                  round
+                  ripple=""
+                  size="sm"
+                  color="dark"
+                  icon="fas fa-user-edit"
                 >
                   <q-tooltip anchor="center left" self="center right">
                     Editar
                   </q-tooltip>
                 </q-btn>
                 <q-btn
-                    round
-                    ripple=""
-                    size="sm"
-                    color="red"
-                    icon="fas fa-user-minus"
+                  round
+                  ripple=""
+                  size="sm"
+                  color="red"
+                  icon="fas fa-user-minus"
                 >
                   <q-tooltip class="bg-red text-white" anchor="center right" self="center left">
                     Deletar
@@ -83,73 +83,63 @@
 
 <script>
 import formContract from '../component/formContract'
+
 export default {
   name: "index",
-  setup () {
-    return {
-      rows: [],
-      columns: [
-        {
-          name: 'id',
-          required: true,
-          align: 'center',
-          label: '#',
-          field: 'id',
-          sortable: true
-        },
-        {
-          name: 'start_validity',
-          label: 'Início',
-          align: 'center',
-          field: 'start_validity',
-          sortable: true
-        },
-        {
-          name: 'end_validity',
-          label: 'Término',
-          align: 'center',
-          field: 'end_validity',
-          sortable: true
-        },
-        {
-          name: 'value',
-          label: 'R$',
-          align: 'center',
-          field: 'value',
-          sortable: true
-        },
-        {
-          name: 'type_value',
-          label: 'Pagamento',
-          align: 'center',
-          field: 'type_value',
-          sortable: false
-        },
-        {
-          name: 'actions',
-          label: '',
-          align: 'center',
-          field: 'actions',
-          sortable: false
-        }
-      ],
-      filter: '',
-    }
-  },
   computed: {
-    loading: {
+    table: {
       set (val) {
-        this.$store.dispatch('contracts/ActionSetLoading', val)
+        this.$store.dispatch('contracts/ActionSetTable', val)
       },
       get () {
+        return this.$store.getters['contracts/getTable']
+      }
+    },
+    tableFilter: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetTableFilter', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getTableFilter']
+      }
+    },
+    tableColumns: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetTableColumns', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getTableColumns']
+      }
+    },
+    tableRows: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetTableRows', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getTableRows']
+      }
+    },
+    tableSelected: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetTableSelected', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getTableSelected']
+      }
+    },
+    loading: {
+      set(val) {
+        this.$store.dispatch('contracts/ActionSetLoading', val)
+      },
+      get() {
         return this.$store.getters['contracts/getLoading']
       }
     },
     formDialog: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('contracts/ActionSetFormDialog', val)
       },
-      get () {
+      get() {
         return this.$store.getters['contracts/getFormDialog']
       }
     }
@@ -158,11 +148,15 @@ export default {
     formContract
   },
   methods: {
-    async getContracts () {
+    async getContracts() {
       try {
         this.rows = await this.$store.dispatch('contracts/ActionGetContracts')
       } catch (error) {
-        this.$store.dispatch('messages/ActionSetErrors', error)
+        await this.$store.dispatch('messages/ActionSetErrors', error)
+        if (error.request.status === 401) {
+          await this.$store.dispatch('login/ActionLogOut')
+          await this.$router.push('/login')
+        }
       }
     }
   },

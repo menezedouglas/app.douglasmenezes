@@ -1,6 +1,5 @@
 import * as types from './mutation-types'
 import requests  from '../../../../http'
-// import helpers from '../../../../helpers'
 
 export const ActionSetLoading = ({ commit }, payload) => {
     commit(types.SET_LOADING, payload)
@@ -46,6 +45,14 @@ export const ActionSetOptions = ({ commit }, payload) => {
     commit(types.SET_OPTIONS, payload)
 }
 
+export const ActionSetOptionsClients = ({ commit }, payload) => {
+  commit(types.SET_OPTIONS_CLIENTS, payload)
+}
+
+export const ActionSetOptionsServices = ({ commit }, payload) => {
+  commit(types.SET_OPTIONS_SERVICES, payload)
+}
+
 export const ActionSetFormDialogEditMode = ({ commit }, payload) => {
     commit(types.SET_FORM_DIALOG_EDIT_MODE, payload)
 }
@@ -54,9 +61,64 @@ export const ActionSetContracts = ({ commit }, payload) => {
     commit(types.SET_CONTRACTS, payload)
 }
 
+export const ActionSetTable = ({ commit }, payload ) => {
+  commit(types.SET_TABLE, payload)
+}
+
 export const ActionSetTableFilter = ({ commit }, payload ) => {
     commit(types.SET_TABLE_FILTER, payload)
 }
+
+export const ActionSetTableColumns = ({ commit }, payload ) => {
+  commit(types.SET_TABLE_COLUMNS, payload)
+}
+
+export const ActionSetTableRows = ({ commit }, payload ) => {
+  commit(types.SET_TABLE_ROWS, payload)
+}
+
+export const ActionSetTableSelected = ({ commit }, payload ) => {
+  commit(types.SET_TABLE_SELECTED, payload)
+}
+
+export const ActionGetClients = async ({ dispatch }) => {
+  try {
+    dispatch('ActionSetLoading', true)
+    const { request } = await requests.clients.all()
+    let options = []
+    request.response.map(client => {
+      options.push({
+        label: client.name,
+        value: client.id
+      })
+    })
+    dispatch('ActionSetOptionsClients', options)
+    dispatch('ActionSetLoading', false)
+    return Promise.resolve()
+  } catch (error) {
+    dispatch('ActionSetLoading', false)
+    return Promise.reject(error)
+  }
+}
+
+// export const ActionGetClients = async ({ dispatch }) => {
+//   try {
+//     dispatch('ActionSetLoading', true)
+//     const { request } = await requests.clients.all()
+//     let options = []
+//     request.response.map(client => {
+//       options.push({
+//         label: client.name,
+//         value: client.id
+//       })
+//     })
+//     dispatch('ActionSetOptionsClients', options)
+//     dispatch('ActionSetLoading', false)
+//   } catch (error) {
+//     dispatch('ActionSetLoading', false)
+//     return Promise.reject(error)
+//   }
+// }
 
 export const ActionGetContracts = async ({ dispatch }) => {
     try {

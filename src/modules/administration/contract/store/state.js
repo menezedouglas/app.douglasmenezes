@@ -1,18 +1,72 @@
+import { ref } from 'vue'
+
 export default {
-    contracts: [],
-    formDialog: false,
-    formDialogEditMode: false,
-    options: [],
-    contractShow: {},
-    tableFilter: '',
-    form: {
-        contract_id: 0,
-        client_id: 0,
-        service_id: 0,
-        start_validity: '',
-        end_validity: '',
-        value: 0,
-        type_value: 0
-    },
-    loading: false
+  contracts: ref([]),
+  formDialog: ref(false),
+  formDialogEditMode: ref(false),
+  options: {
+    clients: ref([]),
+    services: ref([])
+  },
+  contractShow: ref({}),
+  table: {
+    filter: ref(''),
+    columns: ref([
+      {
+        name: 'id',
+        required: true,
+        align: 'center',
+        label: '#',
+        field: 'id',
+        sortable: true
+      },
+      {
+        name: 'start_validity',
+        label: 'Início',
+        align: 'center',
+        field: 'start_validity',
+        sortable: true
+      },
+      {
+        name: 'end_validity',
+        label: 'Término',
+        align: 'center',
+        field: 'end_validity',
+        sortable: true
+      },
+      {
+        name: 'value',
+        label: 'R$',
+        align: 'center',
+        field: 'value',
+        sortable: true
+      },
+      {
+        name: 'type_value',
+        label: 'Pagamento',
+        align: 'center',
+        field: 'type_value',
+        sortable: false
+      },
+      {
+        name: 'actions',
+        label: '',
+        align: 'center',
+        field: 'actions',
+        sortable: false
+      }
+    ]),
+    rows: ref([]),
+    selected: ref([])
+  },
+  form: {
+    contract_id: ref(0),
+    client_id: ref(0),
+    service_id: ref(0),
+    start_validity: ref(''),
+    end_validity: ref(''),
+    value: ref(0),
+    type_value: ref(0)
+  },
+  loading: ref(false)
 }

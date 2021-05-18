@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <q-page class="q-pa-md">
     <formClient></formClient>
     <div class="row">
       <div class="col-12 q-my-sm">
@@ -8,22 +8,22 @@
       </div>
       <div class="col-12">
         <q-table
-            :rows="clients"
-            :loading="loading"
-            :columns="columns"
-            row-key="fantasy_name"
-            :filter="filter"
+          :rows="clients"
+          :loading="loading"
+          :columns="columns"
+          row-key="fantasy_name"
+          :filter="filter"
         >
           <template v-slot:top-left>
             <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
               <template v-slot:append>
-                <q-icon name="fas fa-search" />
+                <q-icon name="fas fa-search"/>
               </template>
             </q-input>
           </template>
           <template v-slot:top-right>
             <q-btn
-              dense
+              round
               size="sm"
               color="positive"
               icon="fas fa-plus"
@@ -63,12 +63,12 @@
                   </q-tooltip>
                 </q-btn>
                 <q-btn
-                    round
-                    ripple=""
-                    size="sm"
-                    color="red"
-                    icon="fas fa-user-minus"
-                    @click="dropClient(props.row.id)"
+                  round
+                  ripple=""
+                  size="sm"
+                  color="red"
+                  icon="fas fa-user-minus"
+                  @click="dropClient(props.row.id)"
                 >
                   <q-tooltip class="bg-red text-white" anchor="center right" self="center left">
                     Deletar
@@ -80,15 +80,16 @@
         </q-table>
       </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import {ref} from 'vue'
 import formClient from '../components/formClient'
+
 export default {
   name: "index",
-  setup () {
+  setup() {
     return {
       columns: [
         {
@@ -128,40 +129,39 @@ export default {
           sortable: false
         }
       ],
-      filter: '',
+      filter: ref(''),
     }
   },
   computed: {
     loading: {
-      set (val) {
-        this.ActionSetLoading(val)
+      set(val) {
+        this.$store.dispatch('client/ActionSetLoading', val)
       },
-      get () {
-        return this.getLoading()
+      get() {
+        return this.$store.getters['client/getLoading']
       }
     },
     clients: {
-      async set () {
+      async set() {
         try {
-          await this.ActionSetClients()
+          await this.$store.dispatch('client/ActionGetClients')
         } catch (error) {
-          if(error.request.status === 401) {
-            this.$store.dispatch('login/ActionLogOut')
+          await this.$store.dispatch('messages/ActionSetErrors', error)
+          if (error.request.status === 401) {
+            await this.$store.dispatch('login/ActionLogOut')
             await this.$router.push('/login')
-          } else {
-            this.$store.dispatch('messages/ActionSetErrors', error)
           }
         }
       },
-      get () {
-        return this.getClients()
+      get() {
+        return this.$store.getters['client/getClients']
       }
     },
     formClientDialog: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetFormDialog', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getFormDialog']
       }
     },
@@ -174,10 +174,10 @@ export default {
       }
     },
     clientShow: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('client/ActionSetClientShow', val)
       },
-      get () {
+      get() {
         return this.$store.getters['client/getClientShow']
       }
     },
@@ -186,31 +186,26 @@ export default {
     formClient
   },
   methods: {
-    ...mapActions('client', ['ActionSetClients', 'ActionSetLoading']),
-    ...mapGetters('client', ['getClients', 'getLoading']),
-    ...mapActions('messages', ['ActionSetErrors']),
     async openFormClient(id = 0, editMode = false) {
       this.editMode = editMode
       if (editMode) {
         try {
           await this.$store.dispatch('client/ActionSetClientShow', id)
-          this.$store.dispatch('client/ActionSetForm', this.clientShow)
-          this.editMode = true
-          this.formClientDialog = true
+          await this.$store.dispatch('client/ActionSetForm', this.clientShow)
+          await this.$store.dispatch('client/ActionSetFormDialog', true)
         } catch (error) {
-          this.$store.dispatch('messages/ActionSetErrors', error)
-          if(error.request.status === 401) {
-            this.$store.dispatch('login/ActionLogOut')
+          await this.$store.dispatch('messages/ActionSetErrors', error)
+          if (error.request.status === 401) {
+            await this.$store.dispatch('login/ActionLogOut')
             await this.$router.push('/login')
           }
         }
       } else {
-        this.formClientDialog = true
+        await this.$store.dispatch('client/ActionSetFormDialog', true)
       }
     },
-
-    dropClient(id) {
-      this.$q.dialog({
+    async dropClient(id) {
+      const response = await this.$q.dialog({
         title: 'Deletar Cliente',
         message: 'Deseja realmente realizar esta ação?',
         cancel: {
@@ -223,20 +218,22 @@ export default {
           label: 'Sim',
           color: 'negative'
         },
-      }).onOk(async () => {
+      })
+      response.onOk(async () => {
         try {
           await this.$store.dispatch('client/ActionDropClient', id)
-          this.$store.dispatch('messages/ActionAddMessage', {
+          await this.$store.dispatch('messages/ActionAddMessage', {
             bg: 'positive',
             message: 'Cliente deletado'
           })
         } catch (error) {
-          this.$store.dispatch('messages/ActionSetErrors', error)
+          console.log(error)
+          await this.$store.dispatch('messages/ActionSetErrors', error)
         }
       })
     }
 
-},
+  },
   created() {
     this.clients = ''
   }

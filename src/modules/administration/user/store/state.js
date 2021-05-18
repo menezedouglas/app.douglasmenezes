@@ -1,9 +1,17 @@
+import {ref} from 'vue'
+
 export default {
-    id: 0,
-    name: '',
-    email: '',
-    loading: '',
-    users: [],
-    formEditMode: false,
-    edit: {}
+  id: ref(0),
+  name: ref(''),
+  email: ref(''),
+  loading: ref(false),
+  users: ref([]),
+  formDialog: ref(false),
+  formEditMode: ref(false),
+  form: {
+    user_id: ref(0),
+    name: ref(''),
+    email: ref(''),
+    password: ref('')
+  }
 }

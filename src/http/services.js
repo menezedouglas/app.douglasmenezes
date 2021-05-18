@@ -5,6 +5,7 @@ import { services as user } from '../modules/administration/user'
 import { services as client } from '../modules/administration/client'
 import { services as refCodes } from '../modules/administration/refCodes'
 import { services as contract } from '../modules/administration/contract'
+import { services as service } from '../modules/administration/services'
 
 export default {
   home,
@@ -13,5 +14,6 @@ export default {
   user,
   client,
   refCodes,
-  contract
+  contract,
+  service
 }

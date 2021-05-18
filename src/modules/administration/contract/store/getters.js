@@ -10,6 +10,12 @@ export const getFormValue = ({ form }) => form.value
 export const getFormTypeValue = ({ form }) => form.type_value
 export const getFormDialog = ({ formDialog }) => formDialog
 export const getOptions = ({ options }) => options
+export const getOptionsClients = ({ options }) => options.clients
+export const getOptionsServices = ({ options }) => options.services
 export const getFormDialogEditMode = ({ formDialogEditMode }) => formDialogEditMode
 export const getContractShow = ({ contractShow }) => contractShow
-export const getTableFilter = ({ tableFilter }) => tableFilter
+export const getTable = ({ table }) => table
+export const getTableFilter = ({ table }) => table.filter
+export const getTableColumns = ({ table }) => table.columns
+export const getTableRows = ({ table }) => table.rows
+export const getTableSelected = ({ table }) => table.selected
