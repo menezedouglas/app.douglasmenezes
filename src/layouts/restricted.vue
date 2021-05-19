@@ -40,16 +40,8 @@ export default {
       }
     }
   },
-  methods: {
-    ...mapActions('login', ['ActionCheckToken']),
-    closeSideBar: () => {
-      // eslint-disable-next-line camelcase
-      const ctrl_sidebar = document.querySelector('#menu_control')
-      if (ctrl_sidebar.checked) { ctrl_sidebar.checked = !ctrl_sidebar.checked }
-    }
-  },
-  created () {
-    this.ActionCheckToken()
+  async created () {
+    await this.$store.dispatch('login/ActionCheckToken')
   }
 }
 </script>
