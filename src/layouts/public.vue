@@ -16,8 +16,8 @@
       </q-toolbar>
     </q-header>
     <main-menu/>
-    <q-page-container>
-      <router-view/>
+    <q-page-container class="content">
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
