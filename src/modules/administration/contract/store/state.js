@@ -60,9 +60,9 @@ export default {
     selected: ref([])
   },
   form: {
-    contract_id: ref(0),
-    client_id: ref(0),
-    service_id: ref(0),
+    contract_id: ref(null),
+    client_id: ref(null),
+    service_id: ref(null),
     start_validity: ref(''),
     end_validity: ref(''),
     value: ref(0),

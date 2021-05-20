@@ -8,6 +8,7 @@
       </div>
       <div class="col-12">
         <q-table
+          grid
           :rows="tableRows"
           :loading="loading"
           :columns="tableColumns"

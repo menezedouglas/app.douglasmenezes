@@ -19,6 +19,7 @@ const authenticatedRoutes = [
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(async ({app, router, store}) => {
   router.beforeEach(async (to) => {
+    store.dispatch('login/ActionCheckToken')
     document.title = `${to.name} - Douglas Menezes`
     if (
       publicRoutes.indexOf(to.path) < 0 &&

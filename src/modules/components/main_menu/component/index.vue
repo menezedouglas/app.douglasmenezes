@@ -14,11 +14,16 @@
       >
         Menu
       </q-item-label>
-      <EssentialLink
-        v-for="link in items"
-        :key="link.name"
-        v-bind="link"
-      />
+      <q-scroll-area
+        visible="false"
+        class="scroll-area"
+      >
+        <EssentialLink
+          v-for="link in items"
+          :key="link.name"
+          v-bind="link"
+        />
+      </q-scroll-area>
     </q-list>
     <section class="menu-footer">
       <div class="social-networks">
@@ -34,6 +39,7 @@
             <q-item-section
               v-if="item.icon"
               avatar
+              class="absolute-center"
             >
               <q-icon :name="item.icon" />
             </q-item-section>

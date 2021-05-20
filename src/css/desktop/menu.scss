@@ -9,6 +9,10 @@
     padding: 0;
   }
 
+  .menu .scroll-area {
+    height: calc(100vh - 250px);
+  }
+
   .menu-item {
     color: #FFA62B;
     transition: all .1s ease-in-out;

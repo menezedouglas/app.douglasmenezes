@@ -44,7 +44,7 @@
         <q-card-section>
           <q-select
             v-model="clientId"
-            label="Clients"
+            label="Clientes"
             :options="optionsClients"
             :loading="clientLoading"
             :disable="clientLoading"
@@ -60,11 +60,6 @@
 import { ref } from 'vue'
 export default {
   name: 'formClient',
-  data () {
-    return {
-      teste: ref(null)
-    }
-  },
   computed: {
     options: {
       set (val) {
@@ -206,9 +201,6 @@ export default {
         })
       })
       this.optionsClients = options
-    },
-    teste (val) {
-      console.log(val)
     }
   },
   methods: {
