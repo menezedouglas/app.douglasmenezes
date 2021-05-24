@@ -147,7 +147,7 @@ export default {
   methods: {
     async getServices() {
       try {
-        await this.$store.dispatch('services/getServices')
+        await this.$store.dispatch('services/obtainServices')
       } catch (error) {
         this.loadErrors(error)
       }
@@ -178,14 +178,30 @@ export default {
       }
     },
     async drop (id) {
-      try {
-        this.$q.loading.show()
-        await this.$store.dispatch('services/dropSerivce', id)
-        this.$q.loading.hide()
-      } catch (error) {
-        this.$q.loading.hide()
-        this.loadErrors(error)
-      }
+      const response = await this.$q.dialog({
+        title: 'Deletar Serviço',
+        message: 'Deseja realmente realizar esta ação?',
+        cancel: {
+          push: true,
+          color: 'positive',
+          label: 'Não'
+        },
+        persistent: true,
+        ok: {
+          label: 'Sim',
+          color: 'negative'
+        },
+      })
+      response.onOk(async () => {
+        try {
+          this.$q.loading.show()
+          await this.$store.dispatch('services/dropSerivce', id)
+          this.$q.loading.hide()
+        } catch (error) {
+          this.$q.loading.hide()
+          this.loadErrors(error)
+        }
+      })
     }
   },
   mounted() {

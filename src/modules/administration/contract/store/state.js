@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import helpers from 'src/helpers'
 
 export default {
   contracts: ref([]),
@@ -6,7 +7,8 @@ export default {
   formDialogEditMode: ref(false),
   options: {
     clients: ref([]),
-    services: ref([])
+    services: ref([]),
+    typeValue: ref([])
   },
   contractShow: ref({}),
   table: {
@@ -25,21 +27,30 @@ export default {
         label: 'Início',
         align: 'center',
         field: 'start_validity',
-        sortable: true
+        sortable: true,
+        format: val => {
+          return new Date(val).toLocaleDateString()
+        }
       },
       {
         name: 'end_validity',
         label: 'Término',
         align: 'center',
         field: 'end_validity',
-        sortable: true
+        sortable: true,
+        format: val => {
+          return new Date(val).toLocaleDateString()
+        }
       },
       {
         name: 'value',
         label: 'R$',
         align: 'center',
         field: 'value',
-        sortable: true
+        sortable: true,
+        format: val => {
+          return helpers.numeric.format.value(val)
+        }
       },
       {
         name: 'type_value',
@@ -49,11 +60,11 @@ export default {
         sortable: false
       },
       {
-        name: 'actions',
+        name: 'status',
         label: '',
         align: 'center',
-        field: 'actions',
-        sortable: false
+        field: 'status',
+        sortable: false,
       }
     ]),
     rows: ref([]),
@@ -66,7 +77,7 @@ export default {
     start_validity: ref(''),
     end_validity: ref(''),
     value: ref(0),
-    type_value: ref(0)
+    type_value: ref('')
   },
   loading: ref(false)
 }

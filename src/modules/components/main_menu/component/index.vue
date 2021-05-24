@@ -147,6 +147,10 @@ export default {
           {
             title: 'Serviços',
             link: '/#/services'
+          },
+          {
+            title: 'Apontamentos',
+            link: '/#/notations'
           }
         ],
         socialsNetworks: [

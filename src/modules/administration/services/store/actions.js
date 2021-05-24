@@ -63,7 +63,7 @@ export const setFormEditMode = ({ commit }, payload) => {
   commit(types.SET_FORM_EDIT_MODE, payload)
 }
 
-export const getServices = async ({ dispatch }) => {
+export const obtainServices = async ({ dispatch }) => {
   try {
     dispatch('setLoading', true)
     const { request } = await requests.service.all()
@@ -90,7 +90,7 @@ export const createSerivce = async ({ dispatch }, payload) => {
   try {
     dispatch('setLoading', true)
     await requests.service.create(payload)
-    dispatch('getServices')
+    dispatch('obtainServices')
     dispatch('setLoading', false)
     return Promise.resolve()
   } catch (error) {
@@ -124,7 +124,7 @@ export const updateSerivce = async ({ dispatch }, payload) => {
   try {
     dispatch('setLoading', true)
     await requests.service.update(payload)
-    dispatch('getServices')
+    dispatch('obtainServices')
     dispatch('setLoading', false)
     return Promise.resolve()
   } catch (error) {
@@ -137,7 +137,7 @@ export const dropSerivce = async ({ dispatch }, payload) => {
   try {
     dispatch('setLoading', true)
     await requests.service.delete({ service_id: payload })
-    dispatch('getServices')
+    dispatch('obtainServices')
     dispatch('setLoading', false)
     return Promise.resolve()
   } catch (error) {

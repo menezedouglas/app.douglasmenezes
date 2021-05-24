@@ -11,6 +11,7 @@ import { store as client } from '../modules/administration/client'
 import { store as refCodes } from '../modules/administration/refCodes'
 import { store as contracts } from '../modules/administration/contract'
 import { store as services } from '../modules/administration/services'
+import { store as notation } from '../modules/administration/notation'
 
 export default {
   home,
@@ -25,5 +26,6 @@ export default {
   client,
   refCodes,
   contracts,
-  services
+  services,
+  notation
 }

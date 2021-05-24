@@ -12,6 +12,7 @@ export const getFormDialog = ({ formDialog }) => formDialog
 export const getOptions = ({ options }) => options
 export const getOptionsClients = ({ options }) => options.clients
 export const getOptionsServices = ({ options }) => options.services
+export const getOptionsTypeValue = ({ options }) => options.typeValue
 export const getFormDialogEditMode = ({ formDialogEditMode }) => formDialogEditMode
 export const getContractShow = ({ contractShow }) => contractShow
 export const getTable = ({ table }) => table

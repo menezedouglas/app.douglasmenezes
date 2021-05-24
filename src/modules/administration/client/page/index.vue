@@ -263,7 +263,6 @@ export default {
             message: 'Cliente deletado'
           })
         } catch (error) {
-          console.log(error)
           await this.$store.dispatch('messages/ActionSetErrors', error)
         }
       })

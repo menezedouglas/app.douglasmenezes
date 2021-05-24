@@ -46,6 +46,9 @@ export default {
   [types.SET_OPTIONS_SERVICES](state, payload) {
     state.options.services = payload
   },
+  [types.SET_OPTIONS_TYPE_VALUE](state, payload) {
+    state.options.typeValue = payload
+  },
   [types.SET_FORM_DIALOG_EDIT_MODE](state, payload) {
     state.formDialogEditMode = payload
   },
