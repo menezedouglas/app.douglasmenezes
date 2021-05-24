@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 
 export default {
+  services: ref([]),
+  loading: ref(false),
   table: {
     cols: ref([
       {
@@ -50,13 +52,15 @@ export default {
     selected: ref([]),
     filter: ref('')
   },
+  formEditMode: ref(false),
+  formDialog: ref(false),
   form: {
     service_id: ref(0),
     name: ref(''),
     description: ref(''),
     delivery_time: ref(0),
     value: ref(0),
-    type_value: ref(0),
+    type_value: ref(''),
     type_service_state: ref('')
   }
 }

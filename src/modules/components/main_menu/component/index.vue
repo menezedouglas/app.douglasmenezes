@@ -143,6 +143,10 @@ export default {
           {
             title: 'Contratos',
             link: '/#/contracts'
+          },
+          {
+            title: 'Serviços',
+            link: '/#/services'
           }
         ],
         socialsNetworks: [

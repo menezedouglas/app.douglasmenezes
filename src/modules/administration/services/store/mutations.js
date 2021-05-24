@@ -35,9 +35,21 @@ export default {
     form.value = payload
   },
   [types.SET_FORM_TYPE_VALUE] ({ form }, payload) {
-    form.value = payload
+    form.type_value = payload
   },
   [types.SET_FORM_TYPE_SERVICE_STATE] ({ form }, payload) {
     form.type_service_state = payload
+  },
+  [types.SET_SERVICES] (state, payload) {
+    state.services = payload
+  },
+  [types.SET_LOADING] (state, payload) {
+    state.loading = payload
+  },
+  [types.SET_FORM_DIALOG] (state, payload) {
+    state.formDialog = payload
+  },
+  [types.SET_FORM_EDIT_MODE] (state, payload) {
+    state.formEditMode = payload
   }
 }
