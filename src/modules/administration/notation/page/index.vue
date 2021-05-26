@@ -174,6 +174,13 @@ export default {
     formNotation
   },
   methods: {
+    async loadTable () {
+      try {
+        await this.$store.dispatch('notation/getNotations')
+      } catch (error) {
+        await this.setErrors(error)
+      }
+    },
     async openFormDialog(id, editMode = false) {
       if (editMode) {
         try {
@@ -228,7 +235,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('notation/getNotations')
+    this.loadTable()
   }
 }
 </script>
