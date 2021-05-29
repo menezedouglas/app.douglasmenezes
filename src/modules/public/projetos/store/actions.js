@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import requests from 'src/http'
 
 export const setProjects = ({ commit }, payload) => {
   commit(types.SET_PROJECTS, payload)
@@ -59,3 +60,18 @@ export const setFormInit = ({ commit }, payload) => {
 export const setFormIsOpenSource = ({ commit }, payload) => {
   commit(types.SET_FORM_IS_OPEN_SOURCE, payload)
 }
+
+export const getProjects = async ({ dispatch }) => {
+  try {
+    dispatch('setLoading', true)
+    const { request } = await requests.projects.all()
+    dispatch('setTableRows', request.response)
+    dispatch('setProjects', request.response)
+    dispatch('setLoading', false)
+    return Promise.resolve(request.response)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+
