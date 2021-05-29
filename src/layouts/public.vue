@@ -40,6 +40,21 @@ export default {
         return this.$store.getters['mainMenu/getOpen']
       }
     }
+  },
+  methods: {
+    async checkAuth () {
+      try {
+        this.$q.loading.show()
+        await this.$store.dispatch('login/ActionCheckToken')
+        this.$q.loading.hide()
+      } catch (error) {
+        console.log(error)
+        this.$q.loading.hide()
+      }
+    }
+  },
+  async created () {
+   await this.checkAuth()
   }
 }
 </script>

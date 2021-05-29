@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import { component as MainMenu } from '../modules/components/main_menu'
-import { mapActions } from 'vuex'
+import {component as MainMenu} from '../modules/components/main_menu'
+import {mapActions} from 'vuex'
+
 export default {
   name: 'restricted',
   components: {
@@ -32,16 +33,28 @@ export default {
   },
   computed: {
     mainMenu: {
-      set (val) {
+      set(val) {
         this.$store.dispatch('mainMenu/ActionSetOpen', val)
       },
-      get () {
+      get() {
         return this.$store.getters['mainMenu/getOpen']
       }
     }
   },
-  async created () {
-    await this.$store.dispatch('login/ActionCheckToken')
+  methods: {
+    async checkAuth() {
+      try {
+        this.$q.loading.show()
+        await this.$store.dispatch('login/ActionCheckToken')
+        this.$q.loading.hide()
+      } catch (error) {
+        console.log(error)
+        this.$q.loading.hide()
+      }
+    }
+  },
+  async created() {
+   await this.checkAuth()
   }
 }
 </script>

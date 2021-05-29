@@ -15,7 +15,7 @@
         Menu
       </q-item-label>
       <q-scroll-area
-        visible="false"
+        :visible="false"
         class="scroll-area"
       >
         <EssentialLink
