@@ -53,6 +53,22 @@ export const setFormNote = ({ commit }, payload) => {
   commit(types.SET_FORM_NOTE, payload)
 }
 
+export const setDay = ({ commit }, payload) => {
+  commit(types.SET_DAY, payload)
+}
+
+export const setDayNow = ({ commit }, payload) => {
+  commit(types.SET_DAY_NOW, payload)
+}
+
+export const setDayNotations = ({ commit }, payload) => {
+  commit(types.SET_DAY_NOTATIONS, payload)
+}
+
+export const setDayContract = ({ commit }, payload) => {
+  commit(types.SET_DAY_CONTRACT, payload)
+}
+
 export const clearForm = ({ dispatch }) => {
   dispatch('setFormNotationId', 0)
   dispatch('setFormContractId', null)
@@ -61,6 +77,30 @@ export const clearForm = ({ dispatch }) => {
   dispatch('setFormEnter', '')
   dispatch('setFormLeave', '')
   dispatch('setFormNote', '')
+}
+
+export const getNotationsByDate = async ({ dispatch, getters }, payload) => {
+  try {
+    dispatch('setLoading', true)
+    await dispatch('getNotations')
+    const notations = getters.getNotations
+    let notationsByDate = []
+    notations.map(not => {
+      const reference = new Date(not.reference)
+      if(
+        payload.getFullYear() === reference.getFullYear() &&
+        payload.getMonth() === reference.getMonth() &&
+        payload.getDate() === reference.getDate()
+      ) {
+        notationsByDate.push(not)
+      }
+    })
+    dispatch('setDayNotations', notationsByDate)
+    dispatch('setLoading', false)
+  } catch (error) {
+    dispatch('setLoading', false)
+    return Promise.reject(error)
+  }
 }
 
 export const getNotations = async ({ dispatch }) => {

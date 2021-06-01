@@ -31,7 +31,7 @@ export const ActionSetFormEndValidity = ({commit}, payload) => {
 }
 
 export const ActionSetFormValue = ({commit}, payload) => {
-  if (typeof payload === 'string') payload = parseInt(payload) * 100
+  if (typeof payload === 'string') payload = parseFloat(payload) * 100
   commit(types.SET_FORM_VALUE, payload)
 }
 

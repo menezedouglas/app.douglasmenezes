@@ -138,22 +138,12 @@ export default {
       await this.$store.dispatch('user/ActionSetFormEditMode', editMode)
       if (editMode) {
         try {
-          const user = await this.$store.dispatch('user/ActionGetUser', id)
-          await this.$store.dispatch('user/ActionSetForm', {
-            user_id: user.id,
-            name: user.name,
-            email: user.email
-          })
-          await this.$store.dispatch('user/ActionSetFormDialog', true)
+          await this.$store.dispatch('user/ActionShowUser', id)
         } catch (error) {
-          await this.$store.dispatch('messages/ActionSetErrors', error)
-          if (error.request.status === 401) {
-            await this.$store.dispatch('login/ActionLogOut')
-            await this.$router.push('/login')
-          }
+          await this.setErrors(error)
         }
       } else {
-        await this.$store.dispatch('user/ActionSetFormDialog', true)
+        this.formDialog = true
       }
     },
     async dropUser(id, name) {
@@ -179,13 +169,16 @@ export default {
             message: `${name} deletado(a)!`
           })
         } catch (error) {
-          await this.$store.dispatch('messages/ActionSetErrors', error)
-          if (error.request.status === 401) {
-            await this.$store.dispatch('login/ActionLogOut')
-            await this.$router.push('/login')
-          }
+          await this.setErrors(error)
         }
       })
+    },
+    async setErrors(error) {
+      await this.$store.dispatch('messages/ActionSetErrors', error)
+      if (error.request.status === 401) {
+        await this.$store.dispatch('login/ActionLogOut')
+        await this.$router.push('/login')
+      }
     }
   }
   ,

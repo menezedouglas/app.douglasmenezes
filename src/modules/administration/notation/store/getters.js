@@ -15,3 +15,7 @@ export const getFormReference = ({ form }) => form.reference
 export const getFormEnter = ({ form }) => form.enter
 export const getFormLeave = ({ form }) => form.leave
 export const getFormNote = ({ form }) => form.note
+export const getDay = ({ day }) => day
+export const getDayNow = ({ day }) => day.now
+export const getDayNotations = ({ day }) => day.notations
+export const getDayContract = ({ day }) => day.contract

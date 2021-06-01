@@ -70,5 +70,10 @@ export default {
     enter: ref(''),
     leave: ref(''),
     note: ref('')
+  },
+  day: {
+    contract: ref(0),
+    now: ref(new Date()),
+    notations: ref([])
   }
 }

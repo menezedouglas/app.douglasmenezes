@@ -67,6 +67,22 @@ export default {
 
   [types.SET_FORM_NOTE] (state, payload) {
     state.form.note = payload
+  },
+
+  [types.SET_DAY] (state, payload) {
+    state.day = payload
+  },
+
+  [types.SET_DAY_NOW] (state, payload) {
+    state.day.now = payload
+  },
+
+  [types.SET_DAY_CONTRACT] (state, payload) {
+    state.day.contract = payload
+  },
+
+  [types.SET_DAY_NOTATIONS] (state, payload) {
+    state.day.notations = payload
   }
 }
 

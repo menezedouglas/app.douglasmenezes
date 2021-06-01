@@ -5,8 +5,9 @@
         <h2 class="text-grey-8">Dashboard</h2>
         <hr class="q-my-sm">
       </div>
-      <div class="col-auto">
-        <user></user>
+      <div class="row col-12 q-gutter-md">
+        <user />
+        <notation-day />
       </div>
     </div>
   </div>
@@ -14,11 +15,13 @@
 
 <script>
 import { component as user } from '../../user'
+import notationDay from '../../notation/components/notationDay'
 import {mapActions, mapGetters} from "vuex";
 export default {
   name: "dashboard",
   components: {
-    user
+    user,
+    notationDay
   },
   computed: {
     user: {

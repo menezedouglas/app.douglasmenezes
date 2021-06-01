@@ -88,6 +88,22 @@ export const ActionGetUser = ({dispatch}, payload) => {
     })
 }
 
+export const ActionShowUser = async ({ dispatch }, payload) => {
+  try {
+    dispatch('ActionSetLoading', true)
+    const user = await dispatch('ActionGetUser', payload)
+    dispatch('ActionSetFormUserId', user.id)
+    dispatch('ActionSetFormName', user.name)
+    dispatch('ActionSetFormEmail', user.email)
+    dispatch('ActionSetFormEditMode', true)
+    dispatch('ActionSetFormDialog', true)
+    dispatch('ActionSetLoading', false)
+  } catch (error) {
+    dispatch('ActionSetLoading', false)
+    return Promise.reject(error)
+  }
+}
+
 export const ActionSetUser = ({dispatch}, payload) => {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
@@ -117,11 +133,12 @@ export const ActionCreateUser = async ({ dispatch }, payload) => {
   }
 }
 
-export const ActionUpdateUser = async ({ dispatch }, payload) => {
+export const ActionUpdateUser = async ({ dispatch, getters }, payload) => {
   try {
     dispatch('ActionSetLoading', true)
     await requests.user.update(payload)
     dispatch('ActionSetUsers')
+    dispatch('ActionSetUser', getters.getId)
     return Promise.resolve()
   } catch (error) {
     dispatch('ActionSetLoading', false)

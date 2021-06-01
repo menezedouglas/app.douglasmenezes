@@ -1,5 +1,6 @@
 <template>
   <div>
+    <form-user />
     <!-- Card -->
     <q-card
       style="min-width: 255px; min-height: 85px;"
@@ -21,7 +22,9 @@
                   <q-menu auto-close style="width: 100px" anchor="center right" self="center left" :offset="[30, 10]">
                     <q-list>
                       <q-item clickable>
-                        <q-item-section>
+                        <q-item-section
+                          @click="openForm(id, true)"
+                        >
                           <div class="row items-center no-wrap">
                             <div class="col-auto">
                               <i class="fas fa-user-edit"></i>
@@ -65,76 +68,68 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import formUser from './formUser'
 export default {
   name: "index",
+  components: {
+    formUser
+  },
   computed: {
     id: {
       set (val) {
-        this.ActionSetId(val)
+        this.$store.dispatch('user/ActionSetId', val)
       },
       get () {
-        return this.getId()
+        return this.$store.getters['user/getId']
       }
     },
     name: {
       set (val) {
-        this.ActionSetName(val)
+        this.$store.dispatch('user/ActionSetName', val)
       },
       get () {
-        return this.getName()
+        return this.$store.getters['user/getName']
       }
     },
     email: {
       set (val) {
-        this.ActionSetEmail(val)
+        this.$store.dispatch('user/ActionSetEmail', val)
       },
       get () {
-        return this.getEmail()
+        return this.$store.getters['user/getEmail']
       }
     },
     loading: {
       set (val) {
-        this.ActionSetLoading(val)
+        this.$store.dispatch('user/ActionSetLoading', val)
       },
       get () {
-        return this.getLoading()
+        return this.$store.getters['user/getLoading']
       }
     }
   },
   methods: {
-    ...mapActions('user', [
-        'ActionSetId',
-        'ActionSetName',
-        'ActionSetEmail',
-        'ActionSetLoading'
-    ]),
-    ...mapActions('login', [
-        'ActionLogOut'
-    ]),
-    ...mapActions('messages', [
-        'ActionSetErrors'
-    ]),
-    ...mapGetters('user', [
-      'getId',
-      'getName',
-      'getEmail',
-      'getLoading'
-    ]),
     async logout () {
-      this.ActionLogOut()
+      await this.$store.dispatch('login/ActionLogOut')
       await this.$router.push('/login')
     },
-    showFormUser(editMode = false) {
-      const modal = document.querySelector('#formUserModal')
-      switch (editMode) {
-        case true: {
-          break
+    async openForm(id = 0, editMode = false) {
+      await this.$store.dispatch('user/ActionSetFormEditMode', editMode)
+      if (editMode) {
+        try {
+          await this.$store.dispatch('user/ActionShowUser', id)
+        } catch (error) {
+          await this.setErrors(error)
         }
-        case false: {
-          modal.show()
-          break
-        }
+      } else {
+        this.formDialog = true
+      }
+    },
+    async setErrors(error) {
+      await this.$store.dispatch('messages/ActionSetErrors', error)
+      if (error.request.status === 401) {
+        await this.$store.dispatch('login/ActionLogOut')
+        await this.$router.push('/login')
       }
     }
   }
