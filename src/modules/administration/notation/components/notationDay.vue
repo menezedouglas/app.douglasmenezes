@@ -63,13 +63,37 @@
         </q-card-section>
       </q-card-section>
       <q-separator/>
-      <q-card-section class="flex flex-center">
-        <q-btn
-          color="positive"
-          :label="statusBtn"
-          :loading="loading"
-          :disable="loading"
-        />
+      <q-card-section>
+        <q-select
+          filled
+          bottom-slots
+          v-model="dayContract"
+          :options="contracts"
+          :loading="contractLoading"
+          :disable="contractLoading"
+          label="Contrato"
+          :dense="true"
+          :options-dense="true"
+          map-options
+          option-value="id"
+          option-label="id"
+        >
+          <template v-slot:after>
+            <q-btn
+              flat
+              dense
+              color="positive"
+              icon="send"
+              :loading="loading"
+              :disable="loading"
+              @click="commit()"
+            >
+              <q-tooltip anchor="center right" self="center left" :offset="[10,10]">
+                {{ statusBtn }}
+              </q-tooltip>
+            </q-btn>
+          </template>
+        </q-select>
       </q-card-section>
     </q-card>
   </div>
@@ -84,6 +108,8 @@ export default {
       date: '',
       dialog: false,
       statusBtn: '',
+      contracts: [],
+      interval: null,
       weekDays: 'Domingo,Segunda-Feira,Terça-Feira,Quarta-Feira,Quinta-Feira,Sexta-Feira,Sábado'.split(','),
       months: 'Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro'.split(',')
     }
@@ -114,8 +140,12 @@ export default {
       }
     },
     dayNotations: {
-      set(val) {
-        this.$store.dispatch('notation/setDayNotations', val)
+      async set(val) {
+        try {
+          await this.$store.dispatch('notation/getNotationsByDate', val)
+        } catch (error) {
+          await this.setErrors(error)
+        }
       },
       get() {
         return this.$store.getters['notation/getDayNotations']
@@ -128,6 +158,14 @@ export default {
       get() {
         return this.$store.getters['notation/getDayContract']
       }
+    },
+    contractLoading: {
+      set (val) {
+        this.$store.dispatch('contracts/ActionSetLoading', val)
+      },
+      get () {
+        return this.$store.getters['contracts/getLoading']
+      }
     }
   },
   watch: {
@@ -136,6 +174,36 @@ export default {
     }
   },
   methods: {
+    async getContracts () {
+      try {
+        return await this.$store.dispatch('contracts/ActionGetContracts')
+      } catch (error) {
+        await this.setErrors(error)
+        return []
+      }
+    },
+    async commit () {
+      try {
+        clearInterval(this.interval)
+        const status = await this.getStatus()
+        const messages = 'Expediente Iniciado,Almoço Iniciado,Almoço Terminado,Expediente Encerrado'.split(',')
+        await this.$store.dispatch('notation/commitStatus', status)
+        await this.$store.dispatch('messages/ActionAddMessage', {
+          bg: 'positive',
+          message: messages[status]
+        })
+        this.init()
+      } catch (error) {
+        await this.setErrors(error)
+      }
+    },
+    async setErrors(error) {
+      await this.$store.dispatch('messages/ActionSetErrors', error)
+      if(error.request.status === 401) {
+        await this.$store.dispatch('login/ActionLogOut')
+        await this.$router.push('/login')
+      }
+    },
     findByPeriod (period) {
       return this.dayNotations.filter(val => val.type_notation === period.toLowerCase())
     },
@@ -188,12 +256,13 @@ export default {
       this.timer = this.getFullTime(this.dayNow)
     },
     init() {
-      setInterval(this.updateTimer, 1)
+      this.interval = setInterval(this.updateTimer, 1)
     }
   },
-  created() {
+  async created() {
+    this.contracts = await this.getContracts()
     this.init()
-    this.$store.dispatch('notation/getNotationsByDate', this.dayNow)
+    this.dayNotations = this.dayNow
   }
 }
 </script>

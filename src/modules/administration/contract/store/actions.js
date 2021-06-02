@@ -117,7 +117,7 @@ export const ActionGetClients = async ({dispatch}) => {
   }
 }
 
-export const ActionShowContract = async ({ dispatch, getters }, payload) => {
+export const ActionShowContract = async ({ dispatch }, payload) => {
   try {
     dispatch('ActionSetLoading', true)
     const { request } = await requests.contract.show({ contract_id: payload })
@@ -131,7 +131,6 @@ export const ActionShowContract = async ({ dispatch, getters }, payload) => {
     await dispatch('ActionSetLoading', false)
     await dispatch('ActionSetFormDialogEditMode', true)
     await dispatch('ActionSetFormDialog', true)
-    console.log(getters.getForm)
     return Promise.resolve()
   } catch (error) {
     return Promise.reject(error)
