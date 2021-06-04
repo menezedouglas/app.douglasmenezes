@@ -46,6 +46,7 @@ export default {
     name: ref(''),
     description: ref(''),
     init: ref(''),
-    is_open_source: ref(0),
+    end: ref(''),
+    is_open_source: ref(false),
   }
 }

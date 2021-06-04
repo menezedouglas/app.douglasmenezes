@@ -12,4 +12,5 @@ export const getFormProjectId = ({ form }) => form.project_id
 export const getFormName = ({ form }) => form.name
 export const getFormDescription = ({ form }) => form.description
 export const getFormInit = ({ form }) => form.init
+export const getFormEnd = ({ form }) => form.end
 export const getFormIsOpenSource = ({ form }) => form.is_open_source

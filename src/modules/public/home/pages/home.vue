@@ -22,21 +22,16 @@
         <accordion :show-data="showAccordionData" :show-error="showAccordionError"/>
       </div>
     </div>
-    <div class="flex-item">
-      <page-footer></page-footer>
-    </div>
   </q-page>
 </template>
 
 <script>
-import PageFooter from 'components/PageFooter.vue'
 import {component as Accordion} from '../../../components/accordion'
 import { ref } from 'vue'
 
 export default {
   name: 'Home',
   components: {
-    PageFooter,
     Accordion
   },
   data() {

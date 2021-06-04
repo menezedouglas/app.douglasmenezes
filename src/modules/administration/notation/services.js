@@ -11,6 +11,10 @@ export default {
     method: 'get',
     url: 'notation/show'
   },
+  showByContract: {
+    method: 'get',
+    url: 'notation/show/by-contract'
+  },
   all: {
     method: 'get',
     url: 'notation/all'
@@ -18,5 +22,9 @@ export default {
   delete: {
     method: 'get',
     url: 'notation/delete'
+  },
+  reportByContract: {
+    method: 'get',
+    url: 'notation/report/contract'
   }
 }

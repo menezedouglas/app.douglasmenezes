@@ -24,7 +24,7 @@ Object.keys(services).map(service => {
             return axios({
               method: temp[item].method,
               url: `${temp[item].url}${(data) ? helpers.httpResponses.toGet(data) : ''}`,
-              responseType: 'json'
+              responseType: (temp[item].responseType) ? temp[item].responseType : 'json'
             })
           }
           default: {

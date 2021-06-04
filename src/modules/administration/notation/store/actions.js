@@ -70,6 +70,45 @@ export const setDayContract = ({commit}, payload) => {
   commit(types.SET_DAY_CONTRACT, payload)
 }
 
+export const setReport = ({ commit }, payload) => {
+  commit(types.SET_REPORT, payload)
+}
+
+export const setReportDialog = ({ commit }, payload) => {
+  commit(types.SET_REPORT_DIALOG, payload)
+}
+
+export const setReportData = async ({ commit, dispatch, getters }) => {
+  try {
+    dispatch('setLoading', true)
+    const data = await getters.getReportForm
+    const { request } = await requests.notation.reportByContract(data)
+    commit(types.SET_REPORT_DATA, request.response)
+    dispatch('setLoading', false)
+    return Promise.resolve()
+  } catch (error) {
+    console.log(error)
+    dispatch('setLoading', false)
+    return Promise.reject(error)
+  }
+}
+
+export const setReportForm = ({ commit }, payload) => {
+  commit(types.SET_REPORT_FORM, payload)
+}
+
+export const setReportFormContractID = ({ commit }, payload) => {
+  commit(types.SET_REPORT_FORM_CONTRACT_ID, payload)
+}
+
+export const setReportFormMonth = ({ commit }, payload) => {
+  commit(types.SET_REPORT_FORM_MONTH, payload)
+}
+
+export const setReportFormYear = ({ commit }, payload) => {
+  commit(types.SET_REPORT_FORM_YEAR, payload)
+}
+
 export const clearForm = ({dispatch}) => {
   dispatch('setFormNotationId', 0)
   dispatch('setFormContractId', null)

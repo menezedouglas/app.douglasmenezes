@@ -19,3 +19,10 @@ export const getDay = ({ day }) => day
 export const getDayNow = ({ day }) => day.now
 export const getDayNotations = ({ day }) => day.notations
 export const getDayContract = ({ day }) => day.contract
+export const getReport = ({ report }) => report
+export const getReportDialog = ({ report }) => report.dialog
+export const getReportData = ({ report }) => report.data
+export const getReportForm = ({ report }) => report.form
+export const getReportFormContractId = ({ report }) => report.form.contract_id
+export const getReportFormMonth = ({ report }) => report.form.month
+export const getReportFormYear = ({ report }) => report.form.year

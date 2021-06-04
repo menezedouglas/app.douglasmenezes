@@ -57,6 +57,10 @@ export const setFormInit = ({commit}, payload) => {
   commit(types.SET_FORM_INIT, payload)
 }
 
+export const setFormEnd = ({commit}, payload) => {
+  commit(types.SET_FORM_END, payload)
+}
+
 export const setFormIsOpenSource = ({commit}, payload) => {
   commit(types.SET_FORM_IS_OPEN_SOURCE, payload)
 }
@@ -70,6 +74,7 @@ export const getProjects = async ({dispatch}) => {
     dispatch('setLoading', false)
     return Promise.resolve(request.response)
   } catch (error) {
+    dispatch('setLoading', false)
     return Promise.reject(error)
   }
 }

@@ -75,5 +75,14 @@ export default {
     contract: ref(0),
     now: ref(new Date()),
     notations: ref([])
+  },
+  report: {
+    dialog: ref(false),
+    data: ref({}),
+    form: {
+      contract_id: ref(null),
+      month: ref(''),
+      year: ref('')
+    }
   }
 }

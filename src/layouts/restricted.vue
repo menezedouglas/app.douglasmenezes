@@ -16,20 +16,23 @@
       </q-toolbar>
     </q-header>
     <main-menu/>
-    <q-page-container>
-      <router-view/>
+    <q-page-container class="content">
+      <router-view class="page-content"/>
+      <page-footer />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import PageFooter from 'components/PageFooter.vue'
 import {component as MainMenu} from '../modules/components/main_menu'
 import {mapActions} from 'vuex'
 
 export default {
   name: 'restricted',
   components: {
-    MainMenu
+    MainMenu,
+    PageFooter
   },
   computed: {
     mainMenu: {

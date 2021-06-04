@@ -1,6 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <form-notation/>
+    <report />
     <div class="row">
       <div class="col-12 q-my-sm">
         <h2 class="text-grey-8">Apontamentos</h2>
@@ -25,13 +26,17 @@
 
           <template v-slot:top-right>
             <div class="q-gutter-sm">
-<!--              <q-btn-->
-<!--                color="primary"-->
-<!--                icon-right="archive"-->
-<!--                label="Export to csv"-->
-<!--                no-caps-->
-<!--                @click="exportTable"-->
-<!--              />-->
+              <q-btn
+                round
+                size="sm"
+                color="primary"
+                icon="archive"
+                @click="reportDialog = !reportDialog"
+              >
+                <q-tooltip anchor="center left" self="center right" :offset="[10,10]">
+                  Gerar Relatório
+                </q-tooltip>
+              </q-btn>
               <q-btn
                 round
                 size="sm"
@@ -101,6 +106,7 @@
 
 <script>
 import formNotation from '../components/formNotation'
+import report from '../components/report'
 
 export default {
   name: "index",
@@ -168,10 +174,19 @@ export default {
       get() {
         return this.$store.getters['notation/getFormDialog']
       }
+    },
+    reportDialog: {
+      set (val) {
+        this.$store.dispatch('notation/setReportDialog', val)
+      },
+      get () {
+        return this.$store.getters['notation/getReportDialog']
+      }
     }
   },
   components: {
-    formNotation
+    formNotation,
+    report
   },
   methods: {
     async loadTable () {

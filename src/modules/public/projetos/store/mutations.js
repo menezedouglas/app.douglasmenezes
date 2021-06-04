@@ -44,6 +44,9 @@ export default {
   [types.SET_FORM_INIT] (state, payload) {
     state.form.init = payload
   },
+  [types.SET_FORM_END] (state, payload) {
+    state.form.end = payload
+  },
   [types.SET_FORM_IS_OPEN_SOURCE] (state, payload) {
     state.form.is_open_source = payload
   }

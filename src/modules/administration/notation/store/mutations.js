@@ -83,6 +83,34 @@ export default {
 
   [types.SET_DAY_NOTATIONS] (state, payload) {
     state.day.notations = payload
+  },
+
+  [types.SET_REPORT] (state, payload) {
+    state.report = payload
+  },
+
+  [types.SET_REPORT_DATA] (state, payload) {
+    state.report.data = payload
+  },
+
+  [types.SET_REPORT_DIALOG] (state, payload) {
+    state.report.dialog = payload
+  },
+
+  [types.SET_REPORT_FORM] (state, payload) {
+    state.report.form = payload
+  },
+
+  [types.SET_REPORT_FORM_CONTRACT_ID] (state, payload) {
+    state.report.form.contract_id = payload
+  },
+
+  [types.SET_REPORT_FORM_MONTH] (state, payload) {
+    state.report.form.month = payload
+  },
+
+  [types.SET_REPORT_FORM_YEAR] (state, payload) {
+    state.report.form.year = payload
   }
 }
 

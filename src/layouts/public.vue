@@ -17,19 +17,22 @@
     </q-header>
     <main-menu/>
     <q-page-container class="content">
-      <router-view />
+      <router-view class="page-content"/>
+      <page-footer />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import PageFooter from 'components/PageFooter.vue'
 import {component as mainMenu} from '../modules/components/main_menu'
 
 
 export default {
   name: 'MainLayout',
   components: {
-    mainMenu
+    mainMenu,
+    PageFooter
   },
   computed: {
     mainMenu: {

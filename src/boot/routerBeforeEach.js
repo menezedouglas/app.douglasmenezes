@@ -13,7 +13,8 @@ const authenticatedRoutes = [
   '/clients',
   '/contracts',
   '/services',
-  '/notations'
+  '/notations',
+  '/notations/report'
 ]
 
 // "async" is optional;
