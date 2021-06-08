@@ -10,28 +10,57 @@ export default {
       {
         name: 'name',
         label: 'Nome',
-        filed: 'name',
+        field: 'name',
         align: 'center',
         sortable: true
       },
       {
         name: 'description',
         label: 'Descrição',
-        filed: 'description',
+        field: 'description',
         align: 'center',
         sortable: true
       },
       {
         name: 'init',
         label: 'Criado em',
-        filed: 'init',
+        field: 'init',
         align: 'center',
-        sortable: true
+        sortable: true,
+        format (val) {
+          const date = new Date(val)
+
+          return `${
+            (date.getDate() < 10) ?
+              `0${date.getDate()}` : date.getDate()
+          }/${
+            (date.getMonth() + 1 < 10) ?
+              `0${date.getMonth() + 1}` : date.getMonth() + 1
+          }/${date.getFullYear()}`
+        }
+      },
+      {
+        name: 'end',
+        label: 'Previsão de Término',
+        field: 'end',
+        align: 'center',
+        sortable: true,
+        format (val) {
+          const date = new Date(val)
+
+          return `${
+            (date.getDate() < 10) ?
+              `0${date.getDate()}` : date.getDate()
+          }/${
+            (date.getMonth() + 1 < 10) ?
+              `0${date.getMonth() + 1}` : date.getMonth() + 1
+          }/${date.getFullYear()}`
+        }
       },
       {
         name: 'is_open_source',
         label: 'Código aberto',
-        filed: 'is_open_source',
+        field: 'is_open_source',
         align: 'center',
         format: val => (val === 0) ? `Não` : `Sim`,
         sortable: true

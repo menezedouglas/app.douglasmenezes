@@ -15,6 +15,14 @@
           :rows="tableRows"
           :loading="loading"
         >
+          <template v-slot:top-left>
+            <q-input borderless dense debounce="300" v-model="tableFilter" placeholder="Pesquisar">
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </template>
+
           <template v-slot:top-right>
             <q-btn
               v-if="authenticated"
@@ -28,6 +36,31 @@
                 Novo Projeto
               </q-tooltip>
             </q-btn>
+          </template>
+
+          <template v-slot:item="props">
+            <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition">
+              <q-card>
+                <q-card-section horizontal>
+                  <q-card-section class="q-pa-sm">
+                    <q-list dense>
+                      <q-item v-for="col in props.cols.filter(col => col.name !== 'desc')" :key="col.name">
+                        <q-item-section>
+                          <q-item-label>{{ col.label }}</q-item-label>
+                        </q-item-section>
+                        <q-item-section side>
+                          <q-item-label caption class="wrap" style="width: 150px;">{{ col.value }}</q-item-label>
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-card-section>
+                  <q-separator vertical/>
+                  <q-card-section>
+
+                  </q-card-section>
+                </q-card-section>
+              </q-card>
+            </div>
           </template>
         </q-table>
       </div>
