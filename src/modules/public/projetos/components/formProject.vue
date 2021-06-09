@@ -194,11 +194,19 @@ export default {
   methods: {
     async submit () {
       try {
-        await this.$store.dispatch('projects/createProject')
-        await this.$store.dispatch('messages/ActionAddMessage', {
-          bg: 'positive',
-          message: 'Projeto criado'
-        })
+        if(this.editMode) {
+          await this.$store.dispatch('projects/updateProject')
+          await this.$store.dispatch('messages/ActionAddMessage', {
+            bg: 'positive',
+            message: 'Projeto atualizado'
+          })
+        } else {
+          await this.$store.dispatch('projects/createProject')
+          await this.$store.dispatch('messages/ActionAddMessage', {
+            bg: 'positive',
+            message: 'Projeto criado'
+          })
+        }
       } catch (error) {
         await this.setErrors(error)
       }

@@ -1,5 +1,6 @@
 import * as types from './mutation-types'
 import requests from 'src/http'
+import helpers from 'src/helpers'
 
 export const setProjects = ({commit}, payload) => {
   commit(types.SET_PROJECTS, payload)
@@ -65,6 +66,15 @@ export const setFormIsOpenSource = ({commit}, payload) => {
   commit(types.SET_FORM_IS_OPEN_SOURCE, payload)
 }
 
+export const clearForm = ({ dispatch }) => {
+  dispatch('setFormProjectId', 0)
+  dispatch('setFormName', '')
+  dispatch('setFormDescription', '')
+  dispatch('setFormInit', '')
+  dispatch('setFormEnd', '')
+  dispatch('setFormIsOpenSource', false)
+}
+
 export const getProjects = async ({dispatch}) => {
   try {
     dispatch('setLoading', true)
@@ -86,13 +96,15 @@ export const showProject = async ({dispatch}, payload) => {
     dispatch('setFormProjectId', request.response.id)
     dispatch('setFormName', request.response.name)
     dispatch('setFormDescription', request.response.description)
-    dispatch('setFormInit', request.response.init)
-    dispatch('setFormIsOpenSource', request.response.is_open_source)
+    dispatch('setFormInit', helpers.date.format('y/m/d', request.response.init))
+    dispatch('setFormEnd', helpers.date.format('y/m/d', request.response.end))
+    dispatch('setFormIsOpenSource', (request.response.is_open_source !== 0))
     dispatch('setFormEditMode', true)
     dispatch('setFormDialog', true)
     dispatch('setLoading', false)
     return Promise.resolve(request.response)
   } catch (error) {
+    dispatch('setLoading', false)
     return Promise.reject(error)
   }
 }
@@ -101,9 +113,11 @@ export const createProject = async ({dispatch, getters}) => {
   try {
     dispatch('setLoading', true)
     await requests.projects.create(getters.getForm)
-    dispatch('setLoading', false)
+    dispatch('getProjects')
+    dispatch('setFormDialog', false)
     return Promise.resolve()
   } catch (error) {
+    dispatch('setLoading', false)
     return Promise.reject(error)
   }
 }
@@ -112,9 +126,11 @@ export const updateProject = async ({dispatch, getters}) => {
   try {
     dispatch('setLoading', true)
     await requests.projects.update(getters.getForm)
-    dispatch('setLoading', false)
+    dispatch('getProjects')
+    dispatch('setFormDialog', false)
     return Promise.resolve()
   } catch (error) {
+    dispatch('setLoading', false)
     return Promise.reject(error)
   }
 }
@@ -123,9 +139,10 @@ export const dropProject = async ({dispatch}, payload) => {
   try {
     dispatch('setLoading', true)
     await requests.projects.delete({ project_id: payload })
-    dispatch('setLoading', false)
+    dispatch('getProjects')
     return Promise.resolve()
   } catch (error) {
+    dispatch('setLoading', false)
     return Promise.reject(error)
   }
 }

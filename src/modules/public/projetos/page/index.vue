@@ -39,24 +39,50 @@
           </template>
 
           <template v-slot:item="props">
-            <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition">
+            <div class="q-pa-md">
               <q-card>
-                <q-card-section horizontal>
-                  <q-card-section class="q-pa-sm">
-                    <q-list dense>
-                      <q-item v-for="col in props.cols.filter(col => col.name !== 'desc')" :key="col.name">
-                        <q-item-section>
-                          <q-item-label>{{ col.label }}</q-item-label>
-                        </q-item-section>
-                        <q-item-section side>
-                          <q-item-label caption class="wrap" style="width: 150px;">{{ col.value }}</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                    </q-list>
+                <q-card-section class="q-pa-none" :horizontal="authenticated">
+                  <q-card-section class="q-pa-sm" style="width: 200px;">
+                    <div class="row">
+                      <strong>{{ props.row.name }}</strong>
+                    </div>
+                    <p class="wrap text-justify">{{ props.row.description }}</p>
+                    <q-badge :color="(props.row.is_open_source === 0) ? `negative` : `positive`">
+                      {{ (props.row.is_open_source === 0) ? `Código fechado` : `Código Aberto` }}
+                    </q-badge>
                   </q-card-section>
-                  <q-separator vertical/>
-                  <q-card-section>
-
+                  <q-separator
+                    v-if="authenticated"
+                    vertical
+                  />
+                  <q-card-section
+                    v-if="authenticated"
+                    class="flex column flex-center justify-around"
+                  >
+                    <q-btn
+                      round
+                      size="sm"
+                      color="primary"
+                      class="q-ml-sm"
+                      icon="fas fa-edit"
+                      @click="openFormDialog(props.row.id, true)"
+                    >
+                      <q-tooltip anchor="center left" self="center right" :offset="[10,10]">
+                        Editar Projeto
+                      </q-tooltip>
+                    </q-btn>
+                    <q-btn
+                      round
+                      size="sm"
+                      color="negative"
+                      class="q-ml-sm"
+                      icon="fas fa-trash"
+                      @click="drop(props.row.id)"
+                    >
+                      <q-tooltip anchor="center left" self="center right" :offset="[10,10]">
+                        Deletar Projeto
+                      </q-tooltip>
+                    </q-btn>
                   </q-card-section>
                 </q-card-section>
               </q-card>
@@ -154,13 +180,17 @@ export default {
     formProject
   },
   methods: {
-    openFormDialog(id, editMode = false) {
+    async openFormDialog(id, editMode = false) {
       this.formEditMode = editMode
-
-      if(editMode) {}
+      this.$q.loading.show()
+      if(editMode) {
+        await this.$store.dispatch('projects/showProject', id)
+      }
       else {
+        await this.$store.dispatch('projects/clearForm')
         this.formDialog = true
       }
+      this.$q.loading.hide()
     },
     async getProjects () {
       try {
@@ -169,6 +199,40 @@ export default {
       } catch (error) {
         await this.setErrors(error)
       }
+    },
+    async drop(id) {
+      const response = await this.$q.dialog({
+        title: 'Deletar Projeto',
+        message: 'Deseja realmente realizar esta ação?',
+        cancel: {
+          push: true,
+          color: 'positive',
+          label: 'Não'
+        },
+        persistent: true,
+        ok: {
+          label: 'Sim',
+          color: 'negative'
+        },
+      })
+      response.onOk(async () => {
+        try {
+          this.$q.loading.show()
+          await this.$store.dispatch('projects/dropProject', id)
+          this.$q.loading.hide()
+          await this.$store.dispatch('messages/ActionAddMessage', {
+            bg: 'positive',
+            message: 'Projeto deletado'
+          })
+        } catch (error) {
+          this.$q.loading.hide()
+          await this.setErrors(error)
+          if(error.request.status === 401) {
+            await this.$store.dispatch('login/ActionLogOut')
+            await this.$router.push('/login')
+          }
+        }
+      })
     },
     async setErrors (error) {
       await this.$store.dispatch('messages/ActionSetErrors', error)
