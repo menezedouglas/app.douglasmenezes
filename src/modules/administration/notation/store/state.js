@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import helpers from 'src/helpers'
 
 export default {
   notations: ref([]),
@@ -27,7 +28,8 @@ export default {
         label: 'Referência',
         field: 'reference',
         align: 'center',
-        sortable: true
+        sortable: true,
+        format: val => helpers.date.format('d/m/y', val)
       },
       {
         name: 'enter',

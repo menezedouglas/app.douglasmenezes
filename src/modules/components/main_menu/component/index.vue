@@ -18,11 +18,33 @@
         :visible="false"
         class="scroll-area"
       >
-        <EssentialLink
-          v-for="link in items"
-          :key="link.name"
-          v-bind="link"
-        />
+        <div
+          v-for="(link, index) in items"
+          :key="index"
+        >
+          <essential-link
+            v-if="!link.multiple"
+            v-bind="link"
+          />
+
+          <q-expansion-item
+            group="mainMenu"
+            expand-separator
+            v-if="link.multiple"
+            :label="link.title"
+            class="menu-expansion-item"
+          >
+            <q-card class="bg-dark">
+              <q-card-section>
+                <essential-link
+                  v-for="(item, index) in link.items"
+                  :key="index"
+                  v-bind="item"
+                />
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+        </div>
       </q-scroll-area>
     </q-list>
     <section class="menu-footer">
@@ -54,59 +76,6 @@
       </small>
     </section>
   </q-drawer>
-
-  <!--  <div style="position: absolute;">-->
-  <!--    <input type="checkbox" id="menu_control" />-->
-
-  <!--    <label for="menu_control">-->
-  <!--      <div id="btn_menu">-->
-  <!--        <span></span>-->
-  <!--      </div>-->
-  <!--    </label>-->
-
-  <!--    <nav id="menu">-->
-
-  <!--      <section class="menu-header">-->
-
-  <!--        <div class="row">-->
-  <!--          <div class="col position-relative">-->
-  <!--            <h3 class="menu-title">-->
-  <!--              Menu-->
-  <!--            </h3>-->
-  <!--          </div>-->
-  <!--          <div class="col-auto position-relative">-->
-  <!--            <label for="menu_control">-->
-  <!--              <div id="btn-menu-close">-->
-  <!--                <span></span>-->
-  <!--              </div>-->
-  <!--            </label>-->
-  <!--          </div>-->
-  <!--        </div>-->
-
-  <!--      </section>-->
-
-  <!--      <ul class="master-list">-->
-  <!--        <li-->
-  <!--            v-for="(item, index) in items"-->
-  <!--            v-bind:key="index"-->
-  <!--            class="menu-link"-->
-  <!--            @click="closeSideBar"-->
-  <!--        >-->
-  <!--          <redirect-->
-  <!--              :class="(item.active) ? `menu-item menu-item-active` : `menu-item`"-->
-  <!--              :to="item.url"-->
-  <!--          >-->
-  <!--            {{ item.name }}-->
-  <!--          </redirect>-->
-  <!--        </li>-->
-
-  <!--      </ul>-->
-
-
-  <!--      </section>-->
-
-  <!--    </nav>-->
-  <!--  </div>-->
 </template>
 
 <script>
@@ -119,38 +88,65 @@ export default {
       mainMenu: {
         itemsUnauthenticated: [
           {
+            multiple: false,
             title: 'Início',
             link: '/#/'
           },
           {
+            multiple: false,
             title: 'Projetos',
             link: '/#/projects'
           }
         ],
         itemsAuthenticated: [
           {
+            multiple: false,
             title: 'Dashboard',
             link: '/#/dashboard'
           },
           {
-            title: 'Usuários',
-            link: '/#/users'
+            multiple: true,
+            title: 'Administração',
+            items: [
+              {
+                title: 'Usuários',
+                link: '/#/users'
+              },
+              {
+                title: 'Clientes',
+                link: '/#/clients'
+              },
+              {
+                title: 'Contratos',
+                link: '/#/contracts'
+              },
+              {
+                title: 'Serviços',
+                link: '/#/services'
+              },
+              {
+                title: 'Apontamentos',
+                link: '/#/notations'
+              }
+            ]
           },
           {
-            title: 'Clientes',
-            link: '/#/clients'
-          },
-          {
-            title: 'Contratos',
-            link: '/#/contracts'
-          },
-          {
-            title: 'Serviços',
-            link: '/#/services'
-          },
-          {
-            title: 'Apontamentos',
-            link: '/#/notations'
+            multiple: true,
+            title: 'Financeiro',
+            items: [
+              {
+                title: 'Transações',
+                link: '/#/transaction'
+              },
+              {
+                title: 'Recebimentos',
+                link: '/#/receipt'
+              },
+              {
+                title: 'Dívidas',
+                link: '/#/debt'
+              }
+            ]
           }
         ],
         socialsNetworks: [

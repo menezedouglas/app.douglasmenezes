@@ -12,6 +12,9 @@ import { store as refCodes } from '../modules/administration/refCodes'
 import { store as contracts } from '../modules/administration/contract'
 import { store as services } from '../modules/administration/services'
 import { store as notation } from '../modules/administration/notation'
+import { store as transaction } from '../modules/financials/transaction'
+import { store as receipt } from '../modules/financials/receipt'
+import { store as debt } from '../modules/financials/debt'
 
 export default {
   home,
@@ -27,5 +30,8 @@ export default {
   refCodes,
   contracts,
   services,
-  notation
+  notation,
+  transaction,
+  receipt,
+  debt,
 }

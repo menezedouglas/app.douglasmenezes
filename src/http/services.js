@@ -7,6 +7,9 @@ import { services as refCodes } from '../modules/administration/refCodes'
 import { services as contract } from '../modules/administration/contract'
 import { services as service } from '../modules/administration/services'
 import { services as notation } from '../modules/administration/notation'
+import { services as transaction } from '../modules/financials/transaction'
+import { services as receipt } from '../modules/financials/receipt'
+import { services as debt } from '../modules/financials/debt'
 
 export default {
   home,
@@ -17,5 +20,8 @@ export default {
   refCodes,
   contract,
   service,
-  notation
+  notation,
+  transaction,
+  receipt,
+  debt,
 }

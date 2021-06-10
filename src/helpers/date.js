@@ -63,7 +63,7 @@ export default {
           format.map((key, index) => {
             response += dt[key.toLowerCase()].toString()
 
-            if(index >= format.length) response += separator
+            if(index + 1 < format.length) response += separator
           })
         }
 

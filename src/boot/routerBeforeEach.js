@@ -14,7 +14,9 @@ const authenticatedRoutes = [
   '/contracts',
   '/services',
   '/notations',
-  '/notations/report'
+  '/debt',
+  '/receipt',
+  '/transaction',
 ]
 
 // "async" is optional;

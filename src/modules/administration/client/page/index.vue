@@ -70,49 +70,6 @@
               </q-card-section>
             </q-card>
           </template>
-
-<!--          <template v-slot:body="props">-->
-<!--            <q-tr :props="props">-->
-<!--              <q-td key="fantasy_name" :props="props">-->
-<!--                {{ props.row.fantasy_name }}-->
-<!--              </q-td>-->
-<!--              <q-td key="document_type" :props="props">-->
-<!--                {{ props.row.document_type.toUpperCase() }}-->
-<!--              </q-td>-->
-<!--              <q-td key="document" :props="props">-->
-<!--                {{ props.row.document }}-->
-<!--              </q-td>-->
-<!--              <q-td key="email" :props="props">-->
-<!--                {{ props.row.email }}-->
-<!--              </q-td>-->
-<!--              <q-td key="actions" :props="props" class="q-gutter-sm">-->
-<!--                <q-btn-->
-<!--                  round-->
-<!--                  ripple=""-->
-<!--                  size="sm"-->
-<!--                  color="dark"-->
-<!--                  icon="fas fa-user-edit"-->
-<!--                  @click="openFormClient(props.row.id, true)"-->
-<!--                >-->
-<!--                  <q-tooltip anchor="center left" self="center right">-->
-<!--                    Editar-->
-<!--                  </q-tooltip>-->
-<!--                </q-btn>-->
-<!--                <q-btn-->
-<!--                  round-->
-<!--                  ripple=""-->
-<!--                  size="sm"-->
-<!--                  color="red"-->
-<!--                  icon="fas fa-user-minus"-->
-<!--                  @click="dropClient(props.row.id)"-->
-<!--                >-->
-<!--                  <q-tooltip class="bg-red text-white" anchor="center right" self="center left">-->
-<!--                    Deletar-->
-<!--                  </q-tooltip>-->
-<!--                </q-btn>-->
-<!--              </q-td>-->
-<!--            </q-tr>-->
-<!--          </template>-->
         </q-table>
       </div>
     </div>

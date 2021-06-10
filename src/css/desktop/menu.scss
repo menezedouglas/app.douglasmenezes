@@ -22,6 +22,19 @@
     cursor: pointer;
   }
 
+  .menu-expansion-item {
+    font-size: 28px;
+    color: #FFA62B;
+  }
+
+  .menu-expansion-item .q-item,
+  {
+    padding: 10px 30px !important;
+    margin-bottom: 10px;
+    transition: all .1s ease-in-out;
+  }
+
+  .menu-expansion-item .q-item:hover,
   .menu-item:hover {
     color: #FFA62B;
     background: #16697A;

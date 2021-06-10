@@ -7,6 +7,9 @@ import { routes as client } from '../modules/administration/client'
 import { routes as contract } from '../modules/administration/contract'
 import { routes as service } from '../modules/administration/services'
 import { routes as notations } from '../modules/administration/notation'
+import { routes as transaction } from '../modules/financials/transaction'
+import { routes as receipt } from '../modules/financials/receipt'
+import { routes as debt } from '../modules/financials/debt'
 
 export default [
   {
@@ -27,7 +30,10 @@ export default [
       ...client,
       ...contract,
       ...service,
-      ...notations
+      ...notations,
+      ...transaction,
+      ...receipt,
+      ...debt,
     ]
   }
 ]

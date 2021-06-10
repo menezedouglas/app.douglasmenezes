@@ -60,7 +60,7 @@
                 {{ props.row.type_notation_description }}
               </q-td>
               <q-td key="reference" :props="props">
-                {{ props.row.reference }}
+                {{ helpers.date.format('d/m/y', props.row.reference) }}
               </q-td>
               <q-td key="enter" :props="props">
                 {{ props.row.enter }}
@@ -107,9 +107,15 @@
 <script>
 import formNotation from '../components/formNotation'
 import report from '../components/report'
+import helpers from 'src/helpers'
 
 export default {
   name: "index",
+  data () {
+    return {
+      helpers
+    }
+  },
   computed: {
     loading: {
       set(val) {
