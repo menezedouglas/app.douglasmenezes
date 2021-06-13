@@ -72,7 +72,8 @@ export default {
       get () {
         return this.$store.getters['receipt/getTable']
       }
-    }
+    },
+
   }
 }
 </script>
