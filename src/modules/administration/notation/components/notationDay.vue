@@ -13,10 +13,10 @@
             flat
             :title="date"
             :columns="[
-            { name: 'type_notation_description', label: 'Desc.', align: 'center', field: 'type_notation_description', sortable: true },
-            { name: 'enter', label: 'Entrada', align: 'center', field: 'enter', sortable: true },
-            { name: 'leave', label: 'Saída', align: 'center', field: 'leave', sortable: true },
-          ]"
+              { name: 'type_notation_description', label: 'Desc.', align: 'center', field: 'type_notation_description', sortable: true },
+              { name: 'enter', label: 'Entrada', align: 'center', field: 'enter', sortable: true },
+              { name: 'leave', label: 'Saída', align: 'center', field: 'leave', sortable: true },
+            ]"
             :rows="dayNotations"
           />
         </q-card-section>

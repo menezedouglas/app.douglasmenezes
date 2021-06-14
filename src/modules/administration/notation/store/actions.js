@@ -159,7 +159,7 @@ export const commitStatus = async ({dispatch, getters}, payload) => {
       contract_id: getters.getDayContract.id,
       type_notation: type_notation[payload],
       reference: `${getters.getDayNow.getFullYear()}/${getters.getDayNow.getMonth()+1}/${getters.getDayNow.getDate()}`,
-      enter: (payload === 1 || payload === 3) ? getters.getDayNotations[0].enter : getters.getDayNotations[1].enter,
+      enter: (payload === 1) ? getters.getDayNotations[0].enter : getters.getDayNotations[1].enter,
       leave: getters.getDayNow.toLocaleTimeString(),
       note: ''
     }
