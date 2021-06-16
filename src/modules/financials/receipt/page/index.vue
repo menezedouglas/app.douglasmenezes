@@ -37,13 +37,25 @@
             </q-btn>
           </template>
 
-          <template v-slot:item="props">
+          <template v-slot:body="props">
             <q-tr :props="props">
-              <q-td
-                v-for="col in props.cols"
-                :key="col.name"
-              >
-                {{ col.value }}
+              <q-td key="reference_month" :props="props">
+                {{ helpers.date.format('m/y', props.row.reference_month) }}
+              </q-td>
+              <q-td key="value" :props="props">
+                {{ helpers.numeric.format.value(props.row.value) }}
+              </q-td>
+              <q-td key="shelf_life" :props="props">
+                {{ helpers.date.format('d/m/y', props.row.shelf_life) }}
+              </q-td>
+              <q-td key="actions">
+                <q-btn
+                  round
+                  size="sm"
+                  color="primary"
+                  icon="fas fa-edit"
+                  @click="openFormDialog(props.row.id, true)"
+                />
               </q-td>
             </q-tr>
           </template>
@@ -56,8 +68,14 @@
 
 <script>
 import receiptForm from '../components/receiptForm'
+import helpers from 'src/helpers'
 export default {
   name: "index",
+  data () {
+    return {
+      helpers
+    }
+  },
   components: {
     receiptForm
   },
@@ -117,11 +135,20 @@ export default {
       get () {
         return this.$store.getters['receipt/getFormDialog']
       }
+    },
+    formEditMode: {
+      set (val) {
+        this.$store.dispatch('receipt/setFormEditMode', val)
+      },
+      get () {
+        return this.$store.getters['receipt/getFormEditMode']
+      }
     }
   },
   methods: {
     async openFormDialog (id, editMode = false) {
       try {
+        this.formEditMode = editMode
         if(editMode) {
           await this.$store.dispatch('receipt/showReceipt', id)
         }
@@ -136,6 +163,43 @@ export default {
         await this.$store.dispatch('login/ActionLogOut')
         await this.$router.push('/login')
       }
+    },
+    async dropReceipt(id) {
+      const response = await this.$q.dialog({
+        title: 'Excluir recebimento',
+        message: 'Deseja realmente realizar esta ação?',
+        cancel: {
+          push: true,
+          color: 'positive',
+          label: 'Não'
+        },
+        persistent: true,
+        ok: {
+          label: 'Sim',
+          color: 'negative'
+        },
+      })
+      response.onOk(async () => {
+        try {
+          this.$q.loading.show()
+          await this.$store.dispatch('receipt/deleteReceipt', id)
+          this.$q.loading.hide()
+          await this.$store.dispatch('messages/ActionAddMessage', {
+            bg: 'positive',
+            message: 'Recebimento excluído'
+          })
+        } catch (error) {
+          this.$q.loading.hide()
+          await this.setError(error)
+        }
+      })
+    }
+  },
+  async created() {
+    try {
+      await this.$store.dispatch('receipt/getAllReceipts')
+    } catch (error) {
+      await this.setError(error)
     }
   }
 }

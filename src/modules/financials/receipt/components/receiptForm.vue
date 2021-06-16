@@ -51,7 +51,8 @@
           :options="contracts"
           option-value="id"
           option-label="id"
-          :loading="contractLoading"
+          :loading="(contractLoading || loading)"
+          :disable="loading"
           map-options
           emit-value
         />
@@ -74,6 +75,8 @@
                   map-options
                   emit-value
                   behavior="dialog"
+                  :loading="loading"
+                  :disable="loading"
                 >
                   <template v-slot:no-option>
                     <q-item>
@@ -95,7 +98,8 @@
                   map-options
                   emit-value
                   behavior="dialog"
-                  :disable="(! year)"
+                  :loading="loading"
+                  :disable="(! year || loading)"
                 >
                   <template v-slot:no-option>
                     <q-item>
@@ -109,6 +113,61 @@
             </q-card-section>
           </q-card-section>
         </q-card>
+
+        <q-input
+          filled
+          v-model="formValue"
+          label="Valor Recebido"
+          mask="#.##"
+          prefix="R$"
+          fill-mask="0"
+          reverse-fill-mask
+          input-class="text-right"
+          :loading="loading"
+          :disable="loading"
+        />
+
+        <q-input
+          filled
+          label="Validade"
+          v-model="formShelfLife"
+          mask="date"
+          :rules="['date']"
+          class="q-pb-none"
+          :loading="loading"
+          :disable="loading"
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                <q-date v-model="formShelfLife">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
+
+        <q-input
+          filled
+          type="url"
+          v-model="formUrlToDownload"
+          label="URL Nota Fiscal"
+          :loading="loading"
+          :disable="loading"
+        />
+      </q-card-section>
+      <q-card-section class="flex justify-end">
+        <q-btn
+          color="positive"
+          icon="fas fa-save"
+          label="Salvar"
+          @click="submit()"
+          :loading="loading"
+          :disable="loading"
+        />
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -181,7 +240,8 @@ export default {
     },
     formValue: {
       set (val) {
-        this.$store.dispatch('receipt/setFormValue', val)
+
+        this.$store.dispatch('receipt/setFormValue', val * 100)
       },
       get () {
         return this.$store.getters['receipt/getFormValue']
@@ -223,14 +283,25 @@ export default {
   watch: {
     dialog (val) {
       if(val) {
+        if(!this.editMode) this.$store.dispatch('receipt/clearForm')
+        else {
+          const date = new Date(this.formReferenceMonth)
+          this.month = date.getMonth()
+          this.year = date.getFullYear()
+        }
         this.contracts = ''
         this.optionsYear = this.generateYearOptions()
         this.optionsMonth = this.generateMonthOptions()
       }
     },
+    year (val) {
+      if(val !== '' && this.month !== '') {
+        this.formReferenceMonth = `${this.year}-${(this.month + 1 < 10) ? `0${this.month + 1}` : this.month + 1}-01`
+      }
+    },
     month (val) {
       if(val !== '') {
-        this.formReferenceMonth = `01/${(this.month + 1 < 10) ? `0${this.month + 1}` : this.month + 1}/${this.year}`
+        this.formReferenceMonth = `${this.year}-${(this.month + 1 < 10) ? `0${this.month + 1}` : this.month + 1}-01`
       }
     },
     formReferenceMonth (val) {
@@ -289,8 +360,16 @@ export default {
     },
     async submit () {
       try {
-
+        this.$q.loading.show()
+        if(this.editMode) await this.$store.dispatch('receipt/updateReceipt')
+        else await this.$store.dispatch('receipt/createReceipt')
+        this.$q.loading.hide()
+        await this.$store.dispatch('messages/ActionAddMessage', {
+          bg: 'positive',
+          message: (this.editMode) ? 'Recebimento atualizado' : 'Recebimento registrado'
+        })
       } catch (error) {
+        this.$q.loading.hide()
         await this.setError(error)
       }
     },

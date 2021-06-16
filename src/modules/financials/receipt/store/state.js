@@ -10,21 +10,18 @@ export default {
         label: 'Referência',
         field: 'reference_month',
         sortable: true,
-        format: val => helpers.date.format('m/y', val)
       },
       {
         name: 'value',
         label: 'R$',
         field: 'value',
         sortable: true,
-        format: val => helpers.numeric.format.value(val)
       },
       {
         name: 'shelf_life',
         label: 'Validade da nota',
         field: 'shelf_life',
         sortable: true,
-        format: val => helpers.date.format('d/m/y', val)
       },
       {
         name: 'actions',

@@ -60,6 +60,15 @@ export const getAllReceipts = async ({dispatch}) => {
   }
 }
 
+export const clearForm = ({ dispatch }) => {
+  dispatch('setFormReceiptId', 0)
+  dispatch('setFormContractId', 0)
+  dispatch('setFormValue', 0)
+  dispatch('setFormReferenceMonth', '')
+  dispatch('setFormShelfLife', '')
+  dispatch('setFormUrlToDownload', '')
+}
+
 export const showReceipt = async ({dispatch}, payload) => {
   try {
     dispatch('setLoading', true)
