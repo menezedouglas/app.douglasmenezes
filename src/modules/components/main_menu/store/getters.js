@@ -1,2 +1,3 @@
-export const getItems = ({ items }) => { return items }
-export const getSocialsNetworks = ({ socials_networks }) => { return socials_networks }
+export const getItems = ({ items }) => items
+export const getSocialsNetworks = ({ socials_networks }) => socials_networks
+export const getOpen = ({ open }) => open

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { formUser } from "../modules/administration/user";
+import { formUser } from '../modules/administration/user'
 
 export default {
-  name: "modals",
+  name: 'modals',
   components: {
     formUser
   }

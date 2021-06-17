@@ -18,10 +18,10 @@
 <script>
 import messageToast from '../generics/message-toast'
 export default {
-  name: "toast",
+  name: 'toast',
   props: {
     position: { required: true },
-    messages: { required: true },
+    messages: { required: true }
   },
   components: {
     messageToast

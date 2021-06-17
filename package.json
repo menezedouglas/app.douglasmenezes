@@ -1,59 +1,43 @@
 {
   "name": "app.douglasmenezes",
   "version": "0.5.0",
+  "description": "Douglas Menezes - Profession Web Site",
+  "productName": "Douglas Menezes",
+  "author": "Douglas Menezes <menezedouglas@outlook.com.br>",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --ext .js,.vue ./",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-brands-svg-icons": "^5.15.1",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@fortawesome/vue-fontawesome": "^2.0.2",
     "@quasar/extras": "^1.0.0",
-    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "dotenv": "^8.2.0",
-    "quasar": "^2.0.0-beta.1",
-    "vue": "^3.0.0-beta.1",
-    "vue-router": "^4.0.0-alpha.6",
-    "vuex": "^4.0.0-alpha.1"
+    "jspdf": "^2.3.1",
+    "quasar": "^2.0.0-beta.1"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.1",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-alpha.0",
-    "sass": "^1.29.0",
-    "sass-loader": "^10.1.0",
-    "vue-cli-plugin-quasar": "^4.0.0-beta.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+    "@babel/eslint-parser": "^7.13.14",
+    "@quasar/app": "^3.0.0-beta.1",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "eslint-webpack-plugin": "^2.4.0"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
 }

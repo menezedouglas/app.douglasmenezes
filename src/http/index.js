@@ -2,42 +2,43 @@ import axios from 'axios'
 import services from './services'
 import helpers from '../helpers'
 
-axios.defaults.baseURL =  'https://api.douglasmenezes.dev.br/system/v1'
+axios.defaults.baseURL = 'http://localhost:8000/system/v1'
 
 const setToken = (token) => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`
 }
 
-let requests = {}
+const requests = {}
 
+// eslint-disable-next-line array-callback-return
 Object.keys(services).map(service => {
-    const temp = services[service]
-    requests[service] = {}
-    Object.keys(temp).map(item => {
-        // eslint-disable-next-line no-undef
-        helpers.json.extends(requests[service], {
-            [item]: data => {
-                switch (temp[item].method) {
-                    case 'get': {
-                        return axios({
-                            method: temp[item].method,
-                            url: `${temp[item].url}${(data) ? helpers.httpResponses.toGet(data) : ``}`,
-                            responseType: 'json'
-                        })
-                    }
-                    default: {
-                        return axios({
-                            method: temp[item].method,
-                            url: `${temp[item].url}`,
-                            responseType: 'json',
-                            data
-                        })
-                    }
-                }
-
-            }
-        })
+  const temp = services[service]
+  requests[service] = {}
+  // eslint-disable-next-line array-callback-return
+  Object.keys(temp).map(item => {
+    // eslint-disable-next-line no-undef
+    helpers.json.extends(requests[service], {
+      [item]: data => {
+        switch (temp[item].method) {
+          case 'get': {
+            return axios({
+              method: temp[item].method,
+              url: `${temp[item].url}${(data) ? helpers.httpResponses.toGet(data) : ''}`,
+              responseType: (temp[item].responseType) ? temp[item].responseType : 'json'
+            })
+          }
+          default: {
+            return axios({
+              method: temp[item].method,
+              url: `${temp[item].url}`,
+              responseType: 'json',
+              data
+            })
+          }
+        }
+      }
     })
+  })
 })
 
 export default requests

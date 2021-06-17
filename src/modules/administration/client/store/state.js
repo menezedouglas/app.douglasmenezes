@@ -1,10 +1,20 @@
+import { ref } from 'vue'
+
 export default {
-    clients: [],
+    clients: ref([]),
+    formDialog: ref(false),
+    formDialogEditMode: ref(false),
+    options: ref([]),
+    clientShow: ref({}),
     form: {
-        user_id: 0,
-        user_is_representative: false,
-        representative_name: '',
-        representative_occupation: ''
+        client_id: ref(0),
+        user_id: ref(0),
+        full_name: ref(''),
+        fantasy_name: ref(''),
+        document_type: ref(''),
+        document: ref(''),
+        email: ref(''),
+        phone: ref('')
     },
-    loading: false
+    loading: ref(false)
 }

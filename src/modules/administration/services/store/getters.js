@@ -1,0 +1,17 @@
+export const getTable = ({ table }) => table
+export const getTableCols = ({ table }) => table.cols
+export const getTableRows = ({ table }) => table.rows
+export const getTableSelected = ({ table }) => table.selected
+export const getTableFilter = ({ table }) => table.filter
+export const getForm = ({ form }) => form
+export const getFormDialog = ({ formDialog }) => formDialog
+export const getFormEditMode = ({ formEditMode }) => formEditMode
+export const getFormServiceId = ({ form }) => form.service_id
+export const getFormName = ({ form }) => form.name
+export const getFormDescription = ({ form }) => form.description
+export const getFormDeliveryTime = ({ form }) => form.delivery_time
+export const getFormValue = ({ form }) => form.value
+export const getFormTypeValue = ({ form }) => form.type_value
+export const getFormTypeServiceState = ({ form }) => form.type_service_state
+export const getServices = ({ services }) => services
+export const getLoading = ({ loading }) => loading

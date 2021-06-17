@@ -1,7 +1,7 @@
 export default [
     {
         name: 'Clientes',
-        path: '/client',
-        component: () => import('./page/index')
+        path: '/clients',
+        component: () => import('./page')
     }
 ]

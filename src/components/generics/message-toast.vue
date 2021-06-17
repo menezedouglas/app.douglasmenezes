@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "message-toast",
+  name: 'message-toast',
   props: {
     index: { required: true },
     bg: { required: true },
@@ -65,10 +65,10 @@ export default {
     startTimer () {
       // eslint-disable-next-line no-unused-vars
       let count = 0
-      let updateTime = setInterval(() => {
+      const updateTime = setInterval(() => {
         count += 10
         this.percent = (100 * count) / (this.timer * 1000)
-        if(this.percent === 100) {
+        if (this.percent === 100) {
           clearInterval(updateTime)
           setTimeout(() => {
             this.$emit('close')
@@ -77,7 +77,7 @@ export default {
       }, 10)
     }
   },
-  created() {
+  created () {
     this.startTimer()
   }
 }

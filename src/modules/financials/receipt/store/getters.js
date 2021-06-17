@@ -1,0 +1,15 @@
+export const getLoading = ({ loading }) => loading
+export const getTable = ({ table }) => table
+export const getTableCols = ({ table }) => table.cols
+export const getTableRows = ({ table }) => table.rows
+export const getTableFilter = ({ table }) => table.filter
+export const getTableSelected = ({ table }) => table.selected
+export const getForm = ({ form }) => form
+export const getFormEditMode = ({ formEditMode }) => formEditMode
+export const getFormDialog = ({ formDialog }) => formDialog
+export const getFormReceiptId = ({ form }) => form.receipt_id
+export const getFormContractId = ({ form }) => form.contract_id
+export const getFormReferenceMonth = ({ form }) => form.reference_month
+export const getFormValue = ({ form }) => form.value
+export const getFormShelfLife = ({ form }) => form.shelf_life
+export const getFormUrlToDownload = ({ form }) => form.url_to_download

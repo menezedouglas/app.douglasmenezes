@@ -4,3 +4,9 @@ export const getEmail = ({ email }) => email
 export const getLoading = ({ loading }) => loading
 export const getUsers = ({ users }) => users
 export const getFormEditMode = ({ formEditMode }) => formEditMode
+export const getForm = ({ form }) => form
+export const getFormUserId = ({ form }) => form.user_id
+export const getFormName = ({ form }) => form.name
+export const getFormEmail = ({ form }) => form.email
+export const getFormPassword = ({ form }) => form.password
+export const getFormDialog = ({ formDialog }) => formDialog
