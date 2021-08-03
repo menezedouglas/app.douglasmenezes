@@ -59,6 +59,14 @@
           map-options
           behavior="dialog"
         />
+
+        <q-toggle
+          v-model="response_type"
+          checked-icon="table_view"
+          color="red"
+          :label="`Retorno em ${response_type ? 'Excel' : 'PDF'}`"
+          unchecked-icon="picture_as_pdf"
+        />
       </q-card-section>
       <q-separator />
       <q-card-section class="flex justify-between">
@@ -90,7 +98,8 @@ export default {
   name: "report",
   data () {
     return {
-      file: ''
+      file: '',
+      response_type: false
     }
   },
   computed: {
@@ -210,7 +219,7 @@ export default {
     async generate () {
       try {
         this.$q.loading.show()
-        await this.$store.dispatch('notation/setReportData')
+        await this.$store.dispatch('notation/setReportData', this.response_type)
         window.open(this.data.url,"text/pdf")
         this.$q.loading.hide()
       } catch (error) {
