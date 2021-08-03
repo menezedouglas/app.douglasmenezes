@@ -78,12 +78,13 @@ export const setReportDialog = ({ commit }, payload) => {
   commit(types.SET_REPORT_DIALOG, payload)
 }
 
-export const setReportData = async ({ commit, dispatch, getters }) => {
+export const setReportData = async ({ commit, dispatch, getters }, payload) => {
   try {
     dispatch('setLoading', true)
-    const data = await getters.getReportForm
-    const { request } = await requests.notation.reportByContract(data)
-    commit(types.SET_REPORT_DATA, request.response)
+    let data = await getters.getReportForm
+
+    const response = await requests.notation.reportByContract({...data, response_type: payload ? 'xls' : 'pdf'})
+    commit(types.SET_REPORT_DATA, response.data)
     dispatch('setLoading', false)
     return Promise.resolve()
   } catch (error) {
