@@ -2,7 +2,7 @@
   <q-item
     clickable
     tag="a"
-    :href="link"
+    :to="link"
     class="menu-item"
   >
     <q-item-section

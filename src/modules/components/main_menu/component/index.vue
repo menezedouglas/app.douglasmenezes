@@ -90,19 +90,19 @@ export default {
           {
             multiple: false,
             title: 'Início',
-            link: '/#/'
+            link: '/'
           },
           {
             multiple: false,
             title: 'Projetos',
-            link: '/#/projects'
+            link: '/projects'
           }
         ],
         itemsAuthenticated: [
           {
             multiple: false,
             title: 'Dashboard',
-            link: '/#/dashboard'
+            link: '/dashboard'
           },
           {
             multiple: true,
@@ -110,23 +110,23 @@ export default {
             items: [
               {
                 title: 'Usuários',
-                link: '/#/users'
+                link: '/users'
               },
               {
                 title: 'Clientes',
-                link: '/#/clients'
+                link: '/clients'
               },
               {
                 title: 'Contratos',
-                link: '/#/contracts'
+                link: '/contracts'
               },
               {
                 title: 'Serviços',
-                link: '/#/services'
+                link: '/services'
               },
               {
                 title: 'Apontamentos',
-                link: '/#/notations'
+                link: '/notations'
               }
             ]
           },
@@ -136,15 +136,15 @@ export default {
             items: [
               {
                 title: 'Transações',
-                link: '/#/transaction'
+                link: '/transaction'
               },
               {
                 title: 'Recebimentos',
-                link: '/#/receipt'
+                link: '/receipt'
               },
               {
                 title: 'Dívidas',
-                link: '/#/debt'
+                link: '/debt'
               }
             ]
           }
