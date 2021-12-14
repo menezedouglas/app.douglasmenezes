@@ -1,2 +1,0 @@
-export const SET_CODES = 'REFCODES/SET_CODES'
-export const SET_LOADING = 'REFCODES/SET_LOADING'

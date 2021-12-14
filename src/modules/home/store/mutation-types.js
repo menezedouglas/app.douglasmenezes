@@ -1,0 +1,2 @@
+export const SET_LOADING = 'HOME/SET_LOADING'
+export const SET_PROJECTS = 'HOME/SET_PROJECTS'
