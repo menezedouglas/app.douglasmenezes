@@ -1,25 +1,11 @@
 <template>
-  <q-card class="git-hub-card">
-    <q-item>
-      <q-item-section avatar>
-        <q-avatar>
-          <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-        </q-avatar>
-      </q-item-section>
-
-      <q-item-section>
-        <q-item-label>Title</q-item-label>
-        <q-item-label caption>
-          Subhead
-        </q-item-label>
-      </q-item-section>
-    </q-item>
-
-    <q-separator />
-
+  <q-card class="git-hub-card" @click="redirect">
     <q-card-section horizontal>
       <q-card-section>
-
+        <span class="text-h6">{{ name }}</span> <br>
+        <span class="text-grey-7">author: <strong>{{ owner.login }}</strong></span> <br>
+        <small class="text-grey-9">Ultima modificação: {{ formatDate(updated_at) }}</small> <br>
+        <small class="text-grey-9">Criado em: {{ formatDate(created_at) }}</small>
       </q-card-section>
     </q-card-section>
   </q-card>
@@ -27,20 +13,38 @@
 
 <script>
 import { defineComponent } from 'vue'
+import moment from 'moment'
 
 export default defineComponent({
-  name: "GitHubCard"
+  name: "GitHubCard",
+  props: [
+    'owner',
+    'name',
+    'url',
+    'language',
+    'created_at',
+    'updated_at'
+  ],
+  methods: {
+    formatDate(date) {
+      return moment(date).format('DD/MM/YYYY HH:mm:ss')
+    },
+    redirect() {
+      window.open(this.url)
+    }
+  }
 })
 </script>
 
 <style scoped>
 .git-hub-card {
-  position: relative;
-  width: 300px;
-  max-height: 500px;
+  max-width: 400px;
+  min-width: 300px;
   margin: 10px;
-  order: 5;
-  flex-grow: 4;
-  display: inline-block;
+  cursor: pointer;
+}
+
+.git-hub-card:hover {
+  background: #1D1D1Daa;
 }
 </style>

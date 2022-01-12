@@ -6,5 +6,11 @@ export default {
   },
   [types.SET_PROJECTS] (state, payload) {
     state.projects = payload
+  },
+  [types.SET_VERTICAL_SCROLL] (state, payload) {
+    state.verticalScroll = payload
+  },
+  [types.SET_GO_TO] (state, payload) {
+    state.goTo = payload
   }
 }

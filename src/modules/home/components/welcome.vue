@@ -4,11 +4,15 @@
       <span>Douglas Menezes</span>
       <span v-if="!$q.platform.is.mobile">Desenvolvedor Full Stack PHP</span>
       <span v-if="$q.platform.is.mobile">Dev. FullStack PHP</span>
-      <img
+      <q-img
         src="scroll_down.png"
         alt="scroll_down"
         class="scroll-down-icon"
-      />
+      >
+        <q-tooltip>
+          Role para baixo
+        </q-tooltip>
+      </q-img>
     </div>
   </q-page>
 </template>
@@ -74,6 +78,7 @@ export default {
 
   .scroll-down-icon {
     width: 50px;
+    height: 20px;
   }
 }
 
@@ -91,6 +96,7 @@ export default {
 
   .scroll-down-icon {
     width: 35px;
+    height: 20px;
   }
 }
 

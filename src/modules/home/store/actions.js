@@ -3,6 +3,8 @@ import axios from 'axios'
 
 export const setLoading = ({commit}, payload) => commit(types.SET_LOADING, payload)
 export const setProjects = ({commit}, payload) => commit(types.SET_PROJECTS, payload)
+export const setVerticalScroll = ({commit}, payload) => commit(types.SET_VERTICAL_SCROLL, payload)
+export const setGoto = ({commit}, payload) => commit(types.SET_GO_TO, payload)
 
 export async function loadProjects ({ dispatch }) {
   try {

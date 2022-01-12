@@ -16,7 +16,7 @@
     </q-btn>
 
     <q-drawer v-model="rightDrawerOpen" side="right" overlay>
-      <!-- drawer content -->
+      <sidebar />
     </q-drawer>
 
     <q-page-container>
@@ -28,9 +28,28 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { sidebar } from '../modules/menu'
 
 export default defineComponent({
   name: "publicLayout",
+  components: {
+    sidebar
+  },
+  computed: {
+    goTo: {
+      set (val) {
+        this.$store.dispatch('home/setGoto', val)
+      },
+      get () {
+        return this.$store.getters['home/getGoto']
+      }
+    }
+  },
+  watch: {
+    goTo (val) {
+      this.rightDrawerOpen = false
+    }
+  },
   data () {
     return {
       rightDrawerOpen: ref(false)
