@@ -48,6 +48,7 @@ export default defineComponent({
       align-items: center;
       text-align: center;
       letter-spacing: 0.25em;
+      text-transform: uppercase;
       color: #D66853;
     }
   }
@@ -75,6 +76,7 @@ export default defineComponent({
       align-items: center;
       text-align: center;
       letter-spacing: 0.25em;
+      text-transform: uppercase;
       color: #D66853;
     }
   }
