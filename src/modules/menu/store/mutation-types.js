@@ -1,0 +1,1 @@
+export const set_pages = 'menu/set_pages'

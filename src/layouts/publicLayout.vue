@@ -1,132 +1,48 @@
 <template>
-  <q-layout view="hHr lpR fFf" class="app-bg">
-    <q-btn
-      dense
-      flat
-      size="30px"
-      @click="toggleRightDrawer"
-      :class="rightDrawerOpen ? `drawerBtn drawer-open` : `drawerBtn`"
-      ref="drawerBtn"
-    >
-      <div class="menu_icon">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </q-btn>
+  <q-layout view="hHh lpR fFf" class="bg-xiketic">
+    <q-header :elevated="!$q.platform.is.mobile" class="bg-xiketic text-white" height-hint="98">
+      <q-toolbar>
+        <q-toolbar-title class="toolbar-title q-ml-md q-pt-sm">
+          DMES Desenvolvimento de Software
+        </q-toolbar-title>
 
-    <q-drawer v-model="rightDrawerOpen" side="right" overlay>
-      <sidebar />
-    </q-drawer>
+        <sidebar v-if="!$q.platform.is.mobile" />
+      </q-toolbar>
+    </q-header>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
+    <q-footer
+      v-if="$q.platform.is.mobile"
+      elevated
+      class="bg-xiketic text-white"
+      height-hint="98"
+    >
+      <sidebar />
+    </q-footer>
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import { sidebar } from '../modules/menu'
+import { defineComponent, ref } from "vue";
+import { sidebar } from "../modules/menu";
 
 export default defineComponent({
   name: "publicLayout",
   components: {
-    sidebar
+    sidebar,
   },
-  computed: {
-    goTo: {
-      set (val) {
-        this.$store.dispatch('home/setGoto', val)
-      },
-      get () {
-        return this.$store.getters['home/getGoto']
-      }
-    }
-  },
-  watch: {
-    goTo (val) {
-      this.rightDrawerOpen = false
-    }
-  },
-  data () {
-    return {
-      rightDrawerOpen: ref(false)
-    }
-  },
-  methods: {
-    toggleRightDrawer () {
-      this.rightDrawerOpen = !this.rightDrawerOpen
-    }
-  },
-  created() {
-    this.$q.dark.set(true)
-  }
-})
+});
 </script>
 
 <style scoped>
-  .drawerBtn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-    transition: all .2s ease-in-out;
-  }
-
-  .menu_icon {
-    width: 40px;
-    height: 30px;
-    z-index: 100;
-    position: relative;
-  }
-
-  .menu_icon span:nth-child(1),
-  .menu_icon span:nth-child(2),
-  .menu_icon span:nth-child(3) {
-    position: absolute;
-    left: 50%;
-    width: 100%;
-    height: 5px;
-    background: #ffffff;
-    transition: all .2s ease-in-out;
-  }
-
-  .menu_icon span:nth-child(1) {
-    top: 0 !important;
-    transform: translateX(-50%);
-  }
-
-  .menu_icon span:nth-child(2) {
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .menu_icon span:nth-child(3) {
-    bottom: 0 !important;
-    transform: translateX(-50%);
-  }
-
-  @media screen and (min-width: 1000px) {
-    .drawer-open {
-      transform: translateX(-300px);
-    }
-
-    .drawer-open .menu_icon span {
-      left: 0 !important;
-      top: calc(50% - 2px) !important;
-      transform: translateY(-50%);
-    }
-
-    .drawer-open .menu_icon span:nth-child(1),
-    .drawer-open .menu_icon span:nth-child(2) {
-      transform: rotateZ(45deg);
-    }
-
-    .drawer-open .menu_icon span:nth-child(3) {
-      transform: rotateZ(-45deg);
-    }
-  }
+.toolbar-title {
+  font-size: 16px;
+  color: #ffffff99;
+  font-weight: 100;
+  text-transform: uppercase;
+}
 
 </style>

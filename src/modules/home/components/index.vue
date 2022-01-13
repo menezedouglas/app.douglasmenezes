@@ -1,13 +1,24 @@
 <template>
-  <q-page class="q-pa-md">
-    
-  </q-page>
+  <div>
+    <welcome />
+    <counters />
+    <credits />
+  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 
+import welcome from './welcome.vue'
+import counters from './counters.vue'
+import credits from './credits.vue'
+
 export default defineComponent({
-  name: "index"
+  name: 'home',
+  components: {
+    welcome,
+    counters,
+    credits
+  }
 })
 </script>

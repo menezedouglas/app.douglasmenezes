@@ -6,13 +6,19 @@ export const setProjects = ({commit}, payload) => commit(types.SET_PROJECTS, pay
 export const setVerticalScroll = ({commit}, payload) => commit(types.SET_VERTICAL_SCROLL, payload)
 export const setGoto = ({commit}, payload) => commit(types.SET_GO_TO, payload)
 
-export async function loadProjects ({ dispatch }) {
+export async function loadCounters ({ dispatch }) {
   try {
     dispatch('setLoading', true)
     const { data } = await axios.get('https://api.github.com/users/menezedouglas/repos')
+    
+    console.log(data)
+    
     dispatch('setProjects', data)
     dispatch('setLoading', false)
-    return Promise.resolve()
+    return Promise.resolve({
+      repositories: data.length,
+      commits
+    })
   } catch (error) {
     dispatch('setProjects', [])
     dispatch('setLoading', false)
