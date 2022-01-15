@@ -8,6 +8,11 @@ export default {
             route: '/'
         },
         {
+            icon: 'work',
+            label: 'Projetos',
+            route: '/projetos'
+        },
+        {
             icon: 'phone',
             label: 'Contate-me',
             route: '/contato'

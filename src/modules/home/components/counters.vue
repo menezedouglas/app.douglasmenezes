@@ -52,7 +52,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    // this.load()
+    this.load()
   },
 });
 </script>

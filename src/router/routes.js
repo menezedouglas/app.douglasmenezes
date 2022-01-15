@@ -1,5 +1,6 @@
 import { routes as home } from '../modules/home'
 import { routes as contact } from '../modules/contact'
+import { routes as projects } from '../modules/projects'
 
 export default [
   {
@@ -7,7 +8,8 @@ export default [
     component: () => import('layouts/publicLayout.vue'),
     children: [
       ...home,
-      ...contact
+      ...contact,
+      ...projects
     ]
   },
   // {

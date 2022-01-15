@@ -58,6 +58,7 @@ export default defineComponent({
 @media screen and (min-width: 1000px) {
   .welcome-logo {
     width: 100%;
+    max-width: 300px;
     position: absolute;
     top: 50%;
     left: 75%;
