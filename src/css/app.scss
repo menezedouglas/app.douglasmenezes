@@ -48,13 +48,21 @@ $indigo: #3a015c;
   color: $tyrianPurple;
 }
 
-.bg-indigo {
+.bg-new-indigo {
   background: $indigo;
 }
 
 .text-indigo {
   color: $indigo;
 }
+
+.page-title {
+  display: block;
+  font-size: 30px;
+  font-weight: 100;
+  color: $tyrianPurple;
+}
+
 
 @media screen and (min-width: 1000px) {
   .half-page {

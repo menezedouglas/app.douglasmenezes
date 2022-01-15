@@ -1,10 +1,14 @@
 <template>
   <q-page class="q-pa-md bg-white">
+    <div class="page-title">
+      Contate - me
+    </div>
+    <div class="text-subtitle2">Deixe uma mensagem e retornarei o mais breve possível.</div>
+    <small class="text-red">Todos os seus dados serão criptografados e protegidos conforme a LGPD</small>
     <q-form @submit.prevent="submit" class="">
       <div class="row">
         <div class="col-12 q-pa-sm">
           <q-input
-            standout
             :stack-label="$q.platform.is.mobile"
             v-model="form.name"
             no-error-icon
@@ -18,7 +22,6 @@
         </div>
         <div class="col-12 q-pa-sm">
           <q-input
-            standout
             :stack-label="$q.platform.is.mobile"
             v-model="form.email"
             no-error-icon
@@ -63,7 +66,6 @@
         </div>
         <div class="col-12 q-pa-sm">
           <q-input
-            standout
             :stack-label="$q.platform.is.mobile"
             v-model="form.message"
             type="textarea"
@@ -116,4 +118,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+  .radio-input {
+    width: 100%;
+    margin: 5px 0;
+  }
 </style>

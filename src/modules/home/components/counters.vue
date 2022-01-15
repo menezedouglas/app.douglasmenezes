@@ -8,7 +8,7 @@
             outline
             text-color="purple"
             class="q-mb-lg"
-            label="GitHub Stats"
+            label="Estatísticas do GitHub"
           />
         </div>
       </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="col-md col-12 flex items-center justify-around q-my-lg">
           <counter label="Commits" :end="counters.commits" />
-          <counter label="Repositórios" :end="counters.repositories" />
+          <counter label="Repositories" :end="counters.repositories" />
         </div>
       </div>
     </div>

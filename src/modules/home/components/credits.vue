@@ -1,17 +1,17 @@
 <template>
-  <q-page class="q-pa-md" style="overflow: hidden;">
+  <q-page class="q-pa-md bg-xiketic">
     <div class="absolute-center">
       <div class="row">
-        <div class="col-12 text-center text-white q-my-xl">
+        <div class="col-12 text-center text-white">
           <div class="text-h5">Douglas Menezes</div>
           <small>FULL STACK DEVELOPER</small>
         </div>
-        <div class="col-12">
+        <div class="col-12 q-mb-lg">
           <socials />
         </div>
         <div class="col-12 text-center text-grey-6 q-my-xl">
           <p>
-            Design inspired by
+            Design inspirado em
             <a href="https://portifolio-seven-smoky.vercel.app/">
               Jessika Miranda ツ
             </a>

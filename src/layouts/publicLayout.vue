@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-xiketic">
-    <q-header :elevated="!$q.platform.is.mobile" class="bg-xiketic text-white" height-hint="98">
+  <q-layout view="hHh lpR fFf" class="bg-new-indigo">
+    <q-header :elevated="!$q.platform.is.mobile" class="header" height-hint="98">
       <q-toolbar>
         <q-toolbar-title class="toolbar-title q-ml-md q-pt-sm">
           DMES Desenvolvimento de Software
@@ -33,7 +33,7 @@ export default defineComponent({
   name: "publicLayout",
   components: {
     sidebar,
-  },
+  }
 });
 </script>
 
@@ -43,6 +43,14 @@ export default defineComponent({
   color: #ffffff99;
   font-weight: 100;
   text-transform: uppercase;
+  padding: 0;
 }
+
+.header {
+  color: #ffffff;
+  background: #11001C;
+  transition: all .2s ease-in-out;
+}
+
 
 </style>

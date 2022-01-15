@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md half-page">
+  <q-page class="q-pa-md half-page bg-xiketic">
     <div class="welcome">
       <div class="row full-height">
         <div class="col-md col-12 relative-position">
@@ -7,10 +7,11 @@
         </div>
         <div class="col-md-8 col-12 relative-position">
           <div class="absolute-center">
-            <span>Olá, me chamo Douglas 😉</span>
+            <small>Olá!</small>
+            <span>Me chamo Douglas 😉</span>
             <small>Full Stack Developer</small>
-            <q-separator class="q-my-md"></q-separator>
-            <q-btn outline color="purple" label="Entrar em contato" @click="contactFormDialog = !contactFormDialog" />
+            <q-separator class="q-my-sm bg-transparent"></q-separator>
+            <q-btn outline color="purple" label="Inicie uma conversa comigo" @click="contactFormDialog = !contactFormDialog" />
           </div>
         </div>
       </div>

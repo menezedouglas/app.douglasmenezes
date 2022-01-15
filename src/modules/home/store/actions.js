@@ -11,7 +11,18 @@ export async function loadCounters ({ dispatch }) {
     dispatch('setLoading', true)
     const { data } = await axios.get('https://api.github.com/users/menezedouglas/repos')
     
-    console.log(data)
+    let commits = 0
+
+    for (let i = 0; i < data.length; i++) {
+      const response = await axios.get(`https://api.github.com/repos/menezedouglas/${data[i].name}/stats/commit_activity`)
+
+      for(let k = 0; k < response.data.length; k++) {
+
+        commits += response.data[k].total
+
+      }
+
+    }
     
     dispatch('setProjects', data)
     dispatch('setLoading', false)
