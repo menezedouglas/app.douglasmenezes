@@ -2,6 +2,8 @@
 
 Douglas Menezes - Profession Web Site
 
+[![Publish Website to Web Hosting](https://github.com/menezedouglas/app.douglasmenezes/actions/workflows/main.yml/badge.svg)](https://github.com/menezedouglas/app.douglasmenezes/actions/workflows/main.yml)
+
 ## Install the dependencies
 ```bash
 yarn
