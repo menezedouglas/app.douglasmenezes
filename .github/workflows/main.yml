@@ -22,12 +22,18 @@ jobs:
         exclude: |
           **/.git*
           **/.git*/**
-          **/node_modules/**
-          **/.quasar/**
-          **/public/**
-          **/src/**
-          **/src-electron/**
-          **/src-pwa/**
+          **/node_modules*
+          **/node_modules*/**
+          **/.quasar*
+          **/.quasar*/**
+          **/public*
+          **/public*/**
+          **/src*
+          **/src*/**
+          **/src-electron*
+          **/src-electron*/**
+          **/src-pwa*
+          **/src-pwa*/**
           .editorconfig
           .eslintignore
           .eslintrc.js
