@@ -11,7 +11,9 @@
             <span>Me chamo Douglas 😉</span>
             <small>Full Stack Developer</small>
             <q-separator class="q-my-sm bg-transparent"></q-separator>
-            <q-btn outline color="purple" label="Inicie uma conversa comigo" @click="contactFormDialog = !contactFormDialog" />
+            <q-btn outline color="purple" label="Inicie uma conversa comigo" @click="contactFormDialog = !contactFormDialog" >
+              <q-tooltip>Em breve</q-tooltip>
+            </q-btn>
           </div>
         </div>
       </div>
