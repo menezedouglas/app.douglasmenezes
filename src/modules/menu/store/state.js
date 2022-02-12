@@ -7,15 +7,15 @@ export default {
             label: 'Início',
             route: '/'
         },
-        {
-            icon: 'work',
-            label: 'Projetos',
-            route: '/projetos'
-        },
-        {
-            icon: 'phone',
-            label: 'Contate-me',
-            route: '/contato'
-        }
+        // {
+        //     icon: 'work',
+        //     label: 'Projetos',
+        //     route: '/projetos'
+        // },
+        // {
+        //     icon: 'phone',
+        //     label: 'Contate-me',
+        //     route: '/contato'
+        // }
     ])
 }
