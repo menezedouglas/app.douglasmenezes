@@ -1,3 +1,0 @@
-export const SET_SERVICES = 'HOME/SET_SERVICES'
-export const SET_SERVICE = 'HOME/SET_SERVICE'
-export const SET_LOADING = 'HOME/SET_LOADING'
