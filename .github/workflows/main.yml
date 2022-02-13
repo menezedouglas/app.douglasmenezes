@@ -1,0 +1,47 @@
+name: Publish Website to Web Hosting
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+      
+    - name: 📃 Sync Files
+      uses: SamKirkland/FTP-Deploy-Action@4.2.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules*
+          **/node_modules*/**
+          **/.quasar*
+          **/.quasar*/**
+          **/public*
+          **/public*/**
+          **/src*
+          **/src*/**
+          **/src-electron*
+          **/src-electron*/**
+          **/src-pwa*
+          **/src-pwa*/**
+          .editorconfig
+          .eslintignore
+          .eslintrc.js
+          .gitignore
+          .postcssrc.js
+          babel.config.js
+          jsconfig.json
+          package.json
+          quasar.conf.js
+          README.md
+          yarn.lock
