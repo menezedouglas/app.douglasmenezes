@@ -3,7 +3,7 @@
     <welcome />
     <skills />
     <about />
-    <counters />
+    <!-- <counters /> -->
     <credits />
   </div>
 </template>
@@ -12,7 +12,7 @@
 import { defineComponent } from 'vue'
 
 import welcome from './welcome.vue'
-import counters from './counters.vue'
+// import counters from './counters.vue'
 import credits from './credits.vue'
 import skills from './skills.vue'
 import about from './about.vue'
@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'home',
   components: {
     welcome,
-    counters,
+    // counters,
     credits,
     skills,
     about
