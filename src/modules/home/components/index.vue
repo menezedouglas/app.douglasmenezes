@@ -13,7 +13,7 @@ import { defineComponent } from 'vue'
 
 import welcome from './welcome.vue'
 // import counters from './counters.vue'
-import credits from './credits.vue'
+import credits from '../../../components/credits.vue'
 import skills from './skills.vue'
 import about from './about.vue'
 
