@@ -9,7 +9,7 @@ export default [
     component: () => import('layouts/publicLayout.vue'),
     children: [
       ...home,
-      ...birthday,
+      ...birthday
       // ...contact,
       // ...projects
     ]

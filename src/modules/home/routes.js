@@ -1,7 +1,7 @@
 export default [
   {
     name: 'Início',
-    path: '/',
+    path: '',
     component: () => import('./components/index')
   }
 ]
