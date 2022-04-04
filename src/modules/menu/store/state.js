@@ -7,11 +7,11 @@ export default {
             label: 'Início',
             route: '/'
         },
-        {
-          icon: 'celebration',
-          label: 'Aniversário',
-          route: '/aniversario'
-        },
+        // {
+        //   icon: 'celebration',
+        //   label: 'Aniversário',
+        //   route: '/aniversario'
+        // },
         // {
         //     icon: 'work',
         //     label: 'Projetos',
