@@ -11,7 +11,7 @@
             <span>Me chamo Douglas 😉</span>
             <small>Full Stack Developer</small>
             <q-separator class="q-my-sm bg-transparent"></q-separator>
-            <q-btn outline color="purple" label="Inicie uma conversa comigo" @click="contactFormDialog = !contactFormDialog" >
+            <q-btn outline color="purple" label="Entre em contato comigo" @click="redirectTo('https://linktr.ee/menezedouglas')" >
               <q-tooltip>Em breve</q-tooltip>
             </q-btn>
           </div>
@@ -24,7 +24,12 @@
 <script>
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: "welcome"
+  name: "welcome",
+  methods: {
+    redirectTo(url) {
+      window.open(url, '_blank');
+    }
+  }
 });
 </script>
 
