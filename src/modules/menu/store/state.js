@@ -3,7 +3,6 @@ import { ref } from 'vue'
 export default {
     pages: ref([
         {
-            icon: 'home',
             label: 'Início',
             route: '/'
         },
@@ -17,10 +16,10 @@ export default {
         //     label: 'Projetos',
         //     route: '/projetos'
         // },
-        // {
-        //     icon: 'phone',
-        //     label: 'Contate-me',
-        //     route: '/contato'
-        // }
+        {
+            label: 'Seja um Eagle',
+            route: 'https://eagleair.com.br',
+            redirect: true
+        }
     ])
 }

@@ -1,11 +1,12 @@
 <template>
   <q-tabs align="right" inline-label>
-    <q-route-tab 
-      v-for="({route, icon, label}, index) in pages"
+    <q-route-tab
+      v-for="({route, icon, label, redirect}, index) in pages"
       :key="index"
-      :to="route"
+      :to="redirect ? null : route"
       :label="isMobile() ? null : label"
-      :icon="icon" 
+      :icon="icon"
+      @click="redirect ? redirectTo(route) : null"
     />
   </q-tabs>
 </template>
@@ -28,6 +29,9 @@ export default defineComponent({
   methods: {
     isMobile() {
       return this.$q.platform.is.mobile
+    },
+    redirectTo(route) {
+      window.open(route, '_blank')
     }
   }
 });
